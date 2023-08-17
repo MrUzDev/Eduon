@@ -1,0 +1,20 @@
+
+.get-setficate-btn {
+    color: red;
+    /* border-bottom: 1px solid #006AFF; */
+    font-weight: 600;
+    text-decoration:underline;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .vs-title-video-box {
+        flex-direction: column;   
+    }
+    .vs-title-video-box .vendor-title h2 {
+        font-size: 25px;
+        line-height: normal;
+        text-align: center;
+        margin: 20px 0;
+    }
+}

@@ -1,0 +1,76 @@
+.vs-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: #F9F9F9;
+    height: 80px;
+    border-bottom: 1px solid#D9D9D9;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.mr20 {
+    margin-right: 20px;
+}
+
+.mr30 {
+    margin-right: 30px;
+}
+
+.mr40 {
+    margin-right: 40px;
+}
+
+.vs-navbar .profilePhoto{
+    border-radius: 50%;
+    width: 50px !important;
+    height: 50px !important;
+    display: flex;
+}
+
+.radius10 {
+    border-radius: 10px;
+}
+
+.text-black {
+    color: #000;
+}
+
+.mr0 {
+    margin: 0;
+}
+
+.vs-profile-menu {
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px 30px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px;
+}
+
+.vs-profile-menu h4 {
+    border-bottom: 3px solid red;
+    margin-bottom: 20px;
+}
+
+.vs-profile-menu p {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+}
+
+
+@media screen and (max-width: 580px) {
+    .vs-navbar .sm-navbar-btn,
+    .vs-navbar .vs-navbar-name {
+        display: none;
+    }
+}

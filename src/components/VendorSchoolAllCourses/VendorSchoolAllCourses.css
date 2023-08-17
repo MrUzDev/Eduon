@@ -1,0 +1,127 @@
+.vs-all-course-box {
+    border-radius: 15px;
+    /* border: 3px solid  red; */
+    background: #FFF;
+    box-shadow: 0px 4px 24px 3px rgba(0, 0, 0, 0.08);
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.vs-all-course-box .vendor-school-title {
+    /* color: var(--vendorColor); */
+    color: black;
+    font-size: 28px;
+    line-height: normal;
+}
+
+.vs-all-course-box .vs-all-course-box-about {
+    color: #8A909E;
+    font-family: SF Pro Text;
+}
+
+.vs-all-course-box .vs-all-course-box-about p span {
+    color: rgba(255, 0, 0, 0.555);
+    font-size: 18px;
+}
+
+.vs-all-course-box .vs-box-price span {
+    font-size: 30px;
+    color: red;
+}
+
+.myCoursess .css-19kzrtu,
+.allCourses .css-19kzrtu {
+    padding: 20px 0px !important;
+}
+
+.vs-big-container .container {
+    padding: 0 !important;
+}
+
+.vs-big-container .rowGrid {
+    margin: 0 !important;
+}
+
+.vs-module-box {
+    border-radius: 0 0 15px 15px;
+    background: #FFF;
+    padding-bottom: 10px;
+    box-shadow: 0px 4px 5px 3px rgba(0, 0, 0, 0.4);
+}
+.vs-module-box .vs-module-header-title {
+    background-color: #1a1919;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+}
+.vs-module-box .vs-module-header-tn {
+    /* box-shadow: 0px 4px 5px 3px rgba(0, 0, 0, 0.4); */
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+    padding: 20px 10px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #000;
+}
+.vs-module-box .vs-module-header-tn span {
+    display: block;
+    height: 2.6em;
+    width: 2.6em;
+    border: 5px solid #000;
+    border-radius: 50%;
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.vs-module-box .vs-module-body {
+    flex-direction: column;
+    margin-top: 30px;
+    color: #000;
+    padding: 0px 10px;
+}
+
+.vs-module-box .vs-module-body .vs-module-body-title {
+    color: red;
+}
+
+.sv-black-btn {
+    background-color: #1a1919;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: #fff;
+    width: 100%;
+    border: 5px solid #1a1919;
+    transition: .3s background ease-in-out;
+    font-weight: 700;
+}
+
+.sv-black-btn:hover {
+    background: #fff;
+    color: #1a1919;
+}
+
+.allCourses .vendor-school-price-table {
+    color: #000;
+}
+
+.sm-bg-brand-color-2 {
+    background-color: #ff00005c;
+}
+
+@media screen and (max-width: 557px) {
+    .vs-all-course-box .vs-box-price span,
+    .vs-all-course-box .vendor-school-title {
+        font-size: 20px;
+    }   
+
+    .vs-all-course-box .vs-all-course-box-about {
+        display: block;
+    }
+    
+    .vs-all-course-box .vs-all-course-box-about p {
+        margin-bottom: 5px;
+    }
+}

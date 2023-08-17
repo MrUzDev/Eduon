@@ -1,0 +1,428 @@
+.statistic .boxes_line {
+    display: flex;
+    margin-bottom: 30px;
+  }
+  
+  .statisticCourseInside {
+    margin-top: 80px;
+  }
+  
+  .statisticCourseInside .statisticCourseInsideTitle {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.05em;
+    color: #1c1c1c;
+  }
+  
+  .statisticCourseInside .box {
+    display: flex;
+    align-items: center;
+    /* width: 385px; */
+    height: 100px;
+    background: #f6f6f6;
+    border-radius: 15px;
+  }
+  
+  .statisticCourseInside .box_item .img {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 25px;
+    border-radius: 50%;
+    background-color: #bfdaff;
+  }
+  
+  .statisticCourseInside .box_item .img svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .statisticCourseInside .box_item {
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+  }
+  
+  .statisticCourseInside .box_p h2 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    letter-spacing: -0statistic 0.05em;
+    color: #006aff;
+    margin-top: 8px;
+  }
+  
+  .statisticCourseInside .profit_box p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #999999;
+  }
+  
+  .statisticCourseInside .profit_box {
+    display: flex;
+  }
+  
+  .statisticCourseInside .profit {
+    display: flex;
+  }
+  
+  .statisticCourseInside .profit p {
+    margin-left: 5px;
+  }
+  
+  .statisticCourseInside .boxes {
+    width: 242px;
+    height: 56px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+  }
+  
+  .statisticCourseInside .line {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(17, 17, 17, 0.06);
+    margin: 30px 0 50px;
+  }
+  
+  .grapth_rectangle {
+    width: 100%;
+    border: 1px solid #ededed;
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 50px;
+    display: none;
+  }
+  
+  .statisticCourseInside .chart {
+    width: 100% !important;
+    display: none;
+  }
+  
+  .statisticCourseInside .chart svg {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  .statisticCourseInside .text-center {
+    text-align: center;
+  }
+  
+  .statisticCourseInside h1 + p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1c1c1c;
+    margin-bottom: 30px;
+  }
+  /* vauchers ----------------- */
+  .divScrool {
+    padding: 30px;
+    border: 1px solid #ededed;
+    border-radius: 15px;
+    margin-top: 50px;
+  }
+  
+  /* .statisticCourseInsideVauchers {
+    overflow-x: scroll !important;
+    white-space: nowrap !important;
+  } */
+  
+  .statisticCourseInsideVauchers .borderBott {
+    border-bottom: 1px solid #d9d9d9;
+    padding-left: 32px;
+    width: 100%;
+  }
+  @media screen and (max-width: 992px) {
+    .statisticCourseInsideVauchers {
+      overflow-x: scroll !important;
+      white-space: nowrap !important;
+      /* min-width: 700px; */
+      width: 100%;
+    }
+  }
+  
+  .statisticCourseInsideVauchers .borderBott h3 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #999999;
+    padding: 25px 0 20px;
+  }
+  
+  .statisticCourseInsideVauchers .borderBott p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1c1c1c;
+    padding: 20px 0;
+  }
+  
+  .statisticCourseInsideVauchers .borderBott .bgGreen span {
+    background: green;
+    padding: 6px 12px;
+    padding: 6px 12px;
+    background: #e7feef;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #0cc14a;
+  }
+  
+  .statisticCourseInsideVauchers .borderBott .flexD {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1c1c1c;
+  }
+  
+  .statisticCourseInsideVauchers .borderBott .flexD span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1c1c1c;
+  }
+  .statisticCourseInsideVauchers .borderBott .flexD .vauch {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #999999;
+  }
+  /* vauchers ----------------- */
+  
+  @media screen and (max-width: 576px) {
+    .statisticCourseInside .box {
+      display: flex;
+      align-items: center;
+      height: 90px;
+      background: #f6f6f6;
+      border-radius: 15px;
+      margin-bottom: 30px;
+    }
+    .statistic .boxes_line p {
+      font-size: 14px !important;
+      line-height: 17px !important;
+    }
+    .statisticCourseInside .box_p h2 {
+      font-size: 20px;
+      line-height: 24px;
+      margin-top: 5px;
+    }
+  
+    .statisticCourseInside .statisticCourseInsideTitle {
+      padding-left: 15px !important;
+    }
+  }
+  
+  /* @media screen and (max-width: 1269px) {
+    .statisticCourseInsideVauchers {
+      white-space: nowrap !important;
+      overflow-y: scroll !important;
+      overflow-x: scroll !important;
+      width: 100%;
+    }
+  } */
+  .loadedCoursesscroll {
+    margin-top: 80px;
+    border: 1px solid #ededed;
+    border-radius: 15px;
+    padding: 30px;
+  }
+  .loadedCoursesscroll .titleCourse {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: 2px solid rgba(17, 17, 17, 0.06);
+  }
+  
+  .loadedCoursesscroll .titleCourse h1 {
+    font-family: "SF Pro Text";
+    margin-right: 40px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #999999;
+  }
+  
+  .loadedCoursesscroll .tableList {
+    /* background: #f6f6f6; */
+    border-radius: 15px;
+    /* padding: 20px 40px; */
+    padding-left: 15px;
+    width: 99.5%;
+    margin-top: 10px;
+  }
+  
+  .loadedCoursesscroll .tableList table {
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  /* .loadedCoursesscroll .tableList table .topTitle {
+    border-bottom: 1px solid #d9d9d9;
+  }
+  
+  .loadedCoursesscroll .tableList .topTitle .lgMargin {
+    padding-left: 10px;
+  }
+  
+  .loadedCoursesscroll .tableList .bodyTitle .lgMargin {
+    padding-left: 10px;
+  } */
+  
+  .loadedCoursesscroll .tableList table .topTitle th {
+    text-align: left;
+    font-family: "SF Pro Text";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #999999;
+    padding: 18px 0 18px 20px;
+    text-align: left;
+  }
+  
+  .loadedCoursesscroll .tableList table .bodyTitle {
+    border-bottom: 1px solid #d9d9d9;
+    /* padding: 0 40px; */
+  }
+  
+  .loadedCoursesscroll .tableList table .bodyTitle .number {
+    font-family: "SF Pro Text";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.05em;
+    color: #999999;
+  }
+  
+  .loadedCoursesscroll .tableList table .bodyTitle td {
+    padding: 18px 0 18px 20px;
+    font-family: "SF Pro Text";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1c1c1c;
+    text-align: left;
+  }
+  .loadedCoursesscroll .tableList table .bodyTitle .vauch {
+    font-weight: 600;
+  }
+  .loadedCoursesscroll .tableList table .bodyTitle .syllabic {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    color: #999999;
+  }
+  
+  /* .loadedCoursesscroll .tableList table .bodyTitle .active {
+    position: relative;
+    padding-left: 20px;
+  }
+  
+  .loadedCoursesscroll .tableList table .bodyTitle .onHold {
+    position: relative;
+    padding-left: 20px;
+  }
+  
+  .loadedCoursesscroll .tableList table .bodyTitle .rejected {
+    position: relative;
+    padding-left: 20px;
+  }
+  
+  .loadedCoursesscroll .tableList table .bodyTitle .inDetail {
+    display: flex;
+    align-items: center;
+  } */
+  
+  .loadedCoursesscroll .tableList table tr {
+    border-bottom: 1px solid #d9d9d9;
+  }
+  .loadedCoursesscroll .tableList table td {
+    cursor: pointer;
+    padding: 20px 0;
+  }
+  
+  @media screen and (max-width: 1300px) {
+    .loadedCoursesscroll .tableList .lgMargin {
+      padding-left: 10px;
+    }
+  
+    .loadedCoursesscroll .tableList table .topTitle th {
+      font-size: 13px;
+      line-height: 17px;
+      padding: 18px 0;
+    }
+  
+    .loadedCoursesscroll .tableList table .topTitle th svg {
+      margin-left: 10px;
+    }
+  
+    .loadedCoursesscroll .tableList table .bodyTitle .lgMedia {
+      font-size: 13px;
+      line-height: 17px;
+    }
+  
+    .loadedCoursesscroll .tableList table .bodyTitle td {
+      font-size: 14px;
+      line-height: 17px;
+    }
+  
+    .loadedCoursesscroll .tableList {
+      padding: 8px 10px 10px;
+      width: 99.5%;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .loadedCoursesscroll .tableList {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  
+    .loadedCoursesscroll .tableList::-webkit-scrollbar {
+      background: #fff !important;
+    }
+  
+    .loadedCoursesscroll .tableList table .topTitle th svg {
+      margin: 0 10px;
+    }
+  
+    .loadedCoursesscroll .tableList table .bodyTitle td {
+      font-size: 14px;
+      line-height: 17px;
+      padding-left: 10px;
+    }
+  
+    .loadedCoursesscroll .tableList table .topTitle th {
+      font-size: 13px;
+      line-height: 17px;
+      padding: 18px 0;
+      padding-left: 15px;
+    }
+  }
+  @media (max-width: 576px) {
+    .loadedCoursesscroll .tableList {
+      width: 100% !important;
+    }
+  
+    .sm-scroll {
+      overflow-x: scroll !important;
+    }
+  
+    .sm-hidden {
+      overflow-x: hidden;
+    }
+  }
+  

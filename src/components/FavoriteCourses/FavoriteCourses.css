@@ -1,0 +1,183 @@
+.FavoriteCourses {
+  padding-top: 20px;
+}
+.Courserow h4 {
+  font-family: "SF Pro Text";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #006aff;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 20px;
+}
+.Courserow p {
+  font-family: "SF Pro Text";
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #1c1c1c;
+  margin-top: 15px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.Courserow h5 {
+  font-family: "SF Pro Text";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  margin-top: 10px;
+}
+.Courserow .col-6 {
+  margin-bottom: 37px;
+}
+.Courserow img {
+  /* border: 1px solid #d9d9d9; */
+  border-radius: 18px;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: fill !important;
+}
+.Courserow .line {
+  width: 100%;
+  height: 2px;
+  background-color: #006aff;
+  margin-top: 27px;
+}
+.Courserow .col-6 .begin_course_btn {
+  font-family: "SF Pro Text";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #fcfcfc;
+  border: 1px solid #006aff;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.Courserow .alertMessage {
+  font-family: "SF Pro Text";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #999999;
+}
+
+.Courserow .second_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: auto;
+}
+
+.Courserow .second_card .smImgMedia {
+  width: 100%;
+}
+
+.Courserow .reviews {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 24px; */
+  margin-top: 10px !important;
+}
+
+.Courserow .reviews div {
+  display: flex;
+  align-items: center !important;
+}
+
+.Courserow .reviews div svg {
+  width: 20px;
+  margin-right: 12px;
+}
+
+.Courserow .reviews div p {
+  margin-bottom: 0 !important;
+  margin-top: 0px !important;
+  text-decoration: none;
+  font-family: "SF Pro Text", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  color: #006aff;
+}
+
+.Courserow .reviews div p span {
+  margin-left: 5px;
+}
+
+.Courserow .reviews .left {
+  margin-right: 25px;
+}
+
+.Courserow  .price .t-gray {
+  font-family: "SF Pro Text", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  text-decoration: line-through;
+  color: #999999;
+  margin-bottom: -10px;
+}
+
+@media screen and (max-width: 991px) {
+  .FavoriteCourses {
+    padding-top: 70px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .Courserow img {
+    border: none;
+    border-radius: 10px;
+    /* width: 100px; */
+    max-width: 130px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    height: 90px;
+    object-fit: contain !important;
+  }
+  .Courserow h4 {
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 0px;
+  }
+  .Courserow p {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 10px;
+  }
+  .Courserow .col-6 .begin_course_btn {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+  }
+  .FavoriteCourses .smFavoiteCard {
+    display: grid;
+    grid-template-columns: 30% auto;
+    align-items: center;
+  }
+  .FavoriteCourses .smFavoiteCard .smFavoriteText {
+    margin-left: 20px;
+  }
+
+  .FavoriteCourses {
+    padding-top: 0;
+  }
+}

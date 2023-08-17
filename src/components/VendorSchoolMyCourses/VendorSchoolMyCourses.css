@@ -1,0 +1,118 @@
+.vs-my-courses-box {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.vs-my-courses-box .width-100.flex {
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.vs-my-courses-box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.vs-my-courses-box .vs-mt-courses-box-about {
+    /* background-color: red; */
+    width: 100%;
+    padding: 20px;
+}
+
+.vs-my-courses-box .vs-mt-courses-box-about .litle-title {
+    color: red;
+    font-weight: 600;
+}
+
+.vs-my-courses-box .vs-mt-courses-box-about h5 {
+    color:  #1C1C1C;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.vs-my-courses-box .vs-mt-courses-box-about .vs-tutorial-time {
+    color: #999; 
+}
+
+.vs-my-courses-box .vs-mt-courses-box-about .vs-tutorial-time span {
+    color: red;
+    font-weight: 700;
+}
+
+.vs-my-courses-box .vs-mt-courses-box-about .vs-course-prog p {
+    color: #1C1C1C;
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+.vs-my-courses-box .vs-mt-courses-box-about .vs-course-prog p span {
+    color: red;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.vs-my-courses-box .vs-course-prog-span {
+    width: 50%;
+    height: 15px;
+    background-color: red;
+    display: block;
+    border-radius:0px 15px 15px 0px;
+}
+
+@media screen and (max-width: 800px) {
+    .vs-my-courses-box {
+        grid-template-columns: 40% 60%;
+    }
+
+    .vs-my-courses-box .vs-mt-courses-box-about .vs-course-prog p {
+        margin-top: 20px;
+    }
+
+    .vs-my-courses-box .vs-mt-courses-box-about h5 {
+        font-size: 22px;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    .vs-my-courses-box {
+        display: block;
+    }
+
+    .vs-my-courses-box img {
+        border-radius: 15px;
+    }
+
+    .vs-my-courses-box .vs-mt-courses-box-about h5 {
+        font-size: 22px;
+    }
+
+    .vs-my-courses-box .vs-mt-courses-box-about {
+        padding: 10px 0;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .vs-my-courses-box {
+        display: block;
+    }
+
+    .vs-my-courses-box img {
+        border-radius: 15px;
+    }
+
+    .vs-my-courses-box .vs-mt-courses-box-about h5 {
+        font-size: 22px;
+    }
+
+    .vs-my-courses-box .vs-course-prog.flex {
+        display: block ;
+    }
+
+    .vs-my-courses-box .vs-course-prog p{
+        margin: 0;
+    }
+}

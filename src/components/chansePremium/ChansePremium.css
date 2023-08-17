@@ -1,0 +1,275 @@
+.Chanse-premium .chanse-premium-title h2 {
+    margin-top: 20px;
+    text-align: center;
+    color: #000;
+}
+.Chanse-premium .chanse-premium-container .chanse-bottom-content,
+.Chanse-premium .chanse-premium-container .chanse-center-content,
+.Chanse-premium .chanse-premium-container .chanse-top-content {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.Chanse-premium .chanse-premium-container .chanse-top-content .chanse-box:nth-last-of-type(1),
+.Chanse-premium .chanse-premium-container .chanse-top-content .chanse-box:nth-last-of-type(3) {
+    margin-top: 20px;
+}
+
+.Chanse-premium .chanse-premium-container .chanse-center-content {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Chanse-premium .chanse-premium-container .chanse-bottom-content {
+    justify-content: center;
+    gap:0 60px;
+}
+
+.Chanse-premium .chanse-premium-container .chanse-center-content .chanse-Premium-box {
+    border: 5px solid #006AFF;
+    width: 30%;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    color: #006AFF;
+}
+
+.Chanse-premium .chanse-premium-container .chanse-center-content .chanse-Premium-box h1 {
+    font-size: 50px;
+}
+
+.Chanse-premium .chanse-premium-container .chanse-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    justify-content: center;
+    width: 25%;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px 9px rgba(0, 0, 0, 0.11);
+    border-radius: 20px;
+}
+
+.Chanse-premium .chanse-premium-container .chanse-box svg {
+    margin: 20px 0 30px;
+}
+
+.Chanse-premium .chanse-premium-container .chanse-box h5 {
+    font-size: 25px;
+}
+
+.Chanse-premium .chense-statistik-container {
+    margin-top: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 70px 0;
+}
+
+.Chanse-premium .chense-statistik-container .statistik-box {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+.Chanse-premium .chense-statistik-box-center {
+    display: flex;
+    justify-content: end;
+}
+
+.Chanse-premium .statistik-content .statistik-right-title {
+    text-align: right;
+}
+
+.Chanse-premium .chense-statistik-container .statistik-box .statistik-content p {
+    margin-top: 10px;
+}
+
+.Chanse-premium .school-name-input-container .start-btn{
+    background: #006AFF;
+    border-radius: 15px;
+    padding: 10px 20px;
+    color: #fff;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+    .Chanse-premium .chanse-premium-title h2 {
+        margin-top: 80px;
+    }
+
+    .Chanse-premium .statistik-img img{
+        width: 300px;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-box svg {
+        margin: 0 0 20px 0;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-box {
+        width: 30%;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-center-content .chanse-Premium-box h1 {
+        font-size: 2.3rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .Chanse-premium .chanse-premium-container .chanse-box svg {
+        width: 70px;
+        height: 70px;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-box h5 {
+        font-size: 21px;
+    }
+
+    .Chanse-premium .chanse-premium-title h2 {
+        font-size: 2rem;
+        line-height: 120%;
+    }
+
+    .Chanse-premium .chense-statistik-container .statistik-box {
+        gap: 1.2rem;
+    }
+
+    .Chanse-premium .chense-statistik-container .statistik-box .statistik-content h2{
+        font-size: 1.7rem;
+        line-height: 120%;
+    }
+
+    .Chanse-premium .chense-statistik-container {
+        margin-top: 100px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .Chanse-premium .chanse-premium-container .chanse-box {
+        padding: 10px;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-center-content .chanse-Premium-box h1 {
+        font-size: 1.8rem;
+    }
+
+    .Chanse-premium .statistik-img img {
+        width: 250px;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-box h5 {
+        font-size: 1rem;
+    }
+
+    .Chanse-premium .chense-statistik-container .statistik-box .statistik-content h2 {
+        font-size: 1.4rem;
+    }
+}   
+
+@media screen and (max-width: 520px) {
+    .Chanse-premium .chanse-premium-container .chanse-center-content .chanse-Premium-box h1,
+    .Chanse-premium .chanse-premium-title h2 {
+        font-size: 1.5rem;
+    }
+    .Chanse-premium .chanse-premium-title h2 br {
+        display: none;
+    }
+
+    .Chanse-premium  .container {
+        padding: 0;
+    }
+    .Chanse-premium .chanse-premium-container .chanse-center-content .chanse-Premium-box {
+        padding: 10px 0;
+    }
+
+    .Chanse-premium .statistik-img img {
+        width: 180px;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-box {
+        width: 33%;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-bottom-content, .Chanse-premium .chanse-premium-container .chanse-center-content, .Chanse-premium .chanse-premium-container .chanse-top-content {
+        gap: 0 10px;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-box h5 {
+        font-size: 0.8rem;
+        line-height: 130%;
+    }
+
+    .Chanse-premium .chense-statistik-container .statistik-box .statistik-content h2 {
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 435px) {
+    .Chanse-premium .chanse-premium-container .chanse-box svg {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 7px;
+    }   
+    .Chanse-premium .chanse-premium-container .chanse-box {
+        padding: 10px 5px;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-center-content .chanse-Premium-box {
+        border-width: 3px ;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-bottom-content, .Chanse-premium .chanse-premium-container .chanse-center-content, .Chanse-premium .chanse-premium-container .chanse-top-content {
+        gap: 5px;
+    }
+
+    .Chanse-premium .statistik-img img {
+        width: 120px;
+    }
+
+    .Chanse-premium .chense-statistik-container .statistik-box .statistik-content p {
+        margin-top: 5px;
+        font-size: 13px;
+    }
+
+    .Chanse-premium .chanse-premium-container .chanse-bottom-content, .Chanse-premium .chanse-premium-container .chanse-center-content, .Chanse-premium .chanse-premium-container .chanse-top-content {
+        margin-top: 20px;
+    }
+
+    .Chanse-premium .chanse-premium-title h2 {
+        font-size: 1.2rem;
+    }
+
+    .Chanse-premium .chense-statistik-container .statistik-box {
+        gap: .5rem;
+    }
+
+    .Chanse-premium .chense-statistik-container .statistik-box .statistik-content h2 br {
+        display: none;
+    }
+    .Chanse-premium .chanse-premium-container .chanse-center-content .chanse-Premium-box h1 {
+        font-size: 1.2rem;
+    }
+    .Chanse-premium .chanse-premium-container .chanse-bottom-content, .Chanse-premium .chanse-premium-container .chanse-center-content, .Chanse-premium .chanse-premium-container .chanse-top-content {
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 380px) { 
+
+    .Chanse-premium .chanse-premium-container .chanse-box h5 {
+        font-size: .6rem;
+    }
+
+    .Chanse-premium .chense-statistik-container .statistik-box .statistik-content h2 {
+        font-size: 0.9rem;
+    }
+
+    .Chanse-premium .chense-statistik-container .statistik-box .statistik-content p {
+        line-height: 120%;
+    }
+}

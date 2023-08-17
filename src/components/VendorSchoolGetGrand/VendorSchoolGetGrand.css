@@ -1,0 +1,21 @@
+.vs-getGrand .school-full-width-btn button{
+    width: 100%;
+}
+
+.vs-getGrand .css-1x5jdmq {
+    /* height: 1.9em !important; */
+}
+
+.vs-getGrand .css-igs3ac {
+    border-radius: 15px !important;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+@media screen and (max-width: 700px) {
+    .vs-getGrand .school-full-width-btn button {
+        margin-bottom: 100px;
+    }
+}

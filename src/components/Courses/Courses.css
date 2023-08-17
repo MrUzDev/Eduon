@@ -1,0 +1,251 @@
+.navBotMenu {
+    width: 100%;
+    margin-top: 75px !important;
+}
+
+.navBotMenu ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: scroll;
+    white-space: nowrap;
+    scrollbar-color: #d9d9d9;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+}
+
+.navBotMenu ul::-webkit-scrollbar {
+    height: 5px;
+}
+
+.navBotMenu ul::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.navBotMenu ul::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    border-radius: 10px;
+}
+
+.navBotMenu ul li {
+    font-family: "SF Pro Text";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1c1c1c;
+    background: #d9d9d9;
+    border: 1px solid #999999;
+    border-radius: 15px;
+    padding: 8px 16px;
+    margin: 0px 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.navBotMenu ul li:first-child {
+    margin-left: 14px;
+}
+
+.navBotMenu ul li:last-child {
+    margin-right: 14px;
+}
+
+.pt-0 .courses {
+    padding-top: 0 !important;
+}
+
+.courRegPop .css-1ytlwq5-MuiAlert-icon {
+    font-size: 35px;
+    margin-top: 10px;
+}
+
+.courses {
+    padding: 60px 0px 24px 0px;
+}
+
+.courses .bgBuyBlue {
+    color: rgba(252, 252, 252, 1);
+    font-size: 16px;
+    font-family: "Pro-Meduim", "serif";
+    line-height: 19px;
+    font-weight: 500;
+    background-color: rgba(0, 106, 255, 1);
+    border-radius: 5px;
+    border: none;
+    padding: 5px 10px;
+}
+
+
+/* .courses .course-card:last-child .course-item {
+  margin-bottom: 0 !important;
+} */
+
+.courses .pt-20 {
+    padding-top: 20px !important;
+}
+
+.courses .container .rowGrid .p-10 {
+    padding: 10px 5px !important;
+}
+
+.courses .col-6 {
+    overflow-x: visible !important;
+    margin-top: 0px !important;
+}
+
+.ml-240 {
+    margin-left: 240px !important;
+    transition: all 0.2s linear;
+}
+
+.ml-100 {
+    margin-left: 80px !important;
+    transition: all 0.2s linear;
+}
+
+.itemello {
+    position: relative !important;
+}
+
+.pop-up {
+    position: absolute !important;
+    left: 115%;
+    bottom: 0;
+    width: 370px;
+    height: 100%;
+    background-color: black;
+    z-index: 2;
+}
+
+.pop-up .wrapper {
+    position: relative !important;
+    width: 100%;
+    height: 100%;
+}
+
+.pop-up .wrapper .indicator {
+    position: absolute !important;
+    top: 250px;
+    left: -20px;
+    background-color: black;
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    transform: rotate(45deg);
+}
+
+.headerText {
+    font-family: "SF Pro Text";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 33px;
+    color: #1c1c1c;
+    margin: 20px 0 0px;
+    margin-top: 0;
+}
+
+.css-10saggv {
+    border-radius: 15px !important;
+}
+
+.activeCategory {
+    background-color: #80b5ff !important;
+    border: 1px solid #006aff !important;
+    color: white !important;
+}
+
+.courRegPop .css-12e0018-MuiPaper-root-MuiAlert-root {
+    border-radius: 15px !important;
+}
+
+@media screen and (max-width: 1400px) {
+    .navBotMenu {
+        width: 100%;
+        margin-top: 60px !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .ml-100 {
+        margin-left: 80px !important;
+        transition: all 0.2s linear;
+        padding-top: 0px;
+    }
+    .headerText {
+        margin: 0px 0 0px;
+    }
+}
+
+@media (max-width: 576px) {
+    .homepage .courses {
+        /* padding: 50px 10px 24px 10px !important; */
+        margin-top: 100px !important;
+        padding-bottom: 0 !important;
+    }
+    /* .courses {
+        padding: 150px 10px 24px 10px !important;
+    } */
+    .ml-240 {
+        margin-left: 0px !important;
+    }
+    .ml-100 {
+        margin-left: 0px !important;
+        padding: 0px;
+    }
+    .navBotMenu {
+        width: 100%;
+        margin-top: 0 !important;
+        position: fixed;
+        top: 50px !important;
+        right: 0;
+        left: 0;
+        z-index: 20;
+        background-color: white;
+    }
+    .navBotMenu ul {
+        padding: 8px 0;
+        border-top: 1px solid #d9d9d9;
+    }
+    .navBotMenu ul li {
+        margin: 0px 8px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .courRegPop .css-1ytlwq5-MuiAlert-icon {
+        font-size: 25px;
+        margin-top: 0px;
+    } 
+
+    .actionBody .container {
+        padding: 0 7px !important;
+    }
+
+    .courRegPop strong p {
+        font-size: 12px !important;
+    }
+    .courRegPop strong br {
+        display: none;
+    }
+    .courRegPop div{
+        text-align: left;
+        margin-top: 5px !important;
+    }
+
+    .alert {
+        width: 80% !important;
+    }
+    .courRegPop .css-12e0018-MuiPaper-root-MuiAlert-root {
+        padding: 4px 8px  !important;
+    }
+    .courRegPop .css-1ytlwq5-MuiAlert-icon {
+        margin-right: 4px !important;
+    }
+    .courRegPop .css-ki1hdl-MuiAlert-action {
+        padding: 4px 0 0 6px;
+    }
+    .courRegPop .alertBtn {
+        font-size: 12px;
+    }
+}

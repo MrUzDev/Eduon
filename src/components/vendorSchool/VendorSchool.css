@@ -1,0 +1,1520 @@
+@import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap');
+
+.Vendor-School .vendor-school-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1C1C1C;
+    font-weight: 900;
+}
+
+.Vendor-School ul {
+    margin: 0 !important;
+}
+
+.modalForLogin a,
+.Vendor-School a {
+    color: unset;
+    text-decoration: none;
+}
+
+.vendor-btn {
+    padding: 10px 20px;
+    background-color: red;
+    border-radius: 5px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.bg-sm {
+    background-color: red !important;
+}
+
+.eduon-brand-btn {
+    padding: 10px 20px;
+    background-color: #006AFF;
+    border-radius: 5px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.vendor-btn:hover {
+    opacity: 1 !important;
+}
+
+.vendor-btn-1-1 {
+    padding: 0.7rem 1.5rem;
+    background-color: red;
+    border-radius: 10px;
+    font-size: 1rem;
+    border: 2px solid transparent;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 100ms ease-in;
+}
+
+.vendor-btn-1-1:focus,
+.vendor-btn-1-1:hover {
+    background-color: transparent;
+    color: red;
+    border: 2px solid red;
+}
+
+.vendor-btn-2 {
+    background-color: transparent;
+    outline: none;
+    border: 2px solid red;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    font-weight: 500;
+    transition: 100ms ease-in;
+}
+
+.vendor-btn-2:focus,
+.vendor-btn-2:hover {
+    background-color: red;
+    color: #fff;
+}
+
+.margin-y-2 {
+    margin: 2rem 0;
+}
+
+.Vendor-School .vendor-school-question .vendor-types-center {
+    position: relative;
+    padding: 15px 0;
+    display: grid;
+    grid-template-columns: 30% 30%;
+}
+
+.Vendor-School .vendor-school-question .vendor-types-center div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.Vendor-School .vendor-school-question .vendor-types-center div p{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+    color: #fff;
+    font-size: 30px;
+    font-weight: 900;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Vendor-School .vendor-school-question .vendor-types-center div img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.Vendor-School .vendor-question-types {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    gap: 0 2rem;
+    margin: 1rem 0;
+}
+
+.Vendor-School .vendor-question-user-type {
+    width: 80%;
+    /* height: 80vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.Vendor-School .vendor-question-types h2 {
+    cursor: pointer;
+    padding: 0.5rem 2rem;
+    border-radius: 15px;
+    font-size: 1.6rem;
+    border: 2px solid #D9D9D9;
+}
+
+.Vendor-School .vendor-school-question .vendor-type.active {
+    transform: scale(1.1);
+    outline: 4px solid red;
+    border-radius: 15px;
+}
+
+
+.Vendor-School .vendor-question-btn .vendor-btn {
+    width: 70%;
+    padding: 1rem;
+    font-size: 1.3rem;
+}
+
+.vs-big-container .css-1aquho2-MuiTabs-indicator {
+    background-color: red;
+}
+
+.vs-big-container .Mui-selected {
+    color: red !important;
+    border-bottom-color: red !important;
+}
+
+
+/* ///////////////////////// */
+
+.Vendor-School .vendor-school-content {
+    margin-top: 3rem;
+}
+
+.vs-getGrand .vendor-school-user-about-container,
+.Vendor-School .vendor-school-content .vendor-school-user-about-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 1rem;
+}
+
+.vs-getGrand .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root,
+.Vendor-School .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    border-radius: 15px !important;
+}
+
+.vs-getGrand .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input,
+.Vendor-School .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+    height: 65px !important;
+    padding: 0 1.5rem;
+    /* border: 2px solid #D9D9D9 !important; */
+}
+
+.vendor-types-container .vendor-types-box {
+    display: grid;
+    grid-template-columns: 30% 30%;
+}
+
+.vendor-types-container .vendor-types-img-box {
+    width: 100%;
+    height: 100%;
+}
+
+
+.vendor-types-container .vendor-types-img-box img {
+    border-radius: 20px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.vendor-types-container .vendor-types-img-box .vendor-types-img-box-img {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border: 5px solid transparent;
+    border-radius: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.vendor-types-container .vendor-types-img-box .vendor-types-img-box-img .vendor-btn-2 {
+    z-index: 2;
+}
+
+.vendor-types-container .vendor-types-img-box .vendor-types-img-box-img .vendor-btn-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #fff;
+    transform: translateX(-50%) translateY(-100%);
+    font-weight: 700;
+}
+
+.vendor-types-container .vendor-types-img-box .vendor-types-img-box-img .vendor-btn-2:hover {
+    background-color: red;
+}
+
+.vendor-types-container .vendor-types-img-box .vendor-types-img-box-img div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.vendor-types-container .vendor-types-img-box .vendor-types-img-box-img:focus {
+    border: 5px solid red;
+}
+
+.Vendor-School .get-grand {
+    border-bottom: 1px solid #777;
+    margin-bottom: 2rem;
+}
+
+.Vendor-School .get-grand .grant-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: transparent;
+    color: #80B5FF;
+    border: 3px solid #80B5FF;
+    gap: 0 1rem;
+    padding: 1rem 0;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.Vendor-School .ven-con-box .vendor-btn {
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+}
+
+.vs-getGrand .countryDropdown,
+.Vendor-School .countryDropdown {
+    width: 100%;
+    margin: 1rem 0 45px;
+}
+
+.vs-getGrand .vendor-school-user-about-container.vendor-school-textarea,
+.Vendor-School .vendor-school-content .vendor-school-user-about-container.vendor-school-textarea {
+    grid-template-columns: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.vs-getGrand .vendor-school-user-about-container.vendor-school-textarea .editorClassName.rdw-editor-main,
+.Vendor-School .vendor-school-user-about-container.vendor-school-textarea .editorClassName.rdw-editor-main {
+    border: 2px solid #D9D9D9;
+    padding: 0 1rem;
+    border-radius: 15px 15px;
+}
+
+.rdw-editor-main {
+    overflow: visible;
+}
+
+.Vendor-School .school-full-width-btn {
+    text-align: center;
+}
+
+.Vendor-School .school-full-width-btn .vendor-btn {
+    width: 70%;
+    font-size: 1.3rem;
+    padding: 1rem 0;
+}
+
+.iconButtonModal {
+    text-align: right;
+}
+
+.Vendor-School .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+    z-index: 0;
+}
+
+.Vendor-School .vendor-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    background: #ffffff;
+    gap: 0 2rem;
+    /* margin-bottom: 100px; */
+}
+
+.Vendor-School .vendor-footer .vendor-nav-net,
+.Vendor-School .vendor-footer,
+.Vendor-School .vendor-nav .vendor-nav-net,
+.Vendor-School .vendor-nav {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    padding: 1rem 0.5rem;
+}
+
+.Vendor-School .nav-smalll {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Vendor-School .vendor-footer .vendor-nav-logo img,
+.Vendor-School .vendor-nav .vendor-nav-logo img {
+    width: 150px;
+}
+
+.Vendor-School .vendor-footer .vendor-nav-net,
+.Vendor-School .vendor-nav .vendor-nav-net {
+    gap: 0 1rem;
+    padding: 1rem;
+}
+
+.Vendor-School footer .vendor-footer .vendor-nav-lists ul,
+.Vendor-School .vendor-nav .vendor-nav-lists ul {
+    display: flex;
+    align-items: center;
+    gap: 0 3rem;
+    font-weight: 600;
+    font-size: 18px;
+    color: #1C1C1C !important;
+}
+
+.Vendor-School .vendor-footer .vendor-nav-net .vendor-nav-icons,    
+.Vendor-School .vendor-nav .vendor-nav-net .vendor-nav-icons {
+    background-color: red;
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Vendor-School .vendor-showcase .vendor-showcase-bg {
+    height: 620px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    width: 100%;
+    padding: 0 7rem;
+}
+
+.Vendor-School .vendor-showcase .vendor-showcase-content {
+    width: 80%;
+}
+
+.Vendor-School .vendor-showcase .vendor-showcase-content h1 {
+    margin-bottom: 1rem;
+}
+
+.Vendor-School .vendor-showcase .vendor-showcase-bg1 {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../assets/images/zafar-hoshimov.jpg");
+}
+
+.Vendor-School .vendor-showcase .vendor-showcase-bg2 {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../assets/images/mfaktor-auditoriya.jpg");
+}
+
+.Vendor-School .vendor-showcase .vendor-showcase-bg3 {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../assets/images/habibullo.jpg");
+}
+
+.Vendor-School .vendor-showcase .vendor-showcase-bg {
+    width: 100% !important;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.Vendor-School .swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+    right: 30px;
+}
+
+.Vendor-School .swiper-button-prev,
+.swiper-rtl .swiper-button-next {
+    left: 30px;
+}
+
+.Vendor-School .swiper-button-next,
+.swiper-rtl .swiper-button-prev,
+.Vendor-School .swiper-button-prev,
+.swiper-rtl .swiper-button-next {
+    background-color: #fff;
+    color: #1C1C1C;
+    opacity: 1;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.Vendor-School .swiper-button-next:after,
+.Vendor-School .swiper-rtl .swiper-button-prev:after,
+.Vendor-School .swiper-button-prev:after,
+.Vendor-School .swiper-rtl .swiper-button-next:after {
+    font-size: 1rem !important;
+}
+
+.Vendor-School .vendor-showcase .vendor-showcase-btns {
+    display: flex;
+    align-items: center;
+}
+
+.Vendor-School .css-13cymwt-control {
+    border-radius: 15px;
+    border: 2px solid #D9D9D9;
+    margin-bottom: 20px;
+}
+
+.Vendor-School .css-t3ipsp-control {
+    border-color: #D9D9D9;
+    box-shadow: none;
+    border-radius: 15px;
+}
+
+.Vendor-School .vendor-time-select .select__control{
+   min-height: 50px;
+}
+
+.Vendor-School .vendor-showcase .vendor-showcase-btns span{
+    background-color: red;
+    padding: 0.5rem;
+    display: flex;
+    width: 45px;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.Vendor-School .vendor-school-title span {
+    background-color: red;
+    display: flex;
+    width: 55px;
+    border-radius: 3px;
+    height: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.Vendor-School .vendor-school-title span.role2 {
+    opacity: 0.3;
+}
+
+.Vendor-School .about-vendor {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    margin: 4rem 0;
+}
+
+.Vendor-School .about-vendor .about-vendor-left-container {
+    padding: 4rem 0.5rem 0 0;
+}
+
+.Vendor-School .about-vendor .about-vendor-left-container .about-vendor-type-btns {
+    display: flex;
+    gap: 1rem;
+}
+
+.Vendor-School .about-vendor .about-vendor-left-container .about-vendor-type-btns .type-btn-vendor {
+    background-color: #80B5FF;
+    color: #fff;
+    border-radius: 50px;
+    padding: 0.4rem 1rem;
+}
+
+.Vendor-School .about-vendor .about-vendor-left-container .about-vendor-tittle h2 {
+    color: #1C1C1C;
+    margin: 0.4rem 0 1.5rem;
+    font-weight: 900;
+}
+
+.Vendor-School .about-vendor .about-vendor-left-container .about-vendor-content p {
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+    font-family: sans-serif;
+    line-height: 170%;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.Vendor-School .all-partnert-logos {
+    max-height: 200px;
+}
+
+.Vendor-School .about-vendor .about-vendor-img img{
+    width: 100%;
+    height: 100%;
+}
+
+.Vendor-School .all-partnert-logos img {
+    width: 140px;
+}
+
+.Vendor-School .partners .partner-imgs img {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.Vendor-School .container {
+    margin: 0 auto;
+}
+
+.Vendor-School .all-partnerts-logo-container{
+    background-color: #006AFF;
+    color: #fff;
+    padding: 1rem 0;
+}
+
+.Vendor-School .all-partnerts-logo-container .all-partnerts-logo-title p{
+    padding: 1rem 0 1rem 6rem;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.Vendor-School .all-partnerts-logo-container .all-partnert-logos .swiper-slide {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Vendor-School .get-vendor-school .get-vendor-school-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 5rem;
+    color: #1C1C1C;
+}
+
+.Vendor-School .get-vendor-school .get-vendor-school-box {
+    display: grid;
+    gap: 0 1.5rem;
+    grid-template-columns: 65px calc(100% - 70px);
+}
+
+.Vendor-School .get-vendor-school .get-vendor-school-container .get-vendor-school-box-img {
+    background-color: red;
+    width: 65px !important;
+    height: 65px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 35px 35px 0 35px;
+}
+
+.Vendor-School .get-vendor-school .get-ven-school-tittle h2 {
+    margin: 6rem 0 3rem;
+    color: #1C1C1C;
+}
+
+.Vendor-School .get-vendor-school .get-vendor-school-container .get-vendor-school-box-content p {
+    line-height: 150%;
+    opacity: 0.8;
+    font-size: 1rem;
+}
+
+.Vendor-School .many-questions,
+.Vendor-School .vendor-school-spikers {
+    margin: 4rem 0;
+    color: #1C1C1C;
+} 
+
+.Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container {
+    /* display: grid; */
+    /* grid-template-columns: repeat(5, 1fr); */
+}
+
+.Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img {
+    height: 410px;
+}
+
+.Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img img {
+    width: 100%;
+    height: 100% !important;
+    object-fit: cover;
+}
+
+.Vendor-School .vendor-school-spikers .vendor-school-spikers-tittle h2 {
+    margin: 2rem 0;
+}
+
+
+.Vendor-School .vendor-school-spikers .vendor-school-spiker-box .vendor-school-spiker-about {
+    text-align: end;
+    padding: 1rem;
+}
+
+.Vendor-School .vendor-school-spikers .vendor-school-spiker-box .vendor-school-spiker-about p {
+    opacity: 0.7;
+    margin-top: .5rem;
+}
+
+.Vendor-School .vendor-school-spikers .vendor-nav-net {
+    display: flex;
+    justify-content: end;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
+}
+
+.Vendor-School .vendor-school-spikers .vendor-nav-net svg {
+    cursor: pointer;
+}
+
+.Vendor-School .vendor-school-price {
+    margin: 2rem 0;
+    color: #1C1C1C;
+}
+
+.Vendor-School .many-questions .many-questions-tittle p,
+.Vendor-School .vendor-school-price .vendor-school-tittle p {
+    opacity: 0.7;
+    margin-top: 1rem;
+    font-size: 16px;
+}
+
+.allCourses .vendor-school-price-table,
+.Vendor-School .vendor-school-price-table {
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 0 2rem;  
+    font-weight: 600;
+    overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+    margin-top: 1rem;
+}
+
+.allCourses .vendor-school-price-table table, 
+.Vendor-School .vendor-school-price-table table {
+    width: 100%;
+    /* margin-top: 4rem; */
+}
+
+.allCourses .vendor-school-price-table table .vendor-table-container-box,
+.Vendor-School .vendor-school-price-table table .vendor-table-container-box {
+    width: 100% !important;
+}
+
+.allCourses .vendor-school-price-table table tr,
+.Vendor-School .vendor-school-price-table table tr {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.allCourses .vendor-school-price-table table tr:nth-child(even)
+.Vendor-School .vendor-school-price-table table tr:nth-child(even) {
+    background-color: #F6F6F6;
+}
+
+.allCourses .vendor-school-price-table table tr:nth-child(2),
+.allCourses .vendor-school-price-table table tr:nth-child(3),
+.Vendor-School .vendor-school-price-table table tr:nth-child(2),
+.Vendor-School .vendor-school-price-table table tr:nth-child(3) {
+    background-color: #Fff;
+}
+
+.allCourses .vendor-school-price-table table tr .vendor-btn,
+.Vendor-School .vendor-school-price-table table tr .vendor-btn {
+    margin-bottom: 1rem;
+}
+
+.allCourses .vendor-school-price-table table tr:nth-child(1) button,
+.Vendor-School .vendor-school-price-table table tr:nth-child(1) button {
+    /* transform: translateY(-50%); */
+    margin-bottom: 1rem;
+    z-index: 1 !important;
+}
+
+.allCourses .vendor-school-price-table table tr:nth-child(2) th,
+.Vendor-School .vendor-school-price-table table tr:nth-child(2) th {
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.allCourses .vendor-school-price-table table tr:nth-child(4),
+.Vendor-School .vendor-school-price-table table tr:nth-child(4) {
+    color: red;
+}
+
+.allCourses .vendor-school-price-table table tr td,
+.Vendor-School .vendor-school-price-table table tr td {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.allCourses .vendor-school-price-table table tr td:nth-child(1),
+.Vendor-School .vendor-school-price-table table tr td:nth-child(1) {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.allCourses .vendor-school-price-table table tr td:last-child,
+.Vendor-School .vendor-school-price-table table tr td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.allCourses .vendor-school-price-table table tr:last-child th,
+.Vendor-School .vendor-school-price-table table tr:last-child th{
+    padding-top: 2rem;
+}
+
+.allCourses .vendor-school-price-table table tr:nth-child(odd) td,
+.Vendor-School .vendor-school-price-table table tr:nth-child(odd) td {
+   padding: 1rem;
+}
+
+.allCourses .vendor-school-price-table table tr td:nth-of-type(1),
+.Vendor-School .vendor-school-price-table table tr td:nth-of-type(1) {
+    text-align: left;
+}
+
+.allCourses .vendor-school-price-table table tr span,
+.Vendor-School .vendor-school-price-table table tr span {
+    color: red;
+    font-size: 10px;
+}
+
+.Vendor-School .many-questions .many-questions-accardion-container {
+    display: grid;
+    grid-template-columns: 30% 68%;
+    gap: 0 2rem;
+    margin-top: 3rem;
+}
+
+.Vendor-School .many-questions .many-questions-accardion-container .many-questions-accardion-img img {
+    width: 100% !important;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.Vendor-School .many-questions .many-questions-accardion-container .MuiAccordionSummary-content.MuiAccordionSummary-contentGutters.css-o4b71y-MuiAccordionSummary-content p {
+    font-weight: 900;
+}
+
+.Vendor-School .SignUpVendor-container {
+    width: 100%;
+    text-align: center;
+    margin: 4rem 0;
+}
+
+.Vendor-School .SignUpVendor-container span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Vendor-School .SignUpVendor-container img {
+    width: 50%;
+    border-radius: 15px;
+}
+
+.Vendor-School .SignUpVendor-container .vendor-btn {
+    width: 50%;
+    margin-top: 1rem;
+}
+
+.Vendor-School footer {
+    padding: unset !important;
+    margin: unset;
+}
+
+.Vendor-School footer .vendor-footer .vendor-nav-lists ul {
+    color: #fff !important;
+}
+
+.Vendor-School footer .vendor-footer .vendor-btn {
+    background-color: #fff;
+    color: red;
+    font-weight: 500;
+}
+
+.Vendor-School footer .vendor-footer .vendor-nav-net .vendor-nav-icons {
+    background-color: #fff;
+}
+
+.Vendor-School footer .vendor-footer {
+    display: flex;
+    align-items: center;
+    gap: 0 1rem;
+    /* justify-content: space-between; */
+    background: red;
+}
+
+.Vendor-School footer .vendor-footer .vendor-small {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.Vendor-School footer .vendor-footer .vendor-nav-lists ul {
+    display: flex;
+    align-items: center;
+}
+
+.Vendor-School footer .vendor-footer .vendor-nav-lists li {
+    margin: 0;
+}
+
+.Vendor-School .vendor-nav #navbar-close,
+.Vendor-School .vendor-nav #navbar-bar {
+    display: none;
+}
+
+
+.Vendor-School .vendor-days-container .vendor-days-input {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 0 1rem;
+}
+
+.Vendor-School .vendor-days-container .vendor-btn {
+    width: 100%;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    padding: 1rem 0;
+}
+
+.Vendor-School .many-questions .MuiButtonBase-root {
+    text-transform: unset !important;
+}
+
+.Vendor-School .nav-icon-link-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vs-content {
+    margin-top: 80px;
+    margin-left: 250px;
+    transition: .5s;
+}
+
+.vs-content-noactive {
+    margin-top: 80px;
+    margin-left: 70px;
+    transition: .5s;
+}
+
+.Vendor-School .get-vendor-school .uzb-monthly-salary,
+.Vendor-School .get-vendor-school .get-vendor-school-question {
+    margin-top: 70px;
+    color: #1C1C1C;
+}
+
+.Vendor-School .get-vendor-school .uzb-monthly-salary .uzb-monthly-salary-title,
+.Vendor-School .get-vendor-school .get-vendor-school-question .get-vendor-school-question-title {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.Vendor-School .get-vendor-school .get-vendor-school-question .get-vendor-school-question-title::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 15%;
+    height: 4px;
+    background-color: red;
+}
+
+.Vendor-School .get-vendor-school .get-vendor-school-question .get-vendor-school-question-box span {
+    margin-right: 30px;
+    background-color: red;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.Vendor-School .get-vendor-school .get-vendor-school-question .get-vendor-school-question-box span svg {
+    font-size: 50px;
+}
+
+.Vendor-School .get-vendor-school .get-vendor-school-question .get-vendor-school-question-box p {
+    font-size: 20px;
+    color: #3d3d3d;
+}
+
+.Vendor-School .get-vendor-school .uzb-monthly-salary .uzb-monthly-salary-container .uzb-monthly-salary-box {
+    background-color: #d3cdcd;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.Vendor-School .get-vendor-school .uzb-monthly-salary .uzb-monthly-salary-container .uzb-monthly-salary-box.uzb-monthly-salary-box-red {
+    background-color: rgba(255, 0, 0, 0.623);
+    font-weight: 900;
+}
+
+@media screen and (max-width: 1700px){
+    .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img {
+        height: 380px;
+    }
+}
+
+@media screen and (max-width: 1500px){
+    .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img {
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 1350px){
+    .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img {
+        height: 320px;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img {
+        height: 280px;
+    }
+    .Vendor-School .about-vendor .about-vendor-left-container {
+        padding: 1rem 0.5rem 0 0;
+    }
+    .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img {
+        height: 250px;
+    }
+
+    .Vendor-School .vendor-nav .vendor-nav-lists ul {
+        gap: 1rem;
+    }
+
+    .Vendor-School .many-questions .many-questions-accardion-container {
+        gap: 0 1rem;
+    }
+
+    .allCourses .vendor-school-price-table .vendor-btn,
+    .Vendor-School .vendor-school-price-table .vendor-btn {
+        padding: 0.5rem ;
+    }
+
+    .Vendor-School footer .vendor-footer .vendor-btn {
+        padding: 0.7rem 0.4rem;
+    }
+
+    .Vendor-School .many-questions .many-questions-accardion-container {
+        grid-template-columns: 35% 65%;
+    }
+
+    .Vendor-School .vendor-school-question .vendor-types-center {
+        position: relative;
+        padding: 15px 0;
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media screen and (max-width: 1100px){
+        .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img {
+            height: 250px;
+        }
+
+    .Vendor-School .vendor-nav .vendor-nav-net {
+        gap: 0.5rem;
+        padding: 0rem;
+    }
+    .Vendor-School .vendor-nav .vendor-nav-net .vendor-nav-icons {
+        padding: 0.3rem;
+    }
+    .Vendor-School .vendor-btn {
+        padding: 0.7rem 0.8rem;
+        font-size: 14px;
+    }
+.Vendor-School .vendor-footer .vendor-nav-lists ul,
+
+    .Vendor-School .vendor-nav .vendor-nav-lists ul {
+        font-size: 14px;
+    }
+
+    .Vendor-School .about-vendor .about-vendor-left-container {
+        padding: 0 0.2rem 0 0;
+    }
+
+    .Vendor-School .all-partnerts-logo-container .all-partnerts-logo-title p {
+        padding: 1rem 0 1rem 1rem;
+    }
+
+    .Vendor-School .vendor-showcase .vendor-showcase-content h1{
+        font-size: 30px;
+        line-height: 120%;
+    }
+
+    /* .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container {
+        grid-template-columns: repeat(3, 1fr);
+    } */
+
+    .Vendor-School .get-vendor-school .get-vendor-school-container {
+        grid-template-columns: repeat(2,1fr);
+    }
+    .allCourses .vendor-school-price-table,
+    .Vendor-School .vendor-school-price-table {
+        padding: 0 0.5rem 1rem;
+    }
+    .allCourses .vendor-school-price-table table tr:nth-child(odd) td,
+    .Vendor-School .vendor-school-price-table table tr:nth-child(odd) td {
+        padding: 0.5rem;
+    }
+    .allCourses .vendor-school-price-table table tr td,
+    .Vendor-School .vendor-school-price-table table tr td {
+        padding: 1rem 0.5rem;
+    }
+
+    .Vendor-School .many-questions .many-questions-accardion-container .many-questions-accardion-img img {
+        height: 400px;
+    }
+
+    .Vendor-School .many-questions-right-content .MuiButtonBase-root {
+        font-size: 16px;
+    }
+
+    .allCourses .vendor-school-price-table,
+    .Vendor-School .vendor-school-price-table {
+        padding: 0 0.5rem 2rem;
+    }
+
+    .Vendor-School footer .vendor-footer .vendor-nav-lists ul {
+        gap: 0 1rem;
+    }
+
+    .Vendor-School .vendor-question-types h2 {
+        padding: 0.5rem 1.7rem;
+    }
+   
+    .vendor-types-container .vendor-types-box {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .Vendor-School .vendor-school-title {
+        margin-top: 4rem;
+    }
+
+    .Vendor-School .vendor-question-user-type {
+        width: 100%;
+    }
+
+    .Vendor-School footer .vendor-footer .vendor-nav-lists ul a,
+     .Vendor-School .vendor-nav .vendor-nav-lists ul {
+        gap: 0 1rem;
+        font-size: 15px;
+    }
+    .Vendor-School .vendor-footer .vendor-nav-net, .Vendor-School .vendor-nav .vendor-nav-net {
+        padding:0 1.5rem;
+        gap: 0.5rem;
+    }
+
+    .Vendor-School .vendor-footer .vendor-nav-net .vendor-nav-icons, .Vendor-School .vendor-nav .vendor-nav-net .vendor-nav-icons {
+        padding: 0.3rem;
+    }
+
+    .Vendor-School .nav-smalll {
+        background-color: #fff;
+        position: fixed;
+        top: 90px;
+        right: -70%;
+        width: 70%;
+        height: calc(100vh - 90px);
+        z-index: 2;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        justify-content: start;
+        gap: 1rem 0;
+        z-index: 2;
+        transition: .5s ease;
+    }
+    .Vendor-School .vendor-nav {
+        justify-content:  space-between;
+    }
+
+    .Vendor-School .vendor-nav #navbar-close,
+    .Vendor-School .vendor-nav #navbar-bar {
+        display: block;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .Vendor-School .vendor-nav #navbar-close {
+        display: none;
+    }
+
+    .Vendor-School .get-vendor-school .get-vendor-school-question .get-vendor-school-question-title::before {
+        width: 30%;
+    }
+
+}
+
+
+@media screen and (max-width: 850px) {
+
+    .Vendor-School .vendor-showcase .vendor-showcase-bg {
+        height: 500px;
+        padding: 0 0rem 0 4.5rem;
+    }
+
+
+    .Vendor-School footer .vendor-footer .vendor-nav-logo img {
+        padding: 0 0 0.5rem 0;
+    }
+
+    .Vendor-School .vendor-question-types h2 {
+        font-size: 1.5rem;
+    }
+
+    .Vendor-School .vendor-question-types h2 {
+        font-size: 1rem;
+        padding: 0 1rem;
+        margin: 0.5rem 0;
+    }
+    
+    .Vendor-School .nav-smalll .vendor-nav-lists ul {
+        display: flex;
+        flex-direction: column;
+        color: #006AFF !important;
+        gap: 2rem 0;
+        font-size: 1.3rem;
+        padding-bottom: 5rem;   
+    }
+
+    .Vendor-School .vendor-nav .vendor-nav-net {
+        gap: 0 1rem ;
+    }
+
+    .Vendor-School .vendor-nav .vendor-nav-net .vendor-nav-icons {
+        padding: 0.5rem;
+    }
+
+    .Vendor-School .nav-smalll .vendor-btn {
+        /* background-color: #fff; */
+        /* color: #006AFF; */
+        font-weight: 600;
+        padding: 0.7rem 1rem;
+    }
+
+    .Vendor-School .vendor-nav .vendor-nav-net .vendor-nav-icons {
+        background-color: #fff;
+        stroke: #006AFF;
+    }
+
+   
+
+    .Vendor-School .vendor-nav {
+        height: 90px;
+    }
+
+    .Vendor-School .about-vendor .about-vendor-left-container .about-vendor-tittle h2 {
+        font-size: 27px;
+        margin: 0rem 0 .5rem;
+    }
+    .Vendor-School .about-vendor .about-vendor-left-container .about-vendor-content p {
+        font-size: 16px;
+    }
+
+    .Vendor-School footer .vendor-footer {
+        display: block;
+        padding-bottom: 2rem;
+    }
+
+    .Vendor-School .many-questions .many-questions-accardion-container {
+        grid-template-columns: 40% 60%;
+    }
+
+    .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img {
+        height: 240px;
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+    .Vendor-School .vendor-footer .vendor-nav-net, .Vendor-School .vendor-nav .vendor-nav-net {
+        padding: 0;
+    }
+
+    .Vendor-School .get-vendor-school .uzb-monthly-salary .uzb-monthly-salary-container .uzb-monthly-salary-box {
+        display: block;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    .vs-getGrand .vendor-school-user-about-container,
+    .Vendor-School .vendor-school-content .vendor-school-user-about-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .vs-getGrand .birth-box-bottom-child,
+    .Vendor-School .birth-box-bottom-child {
+        margin-top: 44px;
+    }
+
+    .Vendor-School .vendor-question-types {
+        display: block;
+        gap: 1rem 0;
+    }
+
+    .Vendor-School .get-grand-container .get-grand-btn .vendor-btn {
+        width: 100%;
+    }
+
+    .Vendor-School .vendor-showcase .vendor-showcase-bg {
+        height: 300px;
+    }
+
+    .Vendor-School .vendor-showcase .vendor-showcase-bg {
+        padding: 0 3rem;
+    }
+
+    .Vendor-School .swiper-button-next, .swiper-rtl .swiper-button-prev, .Vendor-School .swiper-button-prev, .swiper-rtl .swiper-button-next {
+        height: 25px;
+        width: 25px;
+    }
+
+    .Vendor-School .swiper-button-next, .swiper-rtl .swiper-button-prev {
+        right: 2px;
+    }
+    .Vendor-School .swiper-button-prev, .swiper-rtl .swiper-button-next {
+        left: 2px;
+    }
+
+    .Vendor-School .vendor-showcase .vendor-showcase-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .Vendor-School .vendor-showcase .vendor-showcase-content {
+        width: 100%;
+    }
+
+    .Vendor-School .many-questions .many-questions-accardion-container,
+    .Vendor-School .get-vendor-school .get-vendor-school-container,
+    .Vendor-School .about-vendor {
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .Vendor-School .about-vendor .about-vendor-img {
+        grid-area: 1/1;
+        margin-bottom: 1rem;
+    }
+
+    .Vendor-School footer .vendor-footer .vendor-nav-lists ul {
+        display: grid;
+    }
+
+    /* .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container {
+        grid-template-columns: repeat(2,1fr);
+    } */
+
+    .allCourses .vendor-school-price-table table tr:nth-child(2) th,
+    .Vendor-School .vendor-school-price-table table tr:nth-child(2) th {
+        font-size: 1rem;
+        padding: 0 2px;
+    }
+    .Vendor-School .vendor-btn {
+        padding: 0.5rem;
+    }
+
+    /* .Vendor-School .vendor-school-price-table table tr:nth-child(odd) td, */
+    .allCourses .vendor-school-price-table table tr td,
+    .Vendor-School .vendor-school-price-table table tr td {
+        /* padding: 0.5rem 0; */
+        font-size: 12px;
+    }
+
+    .allCourses .vendor-school-price-table table .vendor-btn,
+    .Vendor-School .vendor-school-price-table table .vendor-btn {
+        font-size: 10px;
+        padding:0.5rem 0.3rem;
+        border-radius: 5px;
+    }
+
+     .Vendor-School .vendor-nav .vendor-nav-net, .Vendor-School .vendor-nav {
+        padding: 0;
+    }
+
+    .Vendor-School .get-vendor-school .get-vendor-school-box {
+        gap: 0 0.5rem;
+    }
+
+    .Vendor-School .middle-btn-margin-bottom {
+        margin-bottom: 3.5rem;
+    }
+
+    .Vendor-School .vendor-types-center {
+        display: block;
+    }
+
+    .Vendor-School .vendor-types-center img {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .Vendor-School .vendor-school-question .vendor-types-center {
+        padding: 0;
+    }
+
+    .Vendor-School .vendor-school-question .vendor-types-center {
+        display: block;
+    }
+
+    .vendor-types-container .vendor-types-box {
+        display: block;;
+    }
+
+    .Vendor-School .get-vendor-school .get-vendor-school-question .get-vendor-school-question-box  {
+        display: block;
+    }
+
+    .Vendor-School .get-vendor-school .get-vendor-school-question .get-vendor-school-question-box span {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 639px) {
+
+    .allCourses .vendor-school-price-table table .vendor-btn,
+    .Vendor-School .vendor-school-price-table table .vendor-btn {
+        font-size: 10px;
+        padding:0.5rem 0.3rem;
+        border-radius: 5px;
+    }
+
+    .allCourses .vendor-school-price-table table tr:nth-of-type(4) td:nth-of-type(1),
+    .Vendor-School .vendor-school-price-table table tr:nth-of-type(4) td:nth-of-type(1) {
+        width: 200px;
+        display: block;
+    }
+    .allCourses .vendor-school-price-table table .vendor-btn,
+    .Vendor-School .vendor-school-price-table table .vendor-btn {
+        width: 100px;
+        margin: 0 0.5rem;
+    }
+
+    .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img {
+        height: 470px;
+    }
+
+    .allCourses .vendor-school-price-table,
+    .Vendor-School .vendor-school-price-table {
+        padding: 0.5rem;
+    }
+
+    .allCourses .vendor-school-price-table table tr:nth-child(odd) td,
+    .Vendor-School .vendor-school-price-table table tr:nth-child(odd) td,
+    .Vendor-School .vendor-school-price-table table tr td {
+        padding: 0.5rem;
+    }
+
+    .Vendor-School .vendor-showcase .vendor-showcase-btns span {
+        height: 38px;
+        width: 38px;
+    }
+
+    .Vendor-School .vendor-days-container .vendor-days-input {
+        grid-template-columns: repeat(1,1fr);
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 550px){
+  
+    .Vendor-School .container {
+        padding: 0;
+    }
+
+    .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container {
+        gap: 2rem 0;
+    }
+
+    .Vendor-School .many-questions h2,
+    .Vendor-School .vendor-school-price h2,
+    .Vendor-School .get-vendor-school .get-ven-school-tittle h2,
+    .Vendor-School .get-vendor-school .get-vendor-school-box .get-vendor-school-box-content h3,
+    .Vendor-School .vendor-school-spikers .vendor-school-spikers-tittle h2 {
+        font-size: 1.5rem;
+        line-height: 150%;
+    }
+
+    .Vendor-School .vendor-showcase .vendor-showcase-bg {
+        padding: 0 0.5rem 0 2rem;
+        height: 250px;
+    }
+
+    .Vendor-School .vendor-showcase .vendor-showcase-content h1 {
+        font-size: 1.3rem ;
+    }
+    /* .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container {
+        grid-template-columns: repeat(1,1fr);
+    } */
+
+    .Vendor-School .all-partnert-logos img {
+        width: 90px;
+    }
+    .Vendor-School .vendor-school-spikers .vendor-school-spikers-img-container .vendor-school-spiker-img {
+        height: 70%;
+    }
+
+    .Vendor-School footer .vendor-footer .vendor-small {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .Vendor-School footer .vendor-footer .vendor-small .vendor-nav-lists {
+        grid-column: 1/span 2;
+        margin-bottom: 1rem;
+      }
+
+      .Vendor-School footer .vendor-footer .vendor-nav-lists ul {
+        display: grid;
+        /* flex-wrap: wrap; */
+        grid-template-columns: repeat(2,1fr);
+        /* justify-content: center; */
+        align-items: center;
+        font-size: 16px;
+      }
+
+      .Vendor-School footer .vendor-footer .vendor-nav-lists ul li:nth-last-of-type(3),
+      .Vendor-School footer .vendor-footer .vendor-nav-lists ul li:nth-last-of-type(1) {
+        text-align: right;
+      }
+
+      .Vendor-School .SignUpVendor-container .vendor-btn,
+      .Vendor-School .SignUpVendor-container img {
+        width: 80%;
+      }
+
+      .Vendor-School footer .vendor-footer .vendor-nav-btn {
+        text-align: right;
+      }
+
+      .Vendor-School .vendor-school-price-table table tr:nth-child(odd) td {
+        /* padding: 0 0.2rem; */
+      }
+
+      .allCourses .vendor-school-price-table table tr td,
+      .Vendor-School .vendor-school-price-table table tr td {
+        font-size: 10px;
+    }
+
+    .Vendor-School .middle-btn-margin-bottom {
+        margin-bottom: .5rem;
+    }
+
+    .Vendor-School .get-vendor-school .uzb-monthly-salary .uzb-monthly-salary-container .uzb-monthly-salary-box h4{
+        font-size: 18px;
+    }
+  
+}

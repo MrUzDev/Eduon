@@ -1,0 +1,110 @@
+#StreamChat {
+    max-width: 320px;
+    width: 300px;
+    padding: 10px 0 0 25px;
+    box-sizing: content-box;
+}
+
+#messages {
+    width: 100%;
+    height: 80vh;
+    display: block;
+    overflow-y: scroll;
+    /* overflow-x: scroll; */
+    cursor: pointer;
+}
+
+#messages::-webkit-scrollbar {
+    width: 10px;
+}
+#messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#messages::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+#chatForm {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#chatForm input{
+    border-radius: 10px;
+    padding: 10px 10px;
+    outline: none;
+    border: 2px solid #006aff;
+}
+
+#chatForm input::placeholder {
+    color: #006aff;
+} 
+
+#chatForm button{
+    border-radius: 10px;
+    padding: 10px 10px;
+    outline: none;
+    background-color: #006aff;
+    color: #fff;
+    border: 2px solid #006aff;
+}
+
+#StreamChat #ChatUserPhoto,
+#StreamChat .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+#StreamChat  h6 {
+    font-size: 15px;
+    font-weight: 600 !important;
+}
+
+@media (max-width: 1000px) {
+    #StreamChat {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-top: 30px;
+        display: grid;
+    }
+    
+    #messages {
+        grid-area: 2/1;
+        height: 500px;
+    }
+
+    #chatForm {
+        margin-bottom: 10px;
+    }
+
+    #chatForm input{
+        padding: 10px 30px 10px 10px;
+    }
+    
+    #chatForm button{
+        padding: 10px 30px;
+    }
+    
+}
+
+@media (max-width: 567px) {
+    #StreamChat {
+        padding: 0;
+    }
+
+    #chatForm input{
+        padding: 5px 7px;
+    }
+    
+    #chatForm button{
+        padding: 5px 10px;
+    }
+    
+}

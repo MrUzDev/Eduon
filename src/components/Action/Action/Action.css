@@ -1,0 +1,339 @@
+.actionBody {
+  background: #e7f0ff;
+  padding: 40px 0 40px 60px;
+  position: relative;
+}
+
+.actionBody .actionCard img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.actionBody .actionCard h1 {
+  font-family: "SF Pro Text";
+  font-weight: 400;
+  font-size: 30px;
+}
+.actionBody .actionCard h1 span {
+  font-family: "SF Pro Text";
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 150%;
+  color: #006aff;
+}
+.actionCard h1 span {
+  color: #006aff;
+}
+
+.actionBody .actionCard p {
+  font-size: 25px;
+  color: #1c1c1c;
+  font-weight: 500;
+}
+
+.actionBody .actionCard p span {
+  font-size: 27px;
+  color: #006aff;
+  display: block;
+}
+
+.actionBody .cardImg {
+  text-align: center !important;
+}
+.actionBody .close {
+  position: absolute;
+  top: 15px !important;
+  right: 15px !important;
+  cursor: pointer;
+}
+
+.actionBody .cardImg img {
+  max-width: 100% !important;
+  border-radius: 15px;
+}
+.actionBody .btns {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  white-space: nowrap;
+}
+
+.actionBody .btns .demos p {
+  font-size: 18px;
+}
+.actionBody .btns .demos h4 {
+  font-size: 20px;
+}
+
+.actionBody .btns button:nth-of-type(1) {
+  margin-right: 30px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ffffff;
+  background: transparent;
+  border-radius: 15px;
+  padding: 14px 64px !important;
+  border: none;
+  border: none;
+  background: #006aff;
+  cursor: pointer;
+  transition: all 0.4s linear;
+}
+
+.actionBody .btns button:nth-of-type(2) {
+  margin-right: 30px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #006aff;
+  background: transparent;
+  border: 2px solid #006aff;
+  border-radius: 15px;
+  padding: 12px 64px;
+  cursor: pointer;
+  transition: all 0.4s linear;
+}
+.actionBody .btns button:hover {
+  background: #7eb4ff;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 1400px) {
+  .actionBody {
+    background: #e7f0ff;
+    padding: 30px 0 30px 40px;
+    position: relative;
+  }
+  .actionBody .btns button:nth-of-type(1) {
+    font-size: 18px !important;
+    padding: 11px 60px !important;
+  }
+
+  .actionBody .btns button:nth-of-type(2) {
+    font-size: 18px !important;
+    padding: 11px 60px !important;
+  }
+  .actionBody .actionCard h1 {
+    font-family: "SF Pro Text";
+    font-weight: 400;
+    font-size: 28px;
+  }
+  .actionBody .actionCard h1 span {
+    font-family: "SF Pro Text";
+    font-weight: 500;
+    font-size: 37px;
+    line-height: 150%;
+    color: #006aff;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .actionBody .actionCard h1 {
+    font-family: "SF Pro Text";
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 45px !important;
+  }
+  .actionBody .actionCard h1 span {
+    font-family: "SF Pro Text";
+    font-weight: 500;
+    font-size: 37px;
+    line-height: 1px !important;
+    color: #006aff;
+  }
+  .actionBody .btns .demos p {
+    font-size: 16px;
+  }
+
+  .actionBody .btns button:nth-of-type(1) {
+    font-size: 18px !important;
+    padding: 11px 50px !important;
+  }
+
+  .actionBody .btns button:nth-of-type(2) {
+    font-size: 18px !important;
+    padding: 9px 50px !important;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .actionBody {
+    background: #e7f0ff;
+    padding: 40px 15px 15px;
+    position: relative;
+  }
+  .actionBody .actionCard h1 {
+    font-family: "SF Pro Text";
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 45px !important;
+  }
+  .actionBody .actionCard h1 span {
+    font-family: "SF Pro Text";
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1px !important;
+    color: #006aff;
+  }
+  .actionBody .btns .demos p {
+    font-size: 14px;
+  }
+
+  .actionBody .btns button:nth-of-type(1) {
+    font-size: 18px !important;
+    padding: 11px 45px !important;
+    margin-right: 10px;
+  }
+
+  .actionBody .btns button:nth-of-type(2) {
+    font-size: 18px !important;
+    padding: 9px 45px !important;
+    margin-right: 10px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .actionBody {
+    background: #e7f0ff;
+    padding: 40px 15px 15px;
+    position: relative;
+  }
+  .actionBody .actionCard h1 {
+    font-family: "SF Pro Text";
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 45px !important;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .actionBody .actionCard h1 span {
+    font-family: "SF Pro Text";
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1px !important;
+    color: #006aff;
+  }
+  .actionBody .btns .demos p {
+    font-size: 14px;
+  }
+
+  .actionBody .btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    white-space: nowrap;
+  }
+
+  .actionBody .cardImg {
+    text-align: center !important;
+    margin-top: 50px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .actionBody {
+    background: #e7f0ff;
+    padding: 40px 15px 15px;
+    position: relative;
+  }
+  .actionBody .actionCard h1 {
+    font-family: "SF Pro Text";
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 45px !important;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .actionBody .actionCard h1 span {
+    font-family: "SF Pro Text";
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1px !important;
+    color: #006aff;
+  }
+  .actionBody .btns {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    /* white-space: nowrap; */
+  }
+  .actionBody .btns .demos p {
+    font-size: 14px;
+  }
+  .actionBody .btns button:nth-of-type(1) {
+    font-size: 18px !important;
+    padding: 11px 45px !important;
+    margin-right: 10px;
+    /* margin-bottom: 15px; */
+  }
+
+  .actionBody .btns button:nth-of-type(2) {
+    font-size: 18px !important;
+    padding: 9px 58px !important;
+    margin-right: 10px;
+  }
+  .actionBody .btns .demos {
+    margin-top: 20px;
+  }
+
+  .actionBody .cardImg {
+    text-align: center !important;
+    margin-top: 50px;
+  }
+}
+@media screen and (max-width: 477px) {
+  .actionBody {
+    background: #e7f0ff;
+    padding: 40px 0px 0px;
+    position: relative;
+  }
+  .actionBody .close {
+    position: absolute;
+    top: 25px !important;
+    right: 15px !important;
+    cursor: pointer;
+  }
+
+  .actionBody .actionCard h1 {
+    font-size: 18px;
+    line-height: 28px !important;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .actionBody .actionCard h1 span {
+    font-size: 20px;
+    color: #006aff;
+  }
+  .actionBody .btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    /* white-space: nowrap; */
+  }
+  .actionBody .btns .demos p {
+    font-size: 14px;
+  }
+  .actionBody .btns button:nth-of-type(1) {
+    font-size: 18px !important;
+    padding: 11px 45px !important;
+    margin-right: 10px;
+    /* margin-bottom: 15px; */
+  }
+
+  .actionBody .btns button:nth-of-type(2) {
+    font-size: 18px !important;
+    padding: 9px 58px !important;
+    margin-right: 10px;
+    margin-top: 20px;
+  }
+  .actionBody .btns .demos {
+    margin-top: 20px;
+  }
+
+  .actionBody .cardImg {
+    text-align: center !important;
+    margin-top: 50px;
+  }
+}

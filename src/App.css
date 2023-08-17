@@ -1,0 +1,85 @@
+.error-messageee {
+  color: #ef2b23;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: left;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.wrap_c3b7,
+.wrap_e9e7 {
+  bottom: 70px !important;
+}
+
+._orientationLeft_d69f.wrap_e9e7 {
+  left: unset !important;
+  right: 10px !important;
+}
+
+/* .d-none {
+    display: none ;
+} */
+
+.pointer {
+  cursor: pointer !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.ml-5 {
+  margin-left: 10px !important;
+}
+
+.btn {
+  transition: background-color 0.2s linear;
+}
+
+.btn:hover {
+  background-color: #006aff !important;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+    .label_d1b3{
+        bottom: 120px !important;
+    }
+    .wrap_ac29 {
+        bottom: 60px !important;
+      }
+}
+
+@media (max-width: 576px) {
+  .app {
+    padding: 0 10px 100px 10px !important;
+  }
+
+  #jvlabelWrap{
+        bottom: 150px !important;
+        background-color: red;
+    }
+    .globalClass_ec9a jdiv {
+      bottom: 35px !important;
+    }
+
+    .icons_bd15 {
+      top: 45% !important;
+    }
+  
+}
+
+.x-icon-sm {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.wrap_a8a4 {
+  bottom: 80px !important;
+}

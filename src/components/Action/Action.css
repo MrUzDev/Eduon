@@ -1,0 +1,465 @@
+    .actionBody {
+        position: relative;
+    }
+    
+    .actionBody .actionCard img {
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    .actionBody .actionCard h1 {
+        font-family: "SF Pro Text";
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 30px;
+    }
+    
+    .actionBody .actionCard h1 span {
+        font-family: "SF Pro Text";
+        font-weight: 600;
+        font-size: 60px;
+        line-height: 60px;
+        white-space: nowrap;
+        color: #006aff;
+    }
+    
+    .actionBody .actionCard p {
+        font-size: 25px;
+        color: #1c1c1c;
+        font-weight: 500;
+    }
+    
+    .actionBody .actionCard p span {
+        font-size: 27px;
+        color: #006aff;
+        display: block;
+    }
+    
+    .actionBody .cardImg {
+        text-align: center !important;
+    }
+    
+    .actionBody .close {
+        position: absolute;
+        top: 15px !important;
+        right: 15px !important;
+        cursor: pointer;
+    }
+    
+    .actionBody .cardImg img {
+        max-width: 100% !important;
+        border-radius: 15px;
+    }
+    
+    .actionBody .btns {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        white-space: nowrap;
+    }
+    
+    .demos p {
+        font-size: 21px !important;
+    }
+    
+    .demos h4 {
+        font-size: 20px;
+        margin-left: 60px;
+    }
+    
+    .actionBody .btns button:nth-of-type(1) {
+        margin-right: 30px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        color: #ffffff;
+        background: transparent;
+        border-radius: 15px;
+        padding: 14px 64px !important;
+        border: none;
+        border: none;
+        background: #006aff;
+        cursor: pointer;
+        transition: all 0.4s linear;
+    }
+    
+    .actionBody .btns button:nth-of-type(2) {
+        margin-right: 30px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        color: #006aff;
+        background: transparent;
+        border: 2px solid #006aff;
+        border-radius: 15px;
+        padding: 12px 64px;
+        cursor: pointer;
+        transition: all 0.4s linear;
+    }
+    
+    .actionBody .btns button:hover {
+        background: #7eb4ff;
+        color: #ffffff;
+    }
+
+    #bannerYanvar {
+        max-width: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+    
+    .actionBody .schoolReg {
+        padding: 0.5rem 1rem ;
+        background-color: #006aff;
+        color: #fff;
+        border-radius: 15px;
+        margin-left: 3rem;
+    }
+
+    .actionBody .vendor-btn {
+        margin-top: 16px;
+        font-size: 14px;
+        margin-left: 1rem;
+        margin-bottom: 16px;
+    }
+
+    .actionBody .vendor-btn:hover {
+        animation-play-state: paused;
+    }
+
+
+    @keyframes vendorBtnAnimation{
+        0%{
+            transform: scale(1) rotate(0deg);
+        }
+        25% {
+            transform: rotate(5deg);
+        }
+        50%{
+            transform: rotate(0deg);
+        }
+        75% {
+            transform: rotate(-5deg);
+        }
+        100% {
+            transform: scale(1.1) rotate(-0deg);
+            font-size: 14px;
+        }
+    }
+
+    .actionBody a:hover,
+    .actionBody a {
+        color: inherit;
+    }
+
+    .actionBannerImg {
+        width: 100% ;
+        border-radius: 15px;
+    }
+
+    .actionBody .swiper-button-next:after,
+    .actionBody .swiper-rtl .swiper-button-prev:after,
+    .actionBody .swiper-button-prev:after,
+    .actionBody .swiper-rtl .swiper-button-next:after {
+        font-size: 2rem !important;
+    }
+
+    .actionBody .swiper-button-next, .actionBody .swiper-button-prev {
+        top: 45%;
+    }
+
+    @media screen and (max-width: 1400px) {
+        .actionBody {
+            position: relative;
+        }
+        .actionBody .btns button:nth-of-type(1) {
+            font-size: 18px !important;
+            padding: 11px 60px !important;
+        }
+        .actionBody .btns button:nth-of-type(2) {
+            font-size: 18px !important;
+            padding: 11px 60px !important;
+        }
+        .actionBody .actionCard h1 {
+            font-family: "SF Pro Text";
+            font-weight: 400;
+            font-size: 28px;
+        }
+        .actionBody .actionCard h1 span {
+            font-family: "SF Pro Text";
+            font-weight: 600;
+            font-size: 55px;
+            line-height: 55px;
+            color: #006aff;
+            white-space: nowrap;
+        }
+    }
+    
+    @media screen and (max-width: 1300px) {
+        .actionBody .actionCard h1 {
+            font-family: "SF Pro Text";
+            font-weight: 400;
+            font-size: 28px;
+            /* line-height: 45px !important; */
+        }
+        .actionBody .actionCard h1 span {
+            font-family: "SF Pro Text";
+            font-weight: 600;
+            font-size: 55px;
+            line-height: 55px !important;
+            color: #006aff;
+            white-space: nowrap;
+        }
+        .actionBody .btns .demos p {
+            font-size: 16px;
+        }
+        .actionBody .btns button:nth-of-type(1) {
+            font-size: 18px !important;
+            padding: 11px 50px !important;
+        }
+        .actionBody .btns button:nth-of-type(2) {
+            font-size: 18px !important;
+            padding: 9px 50px !important;
+        }
+    }
+    
+    @media screen and (max-width: 1200px) {
+        .actionBody {
+            position: relative;
+        }
+        .actionBody .actionCard h1 {
+            font-family: "SF Pro Text";
+            font-weight: 400;
+            font-size: 26px;
+            line-height: 30px !important;
+        }
+        .actionBody .actionCard h1 span {
+            font-family: "SF Pro Text";
+            font-weight: 600;
+            font-size: 40px;
+            line-height: 50px !important;
+            white-space: nowrap;
+            color: #006aff;
+        }
+        .actionBody .btns .demos p {
+            font-size: 14px;
+        }
+        .actionBody .btns button:nth-of-type(1) {
+            font-size: 18px !important;
+            padding: 11px 45px !important;
+            margin-right: 10px;
+        }
+        .actionBody .btns button:nth-of-type(2) {
+            font-size: 18px !important;
+            padding: 9px 45px !important;
+            margin-right: 10px;
+        }
+    }
+    
+    @media screen and (max-width: 992px) {
+
+       .actionBody .demos {
+        text-align: center;
+       }
+
+       .actionBody .demos h4 {
+        margin: 0 !important;
+       }
+    
+        .actionBody .actionCard h1 {
+            font-family: "SF Pro Text";
+            font-weight: 400;
+            font-size: 26px;
+            line-height: 30px !important;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .actionBody .actionCard h1 span {
+            font-family: "SF Pro Text";
+            font-weight: 600;
+            font-size: 55px;
+            line-height: 50px !important;
+            white-space: nowrap;
+            color: #006aff;
+        }
+        /* .actionBody .actionCard h1 span:nth-of-type(2) {
+            margin-bottom: 20px !important;
+        } */
+        .actionBody .btns .demos p {
+            font-size: 14px;
+        }
+        .actionBody .btns {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            white-space: nowrap;
+        }
+        .actionBody .cardImg {
+            text-align: center !important;
+            margin-top: -30px;
+        }
+    }
+    
+    @media screen and (max-width: 768px) {
+       
+        .actionBody .actionCard h1 {
+            font-family: "SF Pro Text";
+            font-weight: 400;
+            font-size: 26px;
+            line-height: 30px !important;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .actionBody .actionCard h1 span {
+            font-family: "SF Pro Text";
+            font-weight: 600;
+            font-size: 45px;
+            line-height: 50px !important;
+            white-space: nowrap;
+            color: #006aff;
+        }
+
+        #bannerYanvar {
+            object-fit: contain;
+            height: 100%;
+        }
+
+        .actionBody .vendor-btn {
+            width: auto !important;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+       .actionBody .swiper-button-next,.actionBody .swiper-button-prev {
+            top: 40%;
+        }
+    }
+    
+    @media screen and (max-width: 576px) {
+     
+        .actionBody .actionCard h1 {
+            font-family: "SF Pro Text";
+            font-weight: 400;
+            font-size: 26px;
+            line-height: 30px !important;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .actionBody .actionCard h1 span {
+            font-family: "SF Pro Text";
+            font-weight: 600;
+            font-size: 40px;
+            line-height: 43px !important;
+            white-space: nowrap;
+            color: #006aff;
+        }
+        .actionBody .btns {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            /* white-space: nowrap; */
+        }
+        .actionBody .btns .demos p {
+            font-size: 14px;
+        }
+        .actionBody .btns button:nth-of-type(1) {
+            font-size: 18px !important;
+            padding: 11px 45px !important;
+            margin-right: 10px;
+            /* margin-bottom: 15px; */
+        }
+        .actionBody .btns button:nth-of-type(2) {
+            font-size: 18px !important;
+            padding: 9px 58px !important;
+            margin-right: 10px;
+        }
+        .actionBody .btns .demos {
+            margin-top: 20px;
+        }
+        .actionBody .cardImg {
+            text-align: center !important;
+            margin-top: 50px;
+        }
+
+        .actionBody {
+            margin-top: 120px;
+        }
+    }
+    
+    @media screen and (max-width: 477px) {
+        .actionBody {
+            position: relative;
+        }
+        .actionBody .close {
+            position: absolute;
+            top: 25px !important;
+            right: 15px !important;     
+            cursor: pointer;
+        }
+        .actionBody .actionCard h1 {
+            font-size: 18px;
+            line-height: 25px !important;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .actionBody .actionCard h1 span {
+            font-size: 30px;
+            line-height: 38px !important;
+            white-space: nowrap;
+            color: #006aff;
+        }
+        .actionBody .btns {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            /* white-space: nowrap; */
+        }
+        .actionBody .btns .demos p {
+            font-size: 14px;
+        }
+        .actionBody .btns button:nth-of-type(1) {
+            font-size: 18px !important;
+            padding: 11px 45px !important;
+            margin-right: 10px;
+            /* margin-bottom: 15px; */
+        }
+        .actionBody .btns button:nth-of-type(2) {
+            font-size: 18px !important;
+            padding: 9px 58px !important;
+            margin-right: 10px;
+            margin-top: 20px;
+        }
+        .actionBody .btns .demos {
+            margin-top: 20px;
+        }
+        .actionBody .cardImg {
+            text-align: center !important;
+            margin-top: 0px !important;
+        }
+    }
+    
+    @media screen and (max-width:380px) {
+        .actionBody .actionCard h1 {
+            font-size: 18px;
+            line-height: 22px !important;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .actionBody .actionCard h1 span {
+            font-size: 25px;
+            line-height: 32px !important;
+            color: #006aff;
+            white-space: nowrap;
+        }
+    }
+
+    @media screen and (min-width: 767px) {
+        .actionBody .vendor-btn {
+            animation: vendorBtnAnimation 500ms ease-out infinite alternate;
+        }
+    }
