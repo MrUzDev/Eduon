@@ -798,11 +798,11 @@ export default function CourseItem(props) {
                   <div className="price mr-20">
                     {props.priceLine ? (
                       <>
-                        <span className="t-gray line-through"> UZS
+                        <span className="t-gray line-through"> UZS&nbsp;	
                         {currency(props.price, 'UZS').replace(/,/g, '.').replace("UZS", "")
                         .replace("soʻm", "").slice(0, -3)} 
                         </span>
-                        <p style={{ color: "#f00", fontWeight: '700' }}> UZS
+                        <p style={{ color: "#f00", fontWeight: '700' }}> UZS&nbsp;	
                         {currency(((props.price) - parseInt(props.priceLine)), 'UZS').replace(/,/g, '.').replace("UZS", "")
                         .replace("soʻm", "").slice(0, -3)}
 
@@ -810,7 +810,7 @@ export default function CourseItem(props) {
                         </p>
                       </>
                     ) : (
-                      <p>UZS
+                      <p>UZS&nbsp;	
                         {currency(props.price, 'UZS').replace(/,/g, '.').replace("UZS", "")
                         .replace("soʻm", "").slice(0, -3)}
                         <span className="gray ml-5"></span>

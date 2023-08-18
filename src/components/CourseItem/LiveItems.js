@@ -208,6 +208,10 @@ export default function LiveItems(props) {
   };
 
 
+  const currency = (number, currency, lang = undefined) => 
+  Intl.NumberFormat(lang, {style: 'currency', currency}).format(number)
+
+
   return (
     <div className='wrapper'>
 
@@ -469,10 +473,10 @@ export default function LiveItems(props) {
     {props.type == "FREE" ? (
       <p>Bepul</p>
     ): (
-    <p>{props.price.toLocaleString("uz-UZ", {
-      style: "currency",
-      currency: "UZS",
-    }).replace(',', ' ' ).replace('.00', '')}</p>
+    <p> UZS&nbsp;	
+      {/* {currency(props.price, 'UZS')} */}
+    {currency(props.price, 'UZS').replace(/,/g, '.').replace(/ /g, '.').replace("UZS", "").replace("soʻm", "").slice(0, -3)} 
+    </p>
     )}
     </div>
       {isBought || props.price == 0 ? (
@@ -496,7 +500,7 @@ export default function LiveItems(props) {
             <h1 onClick={() => navigate(`/chosenStream/${props.id}`)}>
               {props.name && props.name.length > 25
                 ? props.name.slice(0, 25) + "..."
-                : props.name}asas
+                : props.name}
             </h1>
             <div className="btn_popup">
               {props.priceLine ? <button>Chegirmadagi vebinar</button> : null}
