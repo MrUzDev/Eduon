@@ -14,11 +14,12 @@ export const refresh = (code, statusText) => {
         console.log(res.data.access);
         localStorage.removeItem("access");
         localStorage.setItem("access", res.data.access);
-        window.location.reload();
+        // window.location.reload();
       })
         .catch((err) => {
           console.log(err);
           localStorage.removeItem("access");
+          localStorage.removeItem("refresh");
         });
     }
   } catch (error) {}

@@ -457,7 +457,7 @@ export default function UploadCourse() {
         formData2.append("is_valid", "ON HOLD");
         formData2.append("trailer_file", trailerVideo && trailerVideo.video);
         formData2.append('webinar_type', vebinarType)
-        formData2.append('youtube_link', youTubeLink ? youTubeLink.replace('watch?v=' , 'embed/') + '?rel=0' : null)
+        formData2.append('youtube_link', youTubeLink ? youTubeLink.replace('watch?v=' , 'embed/') : null)
   
         
         await axios

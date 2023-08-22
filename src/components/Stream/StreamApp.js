@@ -119,6 +119,8 @@ export default function ViewStream(props) {
     if((new Date(props.startTime).getTime()) <= (new Date(moment().format().replace("+03:00", "+05:00")))) {
       setStartTimeCheck(true)
     }
+
+    console.log(props); 
   }, [props.startTime])
 
 
@@ -408,6 +410,8 @@ useEffect(() => {
 // }, [mediaBlobUrl])
 
 
+
+
   return (
     <>
     {props.streamAbout.webinar_type && props.streamAbout.webinar_type == 'AGORA' ? (
@@ -511,10 +515,10 @@ useEffect(() => {
       <div className="YoutubeTrans">
       {startTimeCheck ? (
         <div style={{position: 'relative'}}>
-        <iframe className="width-100 streamBg" allowfullscreen src={props.streamAbout.youtube_link} title="YouTube video player" frameborder="0"></iframe>
-        <div id="youtubePlayerMark"></div>
+        <iframe className="width-100 streamBg" id="youtubeVideo" allowfullscreen src={`${props.streamAbout.youtube_link}?autoplay=1&rel=0&modestbranding=1&start=1`} allow='autoplay' title="YouTube video player" frameborder="0"></iframe>
+        {/* <div id="youtubePlayerMark"></div> */}
         <div id="youtubePlayerMark2"></div>
-        <div id="youtubePlayerMark3"></div>
+        {/* <div id="youtubePlayerMark3"></div> */}
         </div>
         ): (
         <>

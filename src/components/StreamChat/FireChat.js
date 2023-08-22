@@ -26,7 +26,7 @@ export default function FChat(props) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    props.channelName && messagee != ' ' && name &&
+    props.channelName && messagee != ' ' && messagee != '  ' && messagee != '   ' && name &&
       myFirestore.collection(props.channelName).add({
         text: messagee,
         displayName: name,
@@ -36,7 +36,6 @@ export default function FChat(props) {
 
     setMessagee("");
   };
-
 
 
   return (

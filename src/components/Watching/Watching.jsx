@@ -281,6 +281,7 @@ function Watching() {
   const fullPLay = () => {
     document.querySelector("video").play();
     setPlay(false);
+    setPause(true)
     setPlayerPause(true)
     
     if(window.innerWidth < 1000) {

@@ -284,22 +284,18 @@ html::-webkit-scrollbar-thumb {
     bottom: 0px;
     right: 40px;
     background-color: transparent;
-    width: 40%;
-    height: 35px;
+    width: 50%;
+    height: 45px;
 }
-
+    
 #youtubePlayerMark2 {
     top: 0;
     width: 100%;
     right: 0;
-    height: 50px;
+    height: 80px;
 }
 
-#youtubePlayerMark3 {
-    bottom: 50px;
-    right: 0;
-    width: 20%;
-}
+
 
 @media (max-width: 1200px) {
     .streamBg .streamNav button {
