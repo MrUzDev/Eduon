@@ -296,6 +296,27 @@ html::-webkit-scrollbar-thumb {
 }
 
 
+.youtube-container {
+	overflow: hidden;
+	width: 100%;
+	aspect-ratio: 16/9;
+
+    .salom {
+        width: 100px;
+    }
+}
+
+.youtube-container iframe {
+    width: 300%;
+    height: 100%;
+    /* ...and bring it back again */
+    margin-left: -100%;
+}
+
+.youtube-container iframe .ytp-title {
+display: none;
+}	
+
 
 @media (max-width: 1200px) {
     .streamBg .streamNav button {

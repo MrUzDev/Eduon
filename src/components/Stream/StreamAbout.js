@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import './Stream.css'
 import { useParams, useNavigate } from 'react-router-dom';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { StateContext } from "../../context/Context";
+import axios from "../../Apis/api";
+import { refresh } from "../../Apis/RefreshToken/RefreshToken";
 
 export default function StreamAbout(props) {
+  const {loggedIn } = useContext(StateContext);
+  const [youtubeViewers, setYoutubeViewers] = useState(0)
+
 
     let id = useParams();
     let navigate = useNavigate()
@@ -14,18 +20,33 @@ export default function StreamAbout(props) {
     navigate(`/speakerAbout/${id}`);
   };  
 
+
+  useEffect(() => {
+    try {
+     loggedIn && axios.get(`${process.env.REACT_APP_API_KEY}/api/v2/stream/get-webinar-viewers/${id.id}`,
+      {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+      })
+      .then((res) => setYoutubeViewers(res.data.length))
+      .catch((err) => {
+        refresh(err.response.status, err.response.status.text);
+      });
+    } catch (error) {}
+  }, [])
+
   return (
     <div className='stream-about'>
-
         <div className="streamTitle">
             <h3> {props.streamAbout.name}</h3>
         </div>
-
-
           <div className="video_desc">
            <div className="aboutCourse">
-               {props.streamAbout.short_descr &&  <><>{ ReactHtmlParser(props.streamAbout.short_descr) }</></>}
+            <p>{youtubeViewers} martta ko'rilgan</p>
+              {props.streamAbout.short_descr &&  <>{ ReactHtmlParser(props.streamAbout.short_descr) }</>}
                </div>
+               
            </div>
 
            <div className="Speaker-Stream-About">

@@ -56,7 +56,7 @@ export default function ViewStream(props) {
      
     useEffect(() => {
       setLoader(true)
-      if(props.streamAbout && orSpeaker && props.streamData && startStreamMinute) {
+      if(props.streamAbout && orSpeaker && props.streamData && startStreamMinute ) {
         setTimeout(() => {
           setLoader(false)
         }, 1000);
@@ -119,9 +119,7 @@ export default function ViewStream(props) {
     if((new Date(props.startTime).getTime()) <= (new Date(moment().format().replace("+03:00", "+05:00")))) {
       setStartTimeCheck(true)
     }
-
-    console.log(props); 
-  }, [props.startTime])
+    }, [props.startTime])
 
 
   let channelParameters = {
@@ -133,7 +131,6 @@ export default function ViewStream(props) {
     remoteUid: null,
   };
 
-
   var isSharingEnabled = false;
   var isMuteVideo = false;
 
@@ -144,7 +141,6 @@ export default function ViewStream(props) {
     transform: "translate(-50%, -50%)",
     width: 400,
     bgcolor: "background.paper",
-    // border: "4px solid #006aff",
     borderRadius: "15px",
     boxShadow: 24,
     p: 5,
@@ -230,7 +226,6 @@ export default function ViewStream(props) {
       }
     });
 
-
     await agoraEngine.join(
       "0e3533715d014b1b9511f53da3c981c9",
       props.streamData && props.streamData.channel,
@@ -239,8 +234,6 @@ export default function ViewStream(props) {
     );
 
   
-    
-
     try { 
         if (orSpeaker == "speaker" || orSpeaker == 'speaker2'){
 
@@ -263,30 +256,19 @@ export default function ViewStream(props) {
 try {
   document.getElementById("inItScreen").onclick = async function () {
     if (isSharingEnabled == false) {
-      // Create a screen track for screen sharing.
       channelParameters.screenTrack = await AgoraRTC.createScreenVideoTrack();
-      // Stop playing the local video track.
       channelParameters.localVideoTrack.stop();
-      // Unpublish the local video track.
       await agoraEngine.unpublish(channelParameters.localVideoTrack);
       await agoraEngine.publish(channelParameters.screenTrack);
       // Play the screen track on local container.
       channelParameters.screenTrack.play(localPlayerContainer);
-      // Update the button text.
-      // Update the screen sharing state.
       isSharingEnabled = true;
       setShareScreenIcon(true)
     } else {
-      // Stop playing the screen track.
       channelParameters.screenTrack.stop();
-      // Unpublish the screen track.
       await agoraEngine.unpublish(channelParameters.screenTrack);
-      // Publish the local video track.
       await agoraEngine.publish(channelParameters.localVideoTrack);
-      // Play the local video on the local container.
       channelParameters.localVideoTrack.play(localPlayerContainer);
-      // Update the button text.
-      // Update the screen sharing state.
       isSharingEnabled = false;
       setShareScreenIcon(false)
     }
@@ -315,17 +297,11 @@ try {
       streamStatus(false)
       setLeaveStreamNotf(true)
     }
-
-
   };
 } catch (error) {}
 
 try {
   document.getElementById("leaveUser").onclick = async function () {
-
-  
-    // channelParameters.localAudioTrack.close();
-    // channelParameters.localVideoTrack.close();
 
     removeVideoDiv(remotePlayerContainer.id);
         removeVideoDiv(localPlayerContainer.id);
@@ -372,8 +348,6 @@ function removeVideoDiv(elementId)
 };
 
 
-
-
 useEffect(() => {
     
     const restTime = (new Date(props.streamAbout.start_time).getTime()) - (new Date(moment().format().replace("+03:00", "+05:00")));
@@ -410,7 +384,52 @@ useEffect(() => {
 // }, [mediaBlobUrl])
 
 
+const testPlayer = (event) => {
+ 
+}
 
+
+useEffect(() => {
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const iframe = document.getElementById('youtubeVideo');
+    const customContextMenu = document.getElementById('customContextMenu');
+  
+    iframe.addEventListener('contextmenu', (e) => {
+        e.preventDefault(); // Prevent the default browser context menu
+        const posX = e.clientX;
+        const posY = e.clientY;
+        customContextMenu.style.left = `${posX}px`;
+        customContextMenu.style.top = `${posY}px`;
+        customContextMenu.style.display = 'block';
+    });
+  
+    document.addEventListener('click', () => {
+        customContextMenu.style.display = 'none';
+    });
+  
+  //   const iframe = document.getElementById('myIframe');
+  
+  // iframe.contentWindow.postMessage('Hello from parent', '*');
+  
+  // window.addEventListener('message', (event) => {
+  //   if (event.origin === 'http://localhost:3000') {
+  //       console.log('Received message:', event.data);
+  //   }
+  // });
+  
+  //   var youtube = document.getElementById('youtubeVideo');
+  
+  // // youtube = youtube.contentWindow;
+  // youtube.oncontextmenu = function(e) {
+  //   e.preventDefault();
+  //   console.log("Blocked!");
+  // }
+
+});
+
+    
+}, [loader])
 
   return (
     <>
@@ -428,7 +447,7 @@ useEffect(() => {
               ) : (
                 <div className="NoPhoto">
                    <svg
-              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium avatarka pointer "
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium avatarka pointer"
               focusable="false"
               aria-hidden="true"
               viewBox="0 0 24 24"
@@ -454,7 +473,7 @@ useEffect(() => {
                     <button
                     id="join" onClick={() => {
                       startBasicCall();
-                      setStartStream(true);
+                      setStartStream(true)
                     }} >
                   <SmartDisplayIcon/>
                   </button>
@@ -496,7 +515,7 @@ useEffect(() => {
                  id="join"
                  onClick={() => {
                       startBasicCall();
-                      setStartStream(true);
+                      setStartStream(true)
                     }} >
                    <SmartDisplayIcon/>
                   </button>
@@ -515,10 +534,10 @@ useEffect(() => {
       <div className="YoutubeTrans">
       {startTimeCheck ? (
         <div style={{position: 'relative'}}>
-        <iframe className="width-100 streamBg" id="youtubeVideo" allowfullscreen src={`${props.streamAbout.youtube_link}?autoplay=1&rel=0&modestbranding=1&start=1`} allow='autoplay' title="YouTube video player" frameborder="0"></iframe>
-        {/* <div id="youtubePlayerMark"></div> */}
+        <iframe className="width-100 streamBg" id="youtubeVideo" allowfullscreen src={`${props.streamAbout.youtube_link}?autoplay=1&rel=0&modestbranding=1`} title="YouTube video player" frameborder="0"></iframe>
+        <div id="customContextMenu">
+        </div>
         <div id="youtubePlayerMark2"></div>
-        {/* <div id="youtubePlayerMark3"></div> */}
         </div>
         ): (
         <>
@@ -567,7 +586,7 @@ useEffect(() => {
         </div>
       )}
 
-<Modal
+      <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={vebinarStartModal}
@@ -584,15 +603,38 @@ useEffect(() => {
               <div className="rowGrid">
                 <div className="flex justify-end width-100"><CloseIcon className="pointer" onClick={() => setVebinarStartModal(false)}/></div>
                 <div className="col-24 text-center mb-24">
-                  {/* {startStreamSecond && ( */}
                     <h4> Vebinar boshlanishiga {startStreamDay > 0 ? startStreamDay + ' kun' : null} {startStreamHour > 0 ? startStreamHour + ' soat' : null} {startStreamMinute > 0 ? startStreamMinute + ' daqiqa' : null} {startStreamSecond + ' sekund'} qoldi.</h4>
-                  {/* )} */}
                </div>
               </div>
             </Box>
           </Fade>
         </div>
-      </Modal>;
+      </Modal>
+
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={props.streamAbout.is_end}
+        // onClose={() => setVebinarStartModal(false)}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <div className="modalForLogin">
+          <Fade in={props.streamAbout.is_end}>
+            <Box sx={style2} className="container">
+              <div className="rowGrid">
+                <div className="flex width-100">
+                  <h4>Vebinar o'z nihoyasiga yetgan!</h4>
+               </div>
+              </div>
+            </Box>
+          </Fade>
+        </div>
+      </Modal>
 
       {loader && (
           <div className="loader">

@@ -138,11 +138,14 @@ function VendorSchool() {
           phone_number: number,
           password: password,
         }
-      );
+      ).catch((err) => {
+        refresh(err.response.status, err.response.status.text);
+      });
       localStorage.setItem("access", data.data.access);
       localStorage.setItem("refresh", data.data.refresh);
       localStorage.setItem("vsModalRegNow", true);
       window.location.reload()
+      
     } catch (error) {
       setError(true);
     }
@@ -157,7 +160,10 @@ function VendorSchool() {
         .get(`${process.env.REACT_APP_API_KEY}/api/v1/accounts/profile`, {
           headers,
         })
-        .then((res) => {setIsRegVs(res.data.to_school); console.log(res.data.to_school);});
+        .then((res) => {setIsRegVs(res.data.to_school); console.log(res.data.to_school);})
+        .catch((err) => {
+          refresh(err.response.status, err.response.status.text);
+        });
     } catch (error) {}
   }, [open]);
 
