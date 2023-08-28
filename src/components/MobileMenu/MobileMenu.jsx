@@ -193,7 +193,7 @@ export default function MobileMenu() {
                         }}
                         className="btn mobileMenuLoginBtn  mr-10"
                       >
-                        Boshlash
+                        Kirish
                       </button>
                     )}
                       <button className="btn" onClick={() => {navigate('/sotuvchilarMaktabi'); setMobileMenuOpen(false)}}>Sotuvchilar maktabi</button>

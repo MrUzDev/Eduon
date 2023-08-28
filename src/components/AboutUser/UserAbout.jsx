@@ -85,9 +85,9 @@ function UserAbout(props) {
         <div className="UserAbout container">
           <div className="headrow rowGrid">
             <div className="avatar col-24 col-sm-28">
-              {responseData.profile_picture ? (
+              {responseData.profile_picture_url ? (
                 <img
-                  src={`${process.env.REACT_APP_API_KEY}${responseData.profile_picture}`}
+                  src={`${responseData.profile_picture_url}`}
                   className="avatar"
                   alt="...."
                 />

@@ -17,7 +17,8 @@ import NavbarFalse from "../../../components/NavbarFalse/NavbarFalse";
 import NavbarSm from "../../../components/Navbar/NavbarSm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { GoogleLogin } from 'react-google-login'
+import { gapi } from "gapi-script";
 
 export default function Login() {
   const [show, setShow] = useState(false);
@@ -33,6 +34,8 @@ export default function Login() {
   const PasswordNot = () => toast.error("Parol kiritilmadi!");
   const PassworOrPhoneNumberError = () => toast.error("Telefon raqami yoki parol xato kiritilgan!");
   
+  const clientIdGoogle =  "218671596318-3guu90dq107i1d8n2r288pidrpvaekuj.apps.googleusercontent.com"
+
   useEffect(() => {
     setPhoneNumber(number);
   }, [number]);
@@ -103,6 +106,27 @@ export default function Login() {
       localStorage.setItem("pass", password);
     }
   };
+
+  const onSuccessLogin = (res) => {
+
+    try {
+      axios.post(`${process.env.REACT_APP_API_KEY}/api/v2/accounts/google-auth`,
+      {
+        email: res.profileObj.email,
+        token: res.tokenId
+      }).then((resData) => {
+        console.log(resData.data.jwt_token);
+        localStorage.setItem("access", resData.data.jwt_token.access);
+        localStorage.setItem("refresh", resData.data.jwt_token.refresh);
+        navigate("/");
+        window.location.reload();
+      })
+    } catch (error) {console.log(error)}
+  }
+
+  const onFailureLogin = (res) => {
+    console.log('login failure', res);
+  }
 
   return (
     <>
@@ -271,6 +295,20 @@ export default function Login() {
           <p className="sign-up" onClick={() => setRegisterEmail(!registerEmail)}>
               <span>{!registerEmail ? "Elektron pochta" : "Telefon raqam"} orqali profilga kirish </span>
           </p>
+
+          <GoogleLogin
+            clientId={clientIdGoogle}
+            buttonText="Google orqali tizimga kiring"
+            onSuccess={onSuccessLogin}
+            onFailure={onFailureLogin}
+            cookiePolicy="single_host_origin"
+            isSignedIn={true}
+            className="googleLogin"
+          />
+          
+          <br />
+          <br />
+          <br />
 
           {/* <div className="box_line">
             <div className="line"></div>

@@ -327,6 +327,30 @@
   border-radius: 15px !important;
 }
 
+.Login .googleLogin,
+.Register .googleLogin {
+  width: 100%;
+  border: 3px solid gray !important;
+  border-radius: 15px !important;
+  box-shadow:none !important;
+  padding: 7px 20px !important;
+  color: #1c1c1c !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.Login .googleLogin div,
+.Register .googleLogin div {
+  display: flex;
+  border-radius: 15px !important;
+}
+
+.Login .googleLogin span,
+.Register .googleLogin span {
+  font-weight: 700 !important;
+}
+
 @media (max-width: 576px) {
   .Login .container .login-title {
     font-size: 24px;

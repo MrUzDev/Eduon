@@ -3,6 +3,7 @@ import "./ProfileMenu.css";
 // import Akbarali from "../../assets/images/Ellipse 2.png";
 import MyAccount from "../../assets/icons/wallet-add.png";
 import { useNavigate } from "react-router-dom";
+import { gapi } from "gapi-script";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { StateContext } from "../../context/Context";
@@ -11,14 +12,29 @@ function ProfileMenu(props) {
   const navigate = useNavigate();
   const { statusChange, balance, vaucherBlanceData } = useContext(StateContext);
   const [status, setStatus] = useState(false);
+
+  const clientIdGoogle = "218671596318-3guu90dq107i1d8n2r288pidrpvaekuj.apps.googleusercontent.com"
+
   useEffect(() => {
     setStatus(JSON.parse(localStorage.getItem("status")));
   }, [statusChange]);
 
+  useEffect(() => {
+    gapi.load('auth2', function() {
+      gapi.auth2.init({
+        client_id: clientIdGoogle,
+      });
+    });
+  })
+
   const logoutClick = () => {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
-    window.location.reload();
+    
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function() {
+      window.location.reload();
+    });
   };
 
   const currency = (number, currency, lang = undefined) => 
@@ -32,7 +48,7 @@ function ProfileMenu(props) {
           {props.img ? (
             <img
               className="avatar pointer"
-              src={`${process.env.REACT_APP_API_KEY}${props.img}`}
+              src={`${props.img}`}
               alt="..."
             />
           ) : (
@@ -40,7 +56,7 @@ function ProfileMenu(props) {
           )}
           <h1>
             {`${props.name}  ${props.surname}`}
-            <br /> <span>+{props.mobile}</span>
+            <br /> <span>{!props.isGmail && "+"} {props.mobile}</span>
           </h1>
         </div>
         <div className="myAccount">

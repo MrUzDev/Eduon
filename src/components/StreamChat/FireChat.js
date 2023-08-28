@@ -46,7 +46,7 @@ export default function FChat(props) {
             <div style={{display: 'flex', margin: '5px 0'}} key={index}>
              <div className="photo-container">
              {item.profilePhoto ? (
-                <img id="ChatUserPhoto" src={`${process.env.REACT_APP_API_KEY}${item.profilePhoto}`} />
+                <img id="ChatUserPhoto" src={`${item.profilePhoto}`} />
               ): <AccountCircleIcon
               className="avatar pointer"
             />}

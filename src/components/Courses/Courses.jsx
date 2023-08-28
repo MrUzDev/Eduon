@@ -57,6 +57,8 @@ export default function Courses() {
     localStorage.setItem("activeCategory", name);
   };
 
+  const toastNotf = () => (<div>Click <a href="https://example.com">here</a> to visit a link.</div>)
+
   useEffect(() => {
     try {
       loggedIn &&
@@ -192,6 +194,8 @@ export default function Courses() {
     }else {
       nowRegisterAlert = () => toast.info(`Profil malumotlarini to'ldiring va ${currency(parseInt(value) / 100, 'UZS').replace(/,/g, ".").slice(0, -3)} so'm vaucherga ega bo'ling`);
       nowRegisterAlert()
+    toastNotf()
+
     }
   }
 

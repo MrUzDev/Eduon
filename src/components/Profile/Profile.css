@@ -49,6 +49,10 @@
   display: flex;
 }
 
+.marginr-30 {
+  margin-right: 30px !important;
+}
+
 .profile_links a:first-child {
   color: #006aff;
 }

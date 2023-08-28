@@ -87,7 +87,7 @@ export default function Values() {
           })
           .then((res) => {
             setName(`${res.data.f_name} ${res.data.l_name}`);
-            setProfilePhoto(res.data.profile_picture);
+            setProfilePhoto(res.data.profile_picture_url);
           })
           .catch((err) => {});
     } catch (error) {}

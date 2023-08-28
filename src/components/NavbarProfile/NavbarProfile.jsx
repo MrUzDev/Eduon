@@ -24,7 +24,7 @@ export default function NavbarProfile(props) {
           <img
             aria-describedby={id}
             onClick={handleClick}
-            src={`${process.env.REACT_APP_API_KEY}${userInfo.avatar}`}
+            src={`${userInfo.avatar}`}
             className="avatar pointer"
             alt="..."
           />
@@ -37,7 +37,7 @@ export default function NavbarProfile(props) {
         )
       ) : (
         <Link to="/login">
-          <button className="bgBlue pointer">boshlash</button>
+          <button className="bgBlue pointer">Kirish</button>
         </Link>
       )}
       <Popover
@@ -71,6 +71,7 @@ export default function NavbarProfile(props) {
           surname={userInfo.surname}
           mobile={userInfo.mobile}
           isSpeaker={userInfo.isSpeaker}
+          isGmail={userInfo.is_gmail}
         />
       </Popover>
     </div>

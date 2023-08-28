@@ -32,7 +32,7 @@ export default function ViewStream(props) {
   const [startStream, setStartStream] = useState(false);
   const { profilePhoto, loggedIn } = useContext(StateContext);
   const [orSpeaker, setOrSpeaker] = useState("student");  
-  const [unenrolled, setUnenrolled] = useState("unenrolled");  
+  const [unenrolled, setUnenrolled] = useState(false);  
   const [activeUser, setActiveUser] = useState(0);
   const [deleteVebinarNotf, setDeleteVebinarNotf] = useState(false)
   const [downloadVideoNotf, setDownloadVideoNotf] = useState(false)
@@ -444,7 +444,7 @@ useEffect(() => {
             <div className="userphotoChild">
               {profilePhoto ? (
                 <img
-                  src={`${process.env.REACT_APP_API_KEY}${profilePhoto}`}
+                  src={`${profilePhoto}`}
                   alt=""
                 />
               ) : (

@@ -79,9 +79,10 @@ function VendorSchool() {
   };
 
   useEffect(() => {
+    console.log(loggedIn, 'login');
     setLoader(true)
     if(loggedIn) {
-      if(IsRegVS) {
+      if(IsRegVS === true || IsRegVS === false) {
         setLoader(false)
       }
     }else {
@@ -166,7 +167,7 @@ function VendorSchool() {
         .get(`${process.env.REACT_APP_API_KEY}/api/v1/accounts/profile`, {
           headers,
         })
-        .then((res) => {setIsRegVs(res.data.to_school); console.log(res.data.to_school);})
+        .then((res) => {setIsRegVs(res.data.to_school)})
         .catch((err) => {
           refresh(err.response.status, err.response.status.text);
         });

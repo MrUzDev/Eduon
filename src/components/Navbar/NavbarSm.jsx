@@ -5,6 +5,7 @@ import axios from "../../Apis/api";
 import { refresh } from "../../Apis/RefreshToken/RefreshToken";
 import { StateContext } from "../../context/Context";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { gapi } from "gapi-script";
 
 function NavbarSm() {
   const navigate = useNavigate();
@@ -12,6 +13,9 @@ function NavbarSm() {
   const [openProfile, setOpenProfile] = useState(false);
   const { loggedIn, balance, mobileMenuOpen, setMobileMenuOpen, vaucherBlanceData } =
     useContext(StateContext);
+
+  const clientIdGoogle = "218671596318-3guu90dq107i1d8n2r288pidrpvaekuj.apps.googleusercontent.com"
+
 
   useEffect(() => {
     try {
@@ -40,10 +44,22 @@ function NavbarSm() {
     setStatus(JSON.parse(localStorage.getItem("status")));
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    gapi.load('auth2', function() {
+      gapi.auth2.init({
+        client_id: clientIdGoogle,
+      });
+    });
+  })
+
   const logoutClick = () => {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
-    window.location.reload();
+    
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function() {
+      window.location.reload();
+    });
   };
 
   const currency = (number, currency, lang = undefined) => 

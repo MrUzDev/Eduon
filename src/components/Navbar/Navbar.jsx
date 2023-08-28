@@ -129,13 +129,13 @@ export default function NavbarDemo(props) {
             },
           })
           .then((res) => {
-            // console.log(res)
             setUserInfo({
-              avatar: res.data.profile_picture,
+              avatar: res.data.profile_picture_url,
               name: res.data.f_name,
               surname: res.data.l_name,
               mobile: res.data.phone_number,
               isSpeaker: res.data.is_speaker,
+              is_gmail: res.data.is_gmail,
             });
           })
           .catch((err) => {

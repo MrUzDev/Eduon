@@ -18,7 +18,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-
 export default function ProfileInfo() {
   const navigate = useNavigate();
   const { avatar, setAvatar, loggedIn } = useContext(StateContext);
@@ -47,11 +46,11 @@ export default function ProfileInfo() {
   const [hardSkills, setHardSkills] = useState();
   const [courseLicense, setCourseLicense] = useState();
   const [currentAddress, setCurrentAddress] = useState();
+  const [isGmail, setIsGmail] = useState(false)
 
   // const [avatar, setAvatar] = useState("")
 
   const sendddata = async () => {
-    console.log("click");
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("access")}`,
     };
@@ -62,12 +61,12 @@ export default function ProfileInfo() {
       console.log("adwdawdadw3");
       name && formData.append("f_name", name);
       surname && formData.append("l_name", surname);
-      formData.append("email", email);
-      formData.append("country", country);
-      formData.append("district", region);
-      formData.append("speciality", specialty);
+      email && formData.append("email", email);
+      country && formData.append("country", country);
+      region && formData.append("district", region);
+      specialty && formData.append("speciality", specialty);
       formData.append("interests", interests);
-      formData.append("about_me", about_me);
+      about_me && formData.append("about_me", about_me);
       formData.append("sex", gender);
       formData.append("youtube_url", youtubeUrl);
       formData.append("telegram_url", telegramUrl);
@@ -83,8 +82,8 @@ export default function ProfileInfo() {
       formData.append("current_address", currentAddress);
       console.log("adwdawdadw4");
       // birthday && formData.append(
-        // "date_birth",
-        // moment(birthday._d).format("YYYY-MM-DDThh:mm")
+      // "date_birth",
+      // moment(birthday._d).format("YYYY-MM-DDThh:mm")
       // );
 
       await axios
@@ -96,8 +95,6 @@ export default function ProfileInfo() {
           }
         )
         .then((res) => {
-          console.log(res.data);
-          console.log("res");
           navigate("/userAbout");
         })
         .catch((err) => {});
@@ -120,9 +117,8 @@ export default function ProfileInfo() {
             setmobile(res.data.phone_number);
             setemail(res.data.email);
             setGender(res.data.sex);
-            setAvatar(res.data.profile_picture);
+            setAvatar(res.data.profile_picture_url);
             setspecialty(res.data.speciality);
-            console.log(res.data.speciality);
             setCountry(res.data.country);
             setRegion(res.data.district);
             setAbout_me(res.data.about_me);
@@ -142,7 +138,7 @@ export default function ProfileInfo() {
             setHardSkills(res.data.hard_skill);
             setCurrentAddress(res.data.current_address);
             setDistrict(res.data.current_country);
-            console.log(res.data);
+            setIsGmail(res.data.is_gmail)
             // console.log(res.data.languages);
           });
     } catch (error) {}
@@ -173,7 +169,7 @@ export default function ProfileInfo() {
               src={
                 images.preViews
                   ? images.preViews
-                  : `${process.env.REACT_APP_API_KEY}${avatar}`
+                  : `${avatar}`
               }
               alt=""
             />
@@ -266,10 +262,10 @@ export default function ProfileInfo() {
               </div>
               <div className="d-flex f-direction f-dar">
                 <TextField
-                  className="inputs mt-34"
+                  className={`${!isGmail && 'marginr-30'}  inputs mt-34`}
                   sx={{
                     width: "100%",
-                    marginRight: "30px",
+                   
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderRadius: "15px",
                       height: "70px",
@@ -289,40 +285,43 @@ export default function ProfileInfo() {
                       left: "2px",
                     },
                   }}
-                  label="Telefon raqamingiz "
+                  label={`${isGmail ? 'Telefon raqamingiz' : 'Telefon raqamingiz yoki elektron pochtangiz.'}`}
                   onChange={(e) => setmobile(e.target.value)}
                   variant="outlined"
                   value={mobile}
                 />
-                <TextField
-                  className="inputs mt-30"
-                  sx={{
-                    width: "100%",
-
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderRadius: "15px",
-                      height: "70px",
-                      border: "2px solid #D9D9D9",
-                    },
-                    "& .MuiOutlinedInput-input": {
-                      height: "70px",
-                      padding: "0 0 0 25px",
-                      marginTop: "-4px",
-                      fontSize: "20px",
-                    },
-                    "& .MuiInputLabel-root": {
-                      top: "4px",
-                    },
-                    "& .MuiInputLabel-shrink": {
-                      top: "0",
-                      left: "2px",
-                    },
-                  }}
-                  label="Elektron pochtangiz"
-                  onChange={(e) => setemail(e.target.value)}
-                  value={email}
-                  variant="outlined"
-                />
+                {console.log(isGmail)}
+                {!isGmail && (
+                  <TextField
+                    className="inputs mt-30"
+                    sx={{
+                      width: "100%",
+  
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderRadius: "15px",
+                        height: "70px",
+                        border: "2px solid #D9D9D9",
+                      },
+                      "& .MuiOutlinedInput-input": {
+                        height: "70px",
+                        padding: "0 0 0 25px",
+                        marginTop: "-4px",
+                        fontSize: "20px",
+                      },
+                      "& .MuiInputLabel-root": {
+                        top: "4px",
+                      },
+                      "& .MuiInputLabel-shrink": {
+                        top: "0",
+                        left: "2px",
+                      },
+                    }}
+                    label="Elektron pochtangiz"
+                    onChange={(e) => setemail(e.target.value)}
+                    value={email}
+                    variant="outlined"
+                  />
+                )}
               </div>
 
               <Box>
@@ -376,39 +375,50 @@ export default function ProfileInfo() {
                           id="dataMobilePickerPar"
                         >
                           <div className="col-12 txtMob">
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-helper-label">
-                      Kasbingiz
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={specialty}
-                        label="Kasbingiz"
-                        onChange={(e) => setspecialty(e.target.value)}
-                        sx={{
-                          width: "100%",
-                          marginBottom: "44px",
+                            <FormControl fullWidth>
+                              <InputLabel id="demo-simple-select-helper-label">
+                                Kasbingiz
+                              </InputLabel>
+                              <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={specialty}
+                                label="Kasbingiz"
+                                onChange={(e) => setspecialty(e.target.value)}
+                                sx={{
+                                  width: "100%",
+                                  marginBottom: "44px",
 
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderRadius: "15px",
-                            height: "70px",
-                            border: "2px solid #D9D9D9",
-                          },
-                          "& .MuiOutlinedInput-input": {
-                            height: "70px",
-                          },
-                        }}>
-                        <MenuItem value={"Tadbirkor"}>Tadbirkor</MenuItem>
-                        <MenuItem value={"Davlat korxona xodimi"}>Davlat korxona xodimi</MenuItem>
-                        <MenuItem value={"Xususiy korxona xodimi"}>Xususiy korxona xodimi</MenuItem>
-                        <MenuItem value={"Talaba"}>Talaba</MenuItem>
-                        <MenuItem value={"Nafaqada"}>Nafaqada</MenuItem>
-                        <MenuItem value={"Uy bekasi"}>Uy bekasi</MenuItem>
-                        <MenuItem value={"Abituriyent"}>Abituriyent</MenuItem>
-                        <MenuItem value={"Boshqa"}>Boshqa</MenuItem>
-                      </Select>
-                    </FormControl>
+                                  "& .MuiOutlinedInput-notchedOutline": {
+                                    borderRadius: "15px",
+                                    height: "70px",
+                                    border: "2px solid #D9D9D9",
+                                  },
+                                  "& .MuiOutlinedInput-input": {
+                                    height: "70px",
+                                  },
+                                }}
+                              >
+                                <MenuItem value={"Tadbirkor"}>
+                                  Tadbirkor
+                                </MenuItem>
+                                <MenuItem value={"Davlat korxona xodimi"}>
+                                  Davlat korxona xodimi
+                                </MenuItem>
+                                <MenuItem value={"Xususiy korxona xodimi"}>
+                                  Xususiy korxona xodimi
+                                </MenuItem>
+                                <MenuItem value={"Talaba"}>Talaba</MenuItem>
+                                <MenuItem value={"Nafaqada"}>Nafaqada</MenuItem>
+                                <MenuItem value={"Uy bekasi"}>
+                                  Uy bekasi
+                                </MenuItem>
+                                <MenuItem value={"Abituriyent"}>
+                                  Abituriyent
+                                </MenuItem>
+                                <MenuItem value={"Boshqa"}>Boshqa</MenuItem>
+                              </Select>
+                            </FormControl>
                           </div>
                           <div className="col-12" id="dataMobilePicker">
                             <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -692,7 +702,7 @@ export default function ProfileInfo() {
                   value={interests}
                   onChange={(e) => setinterests(e.target.value)}
                 /> */}
-{/* 
+                {/* 
                 <TextField
                   className="inputs"
                   sx={{

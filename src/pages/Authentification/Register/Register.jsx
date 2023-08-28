@@ -11,7 +11,8 @@ import NavbarFalse from "../../../components/NavbarFalse/NavbarFalse";
 import NavbarSm from "../../../components/Navbar/NavbarSm";
 import { useForm } from "react-hook-form"
 import TextField from "@mui/material/TextField";
-
+import { GoogleLogin } from 'react-google-login'
+import { gapi } from "gapi-script";
 
 export default function Register() {
   const { phoneNumber, setPhoneNumber, setToken, registerEmail, setRegisterEmail} = useContext(StateContext);
@@ -20,6 +21,8 @@ export default function Register() {
   const navigate = useNavigate();
 
   const {control} = useForm()
+
+  const clientIdGoogle =  "218671596318-3guu90dq107i1d8n2r288pidrpvaekuj.apps.googleusercontent.com"
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -71,6 +74,39 @@ export default function Register() {
         .catch((err) => {});
     } catch (error) {}
   };
+
+
+  const onSuccessLogin = (res) => {
+
+    try {
+      axios.post(`${process.env.REACT_APP_API_KEY}/api/v2/accounts/google-auth`,
+      {
+        email: res.profileObj.email,
+        token: res.tokenId
+      }).then((resData) => {
+        console.log(resData.data.jwt_token);
+        localStorage.setItem("access", resData.data.jwt_token.access);
+        localStorage.setItem("refresh", resData.data.jwt_token.refresh);
+        navigate("/");
+        window.location.reload();
+      })
+    } catch (error) {console.log(error)}
+  }
+
+  const onFailureLogin = (res) => {
+    console.log('login failure', res);
+  }
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientIdGoogle,
+        scope: ""
+      })
+    }
+
+    gapi.load("client:auth2", start)
+  })
     
   return (
     <>
@@ -80,9 +116,9 @@ export default function Register() {
         <div className="container">
           <h1 className="login-title">Ro'yxatdan o'tish</h1>
           <p className="sign-up">
-            Akkountingiz bormi? Unda Akkauntingizga
+            Akkountingiz bormi? Unda Akkauntingizga  {" "}
             <Link to="/login">
-              <span> kiring</span>
+              <span>kiring</span>
             </Link>
           </p>
           <form onSubmit={(e) => sendddata(e)}>
@@ -181,6 +217,20 @@ export default function Register() {
                 {!registerEmail ? "Elektron pochta" : "Telefon raqam"} orqali ro'yhatdan o'tish
               </span>
           </p>
+
+          <GoogleLogin
+            clientId={clientIdGoogle}
+            buttonText="Google orqali tizimga kiring"
+            onSuccess={onSuccessLogin}
+            onFailure={onFailureLogin}
+            cookiePolicy="single_host_origin"
+            isSignedIn={true}
+            className="googleLogin"
+          />
+          
+          <br />
+          <br />
+          <br />
           {/* <div className="box_line">
             <div className="line"></div>
             <p>yoki</p>

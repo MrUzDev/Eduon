@@ -223,7 +223,7 @@ export default function VendorSchoolNavbar() {
             <div className="mr20" onClick={() => setShowVsProfMenu(!showVsProfMenu)}>
               {profilePhoto ? (
                 <img
-                  src={`${process.env.REACT_APP_API_KEY}/${profilePhoto}`}
+                  src={`${profilePhoto}`}
                   alt=""
                   className="profilePhoto pointer"
                 />

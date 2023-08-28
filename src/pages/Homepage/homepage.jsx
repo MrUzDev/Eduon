@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Courses from "../../components/Courses/Courses";
 import NavbarDemo from "../../components/Navbar/Navbar";
 import NavbarSm from "../../components/Navbar/NavbarSm";
@@ -9,15 +9,10 @@ import { StateContext } from "../../context/Context";
 import "./homepage.css";
 
 export default function Homepage(props) {
-  const { statusChange, setStatusChange } = useContext(StateContext);
-  // const navigate = useNavigate()
+  const { statusChange, setStatusChange, loggedIn } = useContext(StateContext);
   const location = useLocation();
   const [status, setStatus] = useState(false);
 
-  // useEffect(() => {
-  // location.pathname === "/" && localStorage.setItem("status", false);
-  // location.pathname === "/" && setStatusChange(false);
-  // }, [location]);
   useEffect(() => {
     localStorage.setItem("status", false);
     setStatus(JSON.parse(localStorage.getItem("status")));
@@ -28,7 +23,7 @@ export default function Homepage(props) {
       <NavbarDemo />
       <NavbarSm />
       <SidebarSm active={0} />
-      <Sidebar active={1} />
+      { <Sidebar active={1} />}
       <Courses />
     </div>
   );
