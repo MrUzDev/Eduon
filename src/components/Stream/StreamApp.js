@@ -32,6 +32,7 @@ export default function ViewStream(props) {
   const [startStream, setStartStream] = useState(false);
   const { profilePhoto, loggedIn } = useContext(StateContext);
   const [orSpeaker, setOrSpeaker] = useState("student");  
+  const [unenrolled, setUnenrolled] = useState("unenrolled");  
   const [activeUser, setActiveUser] = useState(0);
   const [deleteVebinarNotf, setDeleteVebinarNotf] = useState(false)
   const [downloadVideoNotf, setDownloadVideoNotf] = useState(false)
@@ -76,7 +77,9 @@ export default function ViewStream(props) {
           }
         )
         .then((res) => {
+          console.log(res.data);
           setOrSpeaker(res.data.user);
+          res.data.user == "unenrolled" && setUnenrolled(true);
         })
         .catch((err) => {
           refresh(err.response.status, err.response.status.text);
@@ -395,7 +398,7 @@ useEffect(() => {
     const iframe = document.getElementById('youtubeVideo');
     const customContextMenu = document.getElementById('customContextMenu');
   
-    iframe.addEventListener('contextmenu', (e) => {
+    iframe && iframe.addEventListener('contextmenu', (e) => {
         e.preventDefault(); // Prevent the default browser context menu
         const posX = e.clientX;
         const posY = e.clientY;
@@ -404,9 +407,9 @@ useEffect(() => {
         customContextMenu.style.display = 'block';
     });
   
-    document.addEventListener('click', () => {
-        customContextMenu.style.display = 'none';
-    });
+    // document.addEventListener('click', () => {
+    //     customContextMenu.style.display = 'none';
+    // });
   
   //   const iframe = document.getElementById('myIframe');
   
@@ -479,14 +482,7 @@ useEffect(() => {
                   </button>
                 ) : (
                   <>
-                  {/* {orSpeaker == 'speaker' ? (
-                    status == 'recording' ?
-                     <button 
-                    // onClick={stopRecording}
-                    ><StopCircleIcon className="navButtonsRed"/></button> : <button 
-                    // onClick={startRecording}
-                    ><AdjustIcon/></button>
-                  ): null} */}
+                
                     <button type="button" id="inItScreen">
                   {shareScreenIcon ? <StopScreenShareIcon className="navButtonsRed"/>: <ScreenShareIcon/>}
                 </button>
@@ -636,63 +632,36 @@ useEffect(() => {
         </div>
       </Modal>
 
-      {loader && (
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={unenrolled}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <div className="modalForLogin">
+          <Fade in={unenrolled}>
+            <Box sx={style2} className="container">
+              <div className="rowGrid">
+                <div className="flex width-100">
+                  {vebinarStartModal && setVebinarStartModal(false)}
+                  <h4>Siz bu vebinarni sotib olmagansiz!</h4>
+               </div>
+              </div>
+            </Box>
+          </Fade>
+        </div>
+      </Modal>
+
+        {loader && (
           <div className="loader">
                       <BounceLoader color="#006AFF" speedMultiplier={1.2} />
           </div>
       )}
-
-        {/* <Collapse in={downloadVideoNotf} style={{zIndex: '2'}}>
-              <Alert
-               action={
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  size="small"
-                  onClick={() => {
-                    setDownloadVideoNotf(false);
-                  }}
-                >
-                  <CloseIcon fontSize="inherit" />
-                </IconButton>
-              }
-              sx={{ mb: 2 }}
-          className="alert animation"
-          severity="info"
-        >
-          <strong>
-          <p style={{fontSize: '18px'}}>Yozib olingan videoni yuklab olmoqchimisiz?</p>
-          </strong>
-          <div style={{textAlign: 'center', marginTop: '10px'}}>
-          </div>
-          <a href={mediaBlobUrl} download='streamVideo.mp4' onClick={() => {setLeaveStreamNotf(true); setDownloadVideoNotf(false)}}><Button className="alertBtn" style={{borderRadius: '15px', backgroundColor: 'rgba(0, 106, 255, 1)', color: '#fff'}}>Ha</Button> </a>
-          <Button onClick={() => {setDownloadVideoNotf(false); navigate('/')}} className="alertBtn" style={{borderRadius: '15px', backgroundColor: 'rgba(0, 106, 255, 1)', marginLeft: '10px'}} variant="contained">Yo'q</Button>
-        </Alert>
-        </Collapse>
-
-        <Collapse in={leaveStreamNotf} >
-              <Alert
-               action={
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  size="small"
-                  onClick={() => {
-                    setLeaveStreamNotf(false);
-                  }}
-                >
-                  <CloseIcon fontSize="inherit" />
-                </IconButton>
-              }
-              sx={{ mb: 2, display: 'flex', alignItems: 'center' }}
-            className="alert animation"
-            severity="info"
-        >
-          <strong>
-          <p style={{fontSize: '18px'}}><Button onClick={() => navigate('/')} className="alertBtn" style={{borderRadius: '15px', backgroundColor: 'rgba(0, 106, 255, 1)'}} variant="contained"><a style={{color: 'unset'}}>Bosh sahifaga o'tish</a></Button></p>
-          </strong>
-        </Alert>
-        </Collapse> */}
     </>
   );
 }

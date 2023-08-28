@@ -8,7 +8,10 @@ import { refresh } from "../../Apis/RefreshToken/RefreshToken";
 // import { StateContext } from "../../context/Context";
 import { BounceLoader } from "react-spinners";
 import { StateContext } from "../../context/Context";
-
+import Sidebar from "../Sidebar/Sidebar";
+// import SidebarActive from "../Sidebar/SidebarActive";
+import SidebarSm from "../Sidebar/SidebarSm";
+  
 function FavoriteCourses() {
   const [favCourses, setfavCourses] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -91,6 +94,9 @@ function FavoriteCourses() {
   }, []);
 
   return (
+    <>
+     <Sidebar active={3} />
+      <SidebarSm active={3} />
     <div className="FavoriteCourses">
       <div style={{ margin: "0px" }} className="Courserow rowGrid">
         {favCourses.length !== 0 ? (
@@ -272,6 +278,7 @@ function FavoriteCourses() {
         </div>
       )}
     </div>
+    </>
   );
 }
 

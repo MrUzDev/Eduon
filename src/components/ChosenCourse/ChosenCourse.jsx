@@ -108,9 +108,9 @@ export default function ChosenCourse(props) {
   const [myCarts, setMycarts] = useState([]);
   const [cartData, setCartData] = useState([]);
   const [speedOptionsAc, setSpeedOptionsAc] = useState(false);
-  const [speakerCourses, setSpeakerCourses] = useState([])
-  const [spakerId, setSpeakerId] = useState(0)
-  const [allSomeCourses, setAllSomeCourses] = useState([])
+  const [speakerCourses, setSpeakerCourses] = useState([]);
+  const [spakerId, setSpeakerId] = useState(0);
+  const [allSomeCourses, setAllSomeCourses] = useState([]);
 
   const playVideo = useRef();
 
@@ -128,16 +128,11 @@ export default function ChosenCourse(props) {
   //   });
   // }, [play]);
 
-
-
   useEffect(() => {
-
-    if(!localStorage.getItem('referalToken')) {
-      localStorage.setItem('referalToken', token && token.token);
+    if (!localStorage.getItem("referalToken")) {
+      localStorage.setItem("referalToken", token && token.token);
     }
-  }, [])
-
-
+  }, []);
 
   const saveSystems = () => {
     setChek(localStorage.setItem("check", check));
@@ -197,7 +192,7 @@ export default function ChosenCourse(props) {
         .get(`${process.env.REACT_APP_API_KEY}/api/v1/courses/${id.id}`)
         .then((res) => {
           setResData(res.data);
-          setSpeakerId(res.data.course_owner.id)
+          setSpeakerId(res.data.course_owner.id);
         })
         .catch((err) => {
           refresh(err.response.status, err.response.status.text);
@@ -307,8 +302,6 @@ export default function ChosenCourse(props) {
 
   const navigate = useNavigate();
 
-
- 
   useEffect(() => {
     try {
       loggedIn &&
@@ -326,12 +319,10 @@ export default function ChosenCourse(props) {
             //   : setAddedToCart(true);
           });
     } catch (error) {}
-
   }, [addedToCart]);
 
-
   useEffect(() => {
-    if(resData.category) {
+    if (resData.category) {
       try {
         axios
           .get(
@@ -344,32 +335,30 @@ export default function ChosenCourse(props) {
     }
   }, [resData]);
 
-
   useEffect(() => {
-    if(spakerId !== 0) {
+    if (spakerId !== 0) {
       try {
         loggedIn &&
           axios
-            .get(`${process.env.REACT_APP_API_KEY}/api/v1/courses/speaker/${spakerId}`, {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("access")}`,
-              },
-            })
+            .get(
+              `${process.env.REACT_APP_API_KEY}/api/v1/courses/speaker/${spakerId}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("access")}`,
+                },
+              }
+            )
             .then((res) => {
-              setSpeakerCourses(res.data)
+              setSpeakerCourses(res.data);
             });
-          } catch (error) {}
-        }
+      } catch (error) {}
+    }
   }, [spakerId]);
-
-  
 
   // useEffect(() => {
   //   setAllSomeCourses([...sameCourses, ...speakerCourses])
   //   console.log(allSomeCourses)
   // }, [sameCourses, speakerCourses])
-
-
 
   useEffect(() => {
     const containerVideo = document.querySelector(".video-container"),
@@ -502,15 +491,15 @@ export default function ChosenCourse(props) {
       setSpeedOptionsAc((speedOptionsAc) => !speedOptionsAc);
     });
 
-    window.addEventListener('keydown', (e) => {
-      if(e.keyCode === 39) {
+    window.addEventListener("keydown", (e) => {
+      if (e.keyCode === 39) {
         mainVideo.currentTime += 5;
         blurvid.currentTime += 5;
-      }else if(e.keyCode === 37) {
+      } else if (e.keyCode === 37) {
         mainVideo.currentTime -= 5;
         blurvid.currentTime -= 5;
       }
-    })
+    });
 
     skipBackward.addEventListener("click", () => {
       mainVideo.currentTime -= 5;
@@ -540,10 +529,8 @@ export default function ChosenCourse(props) {
 
   // }, [speedOptionsAc])
 
-
-    
-  const currency = (number, currency, lang = undefined) => 
-  Intl.NumberFormat(lang, {style: 'currency', currency}).format(number)
+  const currency = (number, currency, lang = undefined) =>
+    Intl.NumberFormat(lang, { style: "currency", currency }).format(number);
 
   return (
     <>
@@ -942,19 +929,38 @@ export default function ChosenCourse(props) {
                               className="t-gray line-through"
                             >
                               UZS
-                              {resData.price ? currency(resData.price, 'UZS').replace("UZS", "").replace("soʻm", "").replace(/,/g, ".").slice(0, -3) : 0}
+                              {resData.price
+                                ? currency(resData.price, "UZS")
+                                    .replace("UZS", "")
+                                    .replace("soʻm", "")
+                                    .replace(/,/g, ".")
+                                    .slice(0, -3)
+                                : 0}
                             </span>
                             <p style={{ color: "red" }}>
                               UZS
-                            {currency((parseInt(resData.price) - parseInt(resData.discount_price)), 'UZS').replace("UZS", "").replace("soʻm", "").replace(/,/g, ".").slice(0, -3)}
+                              {currency(
+                                parseInt(resData.price) -
+                                  parseInt(resData.discount_price),
+                                "UZS"
+                              )
+                                .replace("UZS", "")
+                                .replace("soʻm", "")
+                                .replace(/,/g, ".")
+                                .slice(0, -3)}
                               <span className="gray ml-5"></span>
                             </p>
                           </>
                         ) : (
                           <p>
                             UZS
-                              {resData.price ? currency(resData.price, 'UZS').replace("UZS", "").replace("soʻm", "").replace(/,/g, ".").slice(0, -3) : 0}
-                          
+                            {resData.price
+                              ? currency(resData.price, "UZS")
+                                  .replace("UZS", "")
+                                  .replace("soʻm", "")
+                                  .replace(/,/g, ".")
+                                  .slice(0, -3)
+                              : 0}
                             <span className="gray ml-5"></span>
                           </p>
                         )}
@@ -1101,12 +1107,12 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                       </button>
                     )}
 
-                    <button
+                    {/* <button
                       onClick={(e) => addToFav(e, resData.id)}
                       className="btn_two"
                     >
                       Sevimlilarga qo'shish
-                    </button>
+                    </button> */}
                   </div>
                 </div>
                 <div className="video_title">
@@ -1389,18 +1395,40 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                             <span
                               style={{ textDecoration: "line-through" }}
                               className="t-gray line-through"
-                            >UZS
-                              {resData.price ? currency(resData.price, 'UZS').replace("UZS", "").replace("soʻm", "").replace(/,/g, ".").slice(0, -3) : 0}
-
+                            >
+                              UZS
+                              {resData.price
+                                ? currency(resData.price, "UZS")
+                                    .replace("UZS", "")
+                                    .replace("soʻm", "")
+                                    .replace(/,/g, ".")
+                                    .slice(0, -3)
+                                : 0}
                             </span>
-                            <p style={{ color: "red" }}>UZS
-                            {currency((parseInt(resData.price) - parseInt(resData.discount_price)), 'UZS').replace("UZS", "").replace("soʻm", "").replace(/,/g, ".").slice(0, -3)}
+                            <p style={{ color: "red" }}>
+                              UZS
+                              {currency(
+                                parseInt(resData.price) -
+                                  parseInt(resData.discount_price),
+                                "UZS"
+                              )
+                                .replace("UZS", "")
+                                .replace("soʻm", "")
+                                .replace(/,/g, ".")
+                                .slice(0, -3)}
                               <span className="gray ml-5"></span>
                             </p>
                           </>
                         ) : (
-                          <p>UZS
-                              {resData.price ? currency(resData.price, 'UZS').replace("UZS", "").replace("soʻm", "").replace(/,/g, ".").slice(0, -3) : 0}
+                          <p>
+                            UZS
+                            {resData.price
+                              ? currency(resData.price, "UZS")
+                                  .replace("UZS", "")
+                                  .replace("soʻm", "")
+                                  .replace(/,/g, ".")
+                                  .slice(0, -3)
+                              : 0}
                             <span className="gray ml-5"></span>
                           </p>
                         )}
@@ -1478,19 +1506,28 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                               >
                                 <TwitterIcon round={true} />
                               </TwitterShareButton>
-                            
-<svg   onClick={() => {
+
+                              <svg
+                                onClick={() => {
                                   navigator.clipboard.writeText(
                                     `https://eduon.uz/chosenCourse/${id.id}/${referalToken}`
                                   );
                                   setCopied(true);
-                                }} version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="5120.000000pt" height="5120.000000pt" viewBox="0 0 5120.000000 5120.000000"
- preserveAspectRatio="xMidYMid meet">
-
-<g transform="translate(0.000000,5120.000000) scale(0.110000,-0.100000)"
-fill="#000000" stroke="none">
-<path d="M19960 44793 c-254 -18 -498 -56 -724 -113 -1407 -357 -2514 -1468
+                                }}
+                                version="1.0"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="5120.000000pt"
+                                height="5120.000000pt"
+                                viewBox="0 0 5120.000000 5120.000000"
+                                preserveAspectRatio="xMidYMid meet"
+                              >
+                                <g
+                                  transform="translate(0.000000,5120.000000) scale(0.110000,-0.100000)"
+                                  fill="#000000"
+                                  stroke="none"
+                                >
+                                  <path
+                                    d="M19960 44793 c-254 -18 -498 -56 -724 -113 -1407 -357 -2514 -1468
 -2865 -2875 -65 -260 -97 -484 -111 -778 -5 -111 -10 -599 -10 -1084 l0 -883
 -1577 0 c-1624 0 -1796 -4 -2062 -41 -1055 -148 -1998 -710 -2633 -1569 -434
 -587 -691 -1266 -758 -2000 -14 -161 -14 -25279 1 -25440 76 -843 401 -1610
@@ -1514,10 +1551,10 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
 -256 -935 -307 -115 -17 -513 -18 -9280 -18 -7575 0 -9177 2 -9260 13 -624 84
 -1173 352 -1610 787 -450 448 -723 1019 -795 1660 -6 60 -10 4267 -10 12660 0
 11124 2 12585 15 12699 61 524 262 1000 598 1416 99 123 316 337 437 431 433
-336 950 538 1480 578 63 4 834 9 1712 10 l1598 1 3 -11032z"/>
-</g>
-</svg>
-
+336 950 538 1480 578 63 4 834 9 1712 10 l1598 1 3 -11032z"
+                                  />
+                                </g>
+                              </svg>
                             </div>
                           ) : null}
                         </div>
@@ -1538,12 +1575,12 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                         Xarid qilish
                       </button>
                     )}
-                    <button
+                    {/* <button
                       onClick={(e) => addToFav(e, resData.id)}
                       className="btn_two"
                     >
                       Sevimlilarga qo'shish
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
@@ -1834,12 +1871,12 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
         >
           <strong>Bu kurs savatchaga qo'shilgan!</strong>
         </Alert>
-        <Alert
+        {/* <Alert
           className={alertErrorFav ? "alert animation" : "alert"}
           severity="error"
         >
           <strong>Bu kurs sevimlilarga qo'shilgan!</strong>
-        </Alert>
+        </Alert> */}
         <Alert
           className={loginError ? "alert animation" : "alert"}
           severity="error"

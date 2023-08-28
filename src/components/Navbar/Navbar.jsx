@@ -40,9 +40,9 @@ export default function NavbarDemo(props) {
   const [searchValue, setSearchValue] = useState("");
   const [courseCategories, setCourseCategories] = useState([]);
   const [searchResponse, setSearchResponse] = useState([]);
-  const [webinarLength, setwebinarLength] = useState()
+  const [webinarLength, setwebinarLength] = useState(0)
 
-  const [cartLength, setCartLength] = useState();
+  const [cartLength, setCartLength] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -924,8 +924,8 @@ export default function NavbarDemo(props) {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      {cartLength && cartLength || webinarLength && webinarLength ? (
-                        <p className="cartLength">{cartLength + webinarLength}</p>
+                      {cartLength || webinarLength ? (
+                        <p className="cartLength">{cartLength +  webinarLength}</p>
                       ) : null}
                     </p>
                   )}

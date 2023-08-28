@@ -26,3 +26,8 @@ html {
     overflow-x: hidden !important;
   }
 }
+
+
+.button_c7ee {
+  transform: translateY(-65px) !important;
+}

@@ -32,7 +32,7 @@ const style = {
   p: 5,
 };
 
-export default function Sidebar(props) {
+export default function   Sidebar(props) {
   const { navStretch, addedToFav, balance, loggedIn , isremoved, vaucherBlanceData} =
     useContext(StateContext);
   const [favCourses, setfavCourses] = useState();
@@ -40,8 +40,8 @@ export default function Sidebar(props) {
   const { active } = props;
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [cartLength, setCartLength] = useState();
-  const [webinarLength, setwebinarLength] = useState()
+  const [cartLength, setCartLength] = useState(0);
+  const [webinarLength, setwebinarLength] = useState(0)
   const [referalToken, setReferalToken] = useState("");
   const [share, setShare] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -140,10 +140,11 @@ export default function Sidebar(props) {
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  stroke={active === 0 ? "#006AFF" : "#1C1C1C"}
                 >
                   <path
                     d="M14.2617 15.998H9.26172"
-                    stroke="#1C1C1C"
+                    // stroke="#1C1C1C"
                     strokeWidth="1.5"
                     strokeMiterlimit="10"
                     strokeLinecap="round"
@@ -151,42 +152,42 @@ export default function Sidebar(props) {
                   />
                   <path
                     d="M12.66 2.51814L12.63 2.58814L9.72996 9.31814H6.87996C6.19996 9.31814 5.54996 9.45814 4.95996 9.70814L6.70996 5.52814L6.74996 5.42814L6.81996 5.26814C6.83996 5.20814 6.85996 5.14814 6.88996 5.09814C8.19996 2.06814 9.67996 1.37814 12.66 2.51814Z"
-                    stroke="#1C1C1C"
+                    // stroke="#1C1C1C"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M18.05 9.51819C17.6 9.37819 17.12 9.31819 16.64 9.31819H9.72998L12.63 2.58819L12.66 2.51819C12.81 2.56819 12.95 2.63819 13.1 2.69819L15.31 3.62819C16.54 4.13819 17.4 4.66819 17.92 5.30819C18.02 5.42819 18.1 5.53819 18.17 5.66819C18.26 5.80819 18.33 5.94819 18.37 6.09819C18.41 6.18819 18.44 6.27819 18.46 6.35819C18.73 7.19819 18.57 8.22819 18.05 9.51819Z"
-                    stroke="#1C1C1C"
+                    // stroke="#1C1C1C"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M21.5217 14.1984V16.1484C21.5217 16.3484 21.5117 16.5484 21.5017 16.7484C21.3117 20.2384 19.3617 21.9984 15.6617 21.9984H7.86172C7.62172 21.9984 7.38172 21.9784 7.15172 21.9484C3.97172 21.7384 2.27172 20.0384 2.06172 16.8584C2.03172 16.6284 2.01172 16.3884 2.01172 16.1484V14.1984C2.01172 12.1884 3.23172 10.4584 4.97172 9.70836C5.57172 9.45836 6.21172 9.31836 6.89172 9.31836H16.6517C17.1417 9.31836 17.6217 9.38836 18.0617 9.51836C20.0517 10.1284 21.5217 11.9884 21.5217 14.1984Z"
-                    stroke="#1C1C1C"
+                    // stroke="#1C1C1C"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M6.71 5.52808L4.96 9.70808C3.22 10.4581 2 12.1881 2 14.1981V11.2681C2 8.42808 4.02 6.05808 6.71 5.52808Z"
-                    stroke="#1C1C1C"
+                    // stroke="#1C1C1C"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M21.5186 11.2677V14.1977C21.5186 11.9977 20.0586 10.1277 18.0586 9.52766C18.5786 8.22766 18.7286 7.20766 18.4786 6.35766C18.4586 6.26766 18.4286 6.17766 18.3886 6.09766C20.2486 7.05766 21.5186 9.02766 21.5186 11.2677Z"
-                    stroke="#1C1C1C"
+                    // stroke="#1C1C1C"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                 </svg>
-                {navStretch ? null: <h6 className="noActiveText">Mening Hisobim</h6> }
-                <p>Mening Hisobim</p>
+                {navStretch ? null: <h6 className={` ${active === 0 && 'active'} noActiveText`}>Mening Hisobim</h6> }
+              <p className={active === 0 ? "active " : ""}>Mening Hisobim</p>
               </div>
               <p className="summa">{balance && vaucherBlanceData && currency((balance) + parseInt(vaucherBlanceData.balance / 100), "UZS").replace("UZS", '').replace('soʻm', '').replace(/,/g, ".").slice(0, -3)} so'm</p>
             </div>
@@ -196,7 +197,7 @@ export default function Sidebar(props) {
           <ul>
             <li
               onClick={() => navigate("/")}
-              className={navStretch ? 'pointer d-flex pl-40 align-center' : ''}
+              className={navStretch ? 'pointer d-flex pl-40 align-center' : 'pointer'}
             >
               <svg
                 className="icon"
@@ -232,13 +233,13 @@ export default function Sidebar(props) {
                   strokeLinejoin="round"
                 />
               </svg>
-              {navStretch ? null: <h6 className="noActiveText">Bosh sahifa</h6> }
+              {navStretch ? null: <h6 className={`${active === 1 && 'active'} noActiveText`}>Bosh sahifa</h6> }
               {/* <p className={active === 1 ? "active w100-d-block w240-d-none" : ""}>Bosh sahifa</p> */}
               <p className={active === 1 ? "active " : ""}>Bosh sahifa</p>
             </li>
             <li
               onClick={() => navigate("/myEnrolledCourses")}
-              className={navStretch ? 'pointer d-flex pl-40 align-center' : ''}
+              className={navStretch ? 'pointer d-flex pl-40 align-center' : 'pointer'}
             >
               <svg
                 className="icon "
@@ -268,7 +269,7 @@ export default function Sidebar(props) {
                   strokeLinejoin="round"
                 />
               </svg>
-              {navStretch ? null: <h6 className="noActiveText">Mening Kurslarim</h6> }
+              {navStretch ? null: <h6 className={`${active === 2 && 'active'} noActiveText`}>Mening Kurslarim</h6> }
               {/* <p className={active === 2 ? "active w100-d-block w240-d-none" : "w100-d-block w240-d-none"}>Mening Kurslarim</p> */}
               <p className={active === 2 ? "active " : ""}>Mening Kurslarim</p>
             </li>
@@ -312,11 +313,10 @@ export default function Sidebar(props) {
                     // fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="#fff"
-                  
+                    stroke={active === 3 ? "#006AFF" : "#1C1C1C"}
                   >
                     <path
                       d="M2 2H3.74001C4.82001 2 5.67 2.93 5.58 4L4.75 13.96C4.61 15.59 5.89999 16.99 7.53999 16.99H18.19C19.63 16.99 20.89 15.81 21 14.38L21.54 6.88C21.66 5.22 20.4 3.87 18.73 3.87H5.82001"
-                      stroke="#1c1c1c"
                       strokeWidth="1.5"
                       strokeMiterlimit="10"
                       strokeLinecap="round"
@@ -324,7 +324,6 @@ export default function Sidebar(props) {
                     />
                     <path
                       d="M16.25 22C16.9404 22 17.5 21.4404 17.5 20.75C17.5 20.0596 16.9404 19.5 16.25 19.5C15.5596 19.5 15 20.0596 15 20.75C15 21.4404 15.5596 22 16.25 22Z"
-                      stroke="#1c1c1c"
                       strokeWidth="1.5"
                       strokeMiterlimit="10"
                       strokeLinecap="round"
@@ -332,7 +331,6 @@ export default function Sidebar(props) {
                     />
                     <path
                       d="M8.25 22C8.94036 22 9.5 21.4404 9.5 20.75C9.5 20.0596 8.94036 19.5 8.25 19.5C7.55964 19.5 7 20.0596 7 20.75C7 21.4404 7.55964 22 8.25 22Z"
-                      stroke="#1c1c1c"
                       strokeWidth="1.5"
                       strokeMiterlimit="10"
                       strokeLinecap="round"
@@ -340,24 +338,23 @@ export default function Sidebar(props) {
                     />
                     <path
                       d="M9 8H21"
-                      stroke="#1c1c1c"
                       strokeWidth="1.5"
                       strokeMiterlimit="10"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
                   </svg>
-                {cartLength + webinarLength > 0 ? (
+                {cartLength || webinarLength ? (
                   <span className="count">{cartLength + webinarLength}</span>
                 ) : null}
               </div>
-              {navStretch ? null: <h6 className="noActiveText">Savatchadagi kurslar</h6> }
+              {navStretch ? null: <h6 className={` ${active === 3 && 'active'} noActiveText`}>Savatchadagi kurslar</h6> }
               {/* <p className={active === 3 ? "active w100-d-block w240-d-none" : "w100-d-block w240-d-none"}>Savatchadagi kurslar</p> */}
               <p className={active === 3 ? "active " : ""}>Savatchadagi kurslar</p>
             </li>
             <li
               onClick={() => handleOpen()}
-              className={navStretch ? 'pointer d-flex pl-40 align-center' : ''}
+              className={navStretch ? 'pointer d-flex pl-40 align-center' : 'pointer'}
             >
               <svg
                 className="icon"

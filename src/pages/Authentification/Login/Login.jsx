@@ -15,23 +15,9 @@ import axios from "../../../Apis/api";
 import PhoneInput from "react-phone-input-2";
 import NavbarFalse from "../../../components/NavbarFalse/NavbarFalse";
 import NavbarSm from "../../../components/Navbar/NavbarSm";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Backdrop from "@mui/material/Backdrop";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "4px solid #006aff",
-  borderRadius: "15px",
-  boxShadow: 24,
-  p: 5,
-};
 
 export default function Login() {
   const [show, setShow] = useState(false);
@@ -41,39 +27,57 @@ export default function Login() {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [check, setChek] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-  const { setPhoneNumber } = useContext(StateContext);
+  const { setPhoneNumber, registerEmail, setRegisterEmail } = useContext(StateContext);
+  
+  const PhoneNumberNot = () => toast.error("Telefon raqam kiritilmadi!");
+  const PasswordNot = () => toast.error("Parol kiritilmadi!");
+  const PassworOrPhoneNumberError = () => toast.error("Telefon raqami yoki parol xato kiritilgan!");
   
   useEffect(() => {
     setPhoneNumber(number);
   }, [number]);
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      sendddata(event);
+      saveSystems()
+    }
+  };
+
   const sendddata = async (e) => {
     e.preventDefault();
-    try {
-      const data = await axios.post(
-        `${process.env.REACT_APP_API_KEY}/api/v1/accounts/login/`,
-        {
-          phone_number: number,
-          password: password,
+    if(number) {
+      console.log('boru');
+      console.log(number);
+      if(password) {
+         try {
+           const data = await axios.post(
+            `${process.env.REACT_APP_API_KEY}/api/v1/accounts/login/`,
+            {
+              phone_number: number,
+              password: password,
+            }
+            );
+            localStorage.setItem("access", data.data.access);
+            localStorage.setItem("refresh", data.data.refresh);
+            
+            if(localStorage.getItem('vendorReg')) {
+              navigate('/sotuvchilarMaktabi')
+              localStorage.removeItem('vendorReg')
+            }else {
+            data.data.access ? navigate("/") : navigate("/login");
+          }
+          window.location.reload();
+        } catch (error) {
+          PassworOrPhoneNumberError()
         }
-      );
-      localStorage.setItem("access", data.data.access);
-      localStorage.setItem("refresh", data.data.refresh);
-
-      if(localStorage.getItem('vendorReg')) {
-        navigate('/sotuvchilarMaktabi')
-        localStorage.removeItem('vendorReg')
       }else {
-        data.data.access ? navigate("/") : navigate("/login");
+        PasswordNot()
       }
-      window.location.reload();
-    } catch (error) {
-      setError(true);
-      // handleOpen();
+    }else {
+      console.log('qonde');
+      PhoneNumberNot()
     }
-    // saveSystems()
   };
 
   useEffect(() => {
@@ -113,11 +117,17 @@ export default function Login() {
               <span> Ro'yxatdan o'ting</span>
             </Link>
           </p>
-          <form onSubmit={sendddata}>
+          <form onSubmit={(e) => sendddata(e)}>
+            {!registerEmail ? (
             <div className="phoneInputBox">
               <PhoneInput
+              onKeyDown={handleKeyDown}
+              inputProps={{
+               name: 'phone',
+               required: true,
+               autoFocus: true
+             }}
                 country={"uz"}
-                // value={storageLogDetails?storageLogDetails: number}
                 value={
                   localStorage.getItem("storageMobile")
                     ? localStorage.getItem("storageMobile")
@@ -125,8 +135,42 @@ export default function Login() {
                 }
                 onChange={(phone) => setnumber(phone)}
                 id="phone"
+                placeholder="+998 90 123 45 67"
               />
             </div>
+            ): (
+              <TextField
+                className="inputs"
+                sx={{
+                  width: "100%",
+                  marginBottom: '30px',
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderRadius: "15px",
+                    height: "70px",
+                    border: "2px solid #D9D9D9",
+                  },
+                  "& .MuiOutlinedInput-input": {
+                    height: "70px",
+                    padding: "0 0 0 25px",
+                    marginTop: "-2px",
+                  },
+                  "& .MuiInputLabel-root": {
+                    top: "4px",
+                  },
+                  "& .MuiInputLabel-shrink": {
+                    top: "0",
+                    left: "2px",
+                  },
+                }}
+                value={number}
+                type="email"
+                label="Elektron pochtangizni kiriting"
+                variant="outlined"
+                onChange={(e) => setnumber(e.target.value)}
+              />
+            )}
+
+            
             <div className="password">
               <TextField
                 className="inputs"
@@ -172,12 +216,7 @@ export default function Login() {
                 />
               )}
             </div>
-            {error ? (
-              <p className="error-messageee">
-                <ReportIcon style={{ marginRight: "10px" }} /> Telefon raqami
-                yoki parol xato kiritilgan{" "}
-              </p>
-            ) : null}
+          
             <div className="technicSights">
               <FormGroup>
                 <FormControlLabel
@@ -193,6 +232,7 @@ export default function Login() {
                     },
                   }}
                   onChange={(e) => {
+                    console.log(e.target.checked);
                     setChek(e.target.checked);
                   }}
                   checked={check}
@@ -206,10 +246,6 @@ export default function Login() {
               </p>
             </div>
             <Button
-              onClick={(e) => {
-                sendddata(e);
-                saveSystems();
-              }}
               sx={{
                 width: "100%",
                 height: "70px",
@@ -225,10 +261,16 @@ export default function Login() {
               }}
               variant="contained"
               className="btn"
+              type="submit"
             >
               Tizimga kirish
             </Button>
+            <ToastContainer />
           </form>
+
+          <p className="sign-up" onClick={() => setRegisterEmail(!registerEmail)}>
+              <span>{!registerEmail ? "Elektron pochta" : "Telefon raqam"} orqali profilga kirish </span>
+          </p>
 
           {/* <div className="box_line">
             <div className="line"></div>
@@ -242,45 +284,6 @@ export default function Login() {
             </Link>
           </p> */}
         </div>
-        {/* <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={open}>
-            <Box sx={style} className="container">
-              <div className="rowGrid">
-                <p style={{ color: "#1c1c1c" }} className="col-24">
-                  Akkauntingiz yo'qmi? Unda
-                </p>
-                <div className="col-24">
-                  <Button
-                    sx={{
-                      width: "100%",
-                      marginTop: "20px",
-                      backgroundColor: "#80B5FF",
-                      borderRadius: "15px",
-                      height: "59px",
-                      color: "white",
-                      fontSize: "20px",
-                      fontWeight: "500",
-                    }}
-                    className="btn"
-                    onClick={() => navigate("/register")}
-                  >
-                    Ro'yxatdan o'ting
-                  </Button>
-                </div>
-              </div>
-            </Box>
-          </Fade>
-        </Modal> */}
       </div>
     </>
   );

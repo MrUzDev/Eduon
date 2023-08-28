@@ -159,6 +159,8 @@
     border-radius: 15px !important;
 }
 
+
+
 @media screen and (max-width: 1400px) {
     .navBotMenu {
         width: 100%;
@@ -247,5 +249,13 @@
     }
     .courRegPop .alertBtn {
         font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .Toastify__toast-container {
+        width: 90vw !important; 
+        right: 0 !important;
+        left: auto !important;
     }
 }

@@ -161,6 +161,15 @@
   margin-right: 10px;
 }
 
+.watchingCourses .video .img {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  height: 100%;
+}
+
 .watchingCourses .video .img img {
   width: 100%;
 }

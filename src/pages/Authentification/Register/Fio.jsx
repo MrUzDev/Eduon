@@ -14,6 +14,8 @@ import NavbarFalse from "../../../components/NavbarFalse/NavbarFalse";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import NavbarSm from "../../../components/Navbar/NavbarSm";
+import { BounceLoader } from "react-spinners";
+
 export default function Fio() {
   const [show, setShow] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -43,25 +45,29 @@ export default function Fio() {
   const [error, setError] = useState(false);
   const [referal, setReferal] = useState(localStorage.getItem('referalToken'))
   const [paswordLen, setPaswordLen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [loader, setLoader] = useState(true);
 
   const [dataInfo, setDataInfo] = useState("");
-
-  // ------------
 
   const phoneNumber = localStorage.getItem("mobile");
 
   const navigate = useNavigate();
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    phoneNumber ? setLoader(false) : navigate('/register')
+  })
 
   const errorCheck = () => {
     !surname ? setSurNameError(true) : setSurNameError(false);
     !name ? setNameError(true) : setNameError(false);
     !password ? setPasswordError(true) : setPasswordError(false);
     !check ? setCheckError(true) : setCheckError(false);
-    password.length <= 7 ? setPaswordLen(true) : setPaswordLen(false)
+    // !email ? setemailError(true) : setemailError(false);
+    password && password.length <= 7 ? setPaswordLen(true) : setPaswordLen(false)
     !confirmPassword
       ? setpassword1Error(true)
       : password !== confirmPassword
@@ -71,6 +77,7 @@ export default function Fio() {
     // !email ? setemailError(true) : setemailError(false);
     seterrorCheckOnChange(true);
   };
+  
 
   useEffect(() => {
     if (errorCheckOnChange) {
@@ -78,6 +85,7 @@ export default function Fio() {
       !name ? setNameError(true) : setNameError(false);
       !password ? setPasswordError(true) : setPasswordError(false);
       !check ? setCheckError(true) : setCheckError(false);
+      // !email ? setemailError(true) : setemailError(false);
       !confirmPassword
         ? setpassword1Error(true)
         : password !== confirmPassword
@@ -91,6 +99,7 @@ export default function Fio() {
   const sendddata = async (e) => {
     e.preventDefault();
     errorCheck();
+    console.log(phoneNumber);
     if (
       // surNameError === false &&
       // nameError === false &&
@@ -115,11 +124,12 @@ export default function Fio() {
           f_name: name,
           l_name: surname,
           sex: null,
-          email: null,
+          email: email,
           referral : referal && referal
         })
         .then((res) => {
           // navigate("/login");
+          console.log(res.data);
           password !== confirmPassword
             ? setpassword1Error(true)
             : setpassword1Error();
@@ -196,7 +206,7 @@ try {
                       },
                     }}
                     onChange={(e) => setSurname(e.target.value)}
-                    label="Familiyangiz"
+                    label="Familyangiz"
                     variant="outlined"
                   />
                   <p className="error-messageee">
@@ -399,7 +409,7 @@ try {
               sx={{
                 width: "100%",
                 marginBottom: "10px",
-                marginTop: "30px",
+                // marginTop: "30px",
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderRadius: "15px",
                   height: "70px",
@@ -419,7 +429,7 @@ try {
                 },
               }}
               onChange={(e) => setEmail(e.target.value)}
-              label="Elektron pochtaningiz(ixtiyoriy)"
+              label="Elektron pochtaningiz"
               variant="outlined"
             /> */}
             {/* {emailError ? (
@@ -907,6 +917,15 @@ try {
           </Button>
         </Box>
       </Modal>
+
+      { loader && (
+                        <div className="loader">
+                          <BounceLoader
+                            color="#006AFF"
+                            speedMultiplier={1.2}
+                          />
+                        </div>
+                      )}
     </>
   );
 }

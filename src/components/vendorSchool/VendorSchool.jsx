@@ -62,7 +62,7 @@ function VendorSchool() {
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {setOpen(false); localStorage.removeItem("vendorReg");};
 
   const [expanded, setExpanded] = React.useState(false);
   const [error, setError] = useState(false);
@@ -88,6 +88,12 @@ function VendorSchool() {
       setLoader(false)
     }
   }, [IsRegVS])
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      sendddata(event);
+    }
+  };
 
   useEffect(() => {
     const navbarBar = document.getElementById("navbar-bar");
@@ -208,7 +214,7 @@ function VendorSchool() {
       <div>
         <div className="Vendor-School">
           <nav className="vendor-nav">
-            <div className="vendor-nav-logo">
+            <div className="vendor-nav-logo pointer">
               <img src={Logo} alt="" />
             </div>
 
@@ -349,9 +355,7 @@ function VendorSchool() {
                       <div className="vendor-showcase-btns">
                         <button
                           onClick={() => {
-                            // navigate("/registerVendorSchool");
                             setShowDistrickModal(true)
-                            localStorage.setItem("vendorReg", true);
                           }}
                           className="vendor-btn"
                         >
@@ -499,10 +503,10 @@ function VendorSchool() {
                     mumkin.
                   </p>
                   <button
-                    onClick={() => {
-                      navigate("/registerVendorSchool");
-                      localStorage.setItem("vendorReg", true);
-                    }}
+                   onClick={() => {
+                    localStorage.setItem("vendorReg", true);
+                    RegCheckVS();
+                  }}
                     className="vendor-btn"
                   >
                     Darslarni boshlash
@@ -1795,10 +1799,10 @@ function VendorSchool() {
                     <th></th>
                     <th>
                       <button
-                        onClick={() => {
-                          navigate("/registerVendorSchool");
-                          localStorage.setItem("vendorReg", true);
-                        }}
+                      onClick={() => {
+                        localStorage.setItem("vendorReg", true);
+                        RegCheckVS();
+                      }}
                         className="vendor-btn"
                       >
                         Ariza qoldirish
@@ -1806,10 +1810,10 @@ function VendorSchool() {
                     </th>
                     <th>
                       <button
-                        onClick={() => {
-                          navigate("/registerVendorSchool");
-                          localStorage.setItem("vendorReg", true);
-                        }}
+                      onClick={() => {
+                        localStorage.setItem("vendorReg", true);
+                        RegCheckVS();
+                      }}
                         className="vendor-btn"
                       >
                         Ariza qoldirish
@@ -1817,10 +1821,10 @@ function VendorSchool() {
                     </th>
                     <th>
                       <button
-                        onClick={() => {
-                          navigate("/registerVendorSchool");
-                          localStorage.setItem("vendorReg", true);
-                        }}
+                       onClick={() => {
+                        localStorage.setItem("vendorReg", true);
+                        RegCheckVS();
+                      }}
                         className="vendor-btn"
                       >
                         Ariza qoldirish
@@ -1828,10 +1832,10 @@ function VendorSchool() {
                     </th>
                     <th>
                       <button
-                        onClick={() => {
-                          navigate("/registerVendorSchool");
-                          localStorage.setItem("vendorReg", true);
-                        }}
+                       onClick={() => {
+                        localStorage.setItem("vendorReg", true);
+                        RegCheckVS();
+                      }}
                         className="vendor-btn"
                       >
                         Ariza qoldirish
@@ -2276,8 +2280,8 @@ function VendorSchool() {
                     <th>
                       <button
                         onClick={() => {
-                          navigate("/registerVendorSchool");
                           localStorage.setItem("vendorReg", true);
+                          RegCheckVS();
                         }}
                         className="vendor-btn"
                       >
@@ -2286,10 +2290,21 @@ function VendorSchool() {
                     </th>
                     <th>
                       <button
-                        onClick={() => {
-                          navigate("/registerVendorSchool");
-                          localStorage.setItem("vendorReg", true);
-                        }}
+                      onClick={() => {
+                        localStorage.setItem("vendorReg", true);
+                        RegCheckVS();
+                      }}
+                        className="vendor-btn"
+                      >
+                        Ariza qoldirish
+                      </button>
+                    </th>
+                    <th>
+                      <button
+                       onClick={() => {
+                        localStorage.setItem("vendorReg", true);
+                        RegCheckVS();
+                      }}
                         className="vendor-btn"
                       >
                         Ariza qoldirish
@@ -2298,19 +2313,8 @@ function VendorSchool() {
                     <th>
                       <button
                         onClick={() => {
-                          navigate("/registerVendorSchool");
                           localStorage.setItem("vendorReg", true);
-                        }}
-                        className="vendor-btn"
-                      >
-                        Ariza qoldirish
-                      </button>
-                    </th>
-                    <th>
-                      <button
-                        onClick={() => {
-                          navigate("/registerVendorSchool");
-                          localStorage.setItem("vendorReg", true);
+                          RegCheckVS();
                         }}
                         className="vendor-btn"
                       >
@@ -2604,10 +2608,10 @@ function VendorSchool() {
               <span>
                 <img src={SignUpVendorImg} alt="" />
                 <button
-                  onClick={() => {
-                    navigate("/registerVendorSchool");
-                    localStorage.setItem("vendorReg", true);
-                  }}
+                 onClick={() => {
+                  localStorage.setItem("vendorReg", true);
+                  RegCheckVS();
+                }}
                   className="vendor-btn"
                 >
                   Kursga ro’yxatdan o’tish
@@ -2618,7 +2622,7 @@ function VendorSchool() {
 
           <footer>
             <nav className="vendor-footer">
-              <div className="vendor-nav-logo">
+              <div className="vendor-nav-logo pointer">
                 <img src={VendorSchoolLogoRemove} alt="" />
               </div>
               <div className="vendor-small">
@@ -2720,10 +2724,10 @@ function VendorSchool() {
                 </div>
                 <div className="vendor-nav-btn">
                   <button
-                    onClick={() => {
-                      navigate("/registerVendorSchool");
-                      localStorage.setItem("vendorReg", true);
-                    }}
+                   onClick={() => {
+                    localStorage.setItem("vendorReg", true);
+                    RegCheckVS();
+                  }}
                     className="vendor-btn"
                   >
                     Ro’yxatdan o’tish
@@ -2759,11 +2763,16 @@ function VendorSchool() {
                 <h2 style={{ textAlign: "center", margin: "20px" }}>
                   Profilga kirish
                 </h2>
-                <form onSubmit={sendddata}>
+                <form onSubmit={(e) => sendddata(e)}>
                   <div className="phoneInputBox">
                     <PhoneInput
+                     onKeyDown={handleKeyDown}
+                     inputProps={{
+                      name: 'phone',
+                      required: true,
+                      autoFocus: true
+                    }}
                       country={"uz"}
-                      // value={storageLogDetails?storageLogDetails: number}
                       value={
                         localStorage.getItem("storageMobile")
                           ? localStorage.getItem("storageMobile")
@@ -2831,9 +2840,6 @@ function VendorSchool() {
                     </Link>
                   </p>
                   <Button
-                    onClick={(e) => {
-                      sendddata(e);
-                    }}
                     sx={{
                       width: "100%",
                       height: "70px",
@@ -2849,6 +2855,7 @@ function VendorSchool() {
                     }}
                     variant="contained"
                     className="btn"
+                    type="submit"
                   >
                     Tizimga kirish
                   </Button>

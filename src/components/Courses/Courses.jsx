@@ -14,6 +14,8 @@ import Collapse from "@mui/material/Collapse";
 import CloseIcon from "@mui/icons-material/Close";
 import LiveItems from "../CourseItem/LiveItems";
 // import alanBtn from '@alan-ai/alan-sdk-web';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Courses() {
   const {
@@ -21,22 +23,17 @@ export default function Courses() {
     addedToCart,
     addedToFav,
     loggedIn,
-    boughtCourses,
-    setAddedToCart,
     isremoved,
-    setIsRemoved,
+    boughtCourses,
   } = useContext(StateContext);
   const navigate = useNavigate();
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const [loginError, setLoginError] = useState(false);
   const [alertError, setAlertError] = useState(false);
 
   const [categories, setCategories] = useState([]);
 
   const [courseData, setCourseData] = useState([]);
-  // console.log(courseData);
   const [activeCategory, setActiveCategory] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [cartData, setCartData] = useState([]);
@@ -48,16 +45,18 @@ export default function Courses() {
   const [stCartData, setStCartData] = useState([]);
 
   const [webinarCard, setWebinarCart] = useState([]);
-  const [notfullProfile, setnotFullProfile] = useState(true);
 
   const [voucherData, setVoucherData] = useState([]);
+  const [fullProfile, setFullProfile] = useState(true)
 
-
+  let profileDataFill;
+  let nowRegisterAlert;
 
   const navigateToCourses = (id, name) => {
     name === "Barchasi" ? navigate("/") : navigate(`/courses/${id}`);
     localStorage.setItem("activeCategory", name);
   };
+
   useEffect(() => {
     try {
       loggedIn &&
@@ -75,7 +74,7 @@ export default function Courses() {
             refresh(err.response.status, err.response.status.text);
           });
     } catch (error) {}
-  }, [addedToCart]);
+  }, [addedToCart, isremoved]);
 
   useEffect(() => {
     try {
@@ -172,7 +171,7 @@ export default function Courses() {
             refresh(err.response.status, err.response.status.text);
           });
     } catch (error) {}
-  }, [addedToCart]);
+  }, [addedToCart, isremoved]);
 
   useEffect(() => {
     try {
@@ -185,6 +184,17 @@ export default function Courses() {
     } catch (error) {}
   }, []);
 
+  
+  const updateToastData = (value) => {
+    if(loggedIn) {
+      profileDataFill = () => toast.info(`Profil malumotlarini to'ldiring va ${currency(parseInt(value) / 100, 'UZS').replace(/,/g, ".").slice(0, -3)} so'm vaucherga ega bo'ling`);
+      profileDataFill()
+    }else {
+      nowRegisterAlert = () => toast.info(`Profil malumotlarini to'ldiring va ${currency(parseInt(value) / 100, 'UZS').replace(/,/g, ".").slice(0, -3)} so'm vaucherga ega bo'ling`);
+      nowRegisterAlert()
+    }
+  }
+
   useEffect(() => {
     try {
       loggedIn &&
@@ -195,11 +205,15 @@ export default function Courses() {
             },
           })
           .then((res) => {
-            setnotFullProfile(res.data.is_full);
+            setFullProfile(!res.data.is_full)
           });
-    } catch (error) {}
-  }, []);
-
+        } catch (error) {}
+      }, []);
+      
+  useEffect(()=> {
+    loggedIn && fullProfile && voucherData.forEach((item) => item.name === "full_account_voucher" && item.value !== 0 && updateToastData(item.value))
+    !loggedIn && voucherData.forEach((item) => item.name === "registr" && item.value !== 0 && updateToastData(item.value))
+  }, [voucherData, fullProfile])
 
   useEffect(() => {
     try {
@@ -211,36 +225,11 @@ export default function Courses() {
     } catch (error) {}
   }, []);
 
-  // useEffect(() => {
-  //   try {
-  //   const api = axios.get("https://api.ipify.org")
-  //   console.log(api);
-  //   // .then((res) => console.log(res.data)); 
-  //   } catch (error) {}
-  // }, []);
-
-//   useEffect(() => {
-//     Axios({
-//       method: 'post',
-//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-//       url: 'https://localhost:44346/Order/Order/GiveOrder',
-//       data: order
-//     }).then(function (response) {
-//       console.log(response.data);
-//     });
-
-
-//     // axios.get(`http://localhost:4000/api`,{ crossdomain: true }).then((result)=>{
-//     //     console.log("result",result);
-//     //   }).catch((error)=>{
-//     //     console.log("Error",error);
-//     //   });
-//  },[]);
+  
 
   const fnctest = async () => {
 
     const api = await axios.get("https://ipapi.co/json")
-    console.log(api.data);
 
     // fetch("https://ipapi.co/json")
     //   .then((response) => {
@@ -374,105 +363,8 @@ export default function Courses() {
         </div>
       </div>
 
-      {!loggedIn
-        ? voucherData.map(
-            (num, index) =>
-              num.name == "registr" && num.value !== 0 && (
-                <div className="courRegPop">
-                  <Collapse in={open}>
-                    <Alert
-                      action={
-                        <IconButton
-                          aria-label="close"
-                          color="inherit"
-                          size="small"
-                          onClick={() => {
-                            setOpen(false);
-                          }}
-                        >
-                          <CloseIcon fontSize="inherit" />
-                        </IconButton>
-                      }
-                      sx={{ mb: 2 }}
-                      className="alert animation"
-                      severity="info"
-                    >
-                      <strong>
-                        <p style={{ fontSize: "18px" }}>
-                          Hoziroq ro'yxatdan o'ting va {currency(parseInt(num.value) / 100, 'UZS').replace(/,/g, ".").slice(0, -3)}{" "} so'm <br />{" "}
-                          vaucherga ega bo'ling
-                        </p>
-                      </strong>
-                      <div
-                        style={{ textAlign: "center", marginTop: "10px" }}
-                      ></div>
-                      <Button
-                        className="alertBtn"
-                        style={{
-                          borderRadius: "15px",
-                          backgroundColor: "rgba(0, 106, 255, 1)",
-                        }}
-                        variant="contained"
-                        onClick={() => navigate("/register")}
-                      >
-                        Ro'yxatdan o'tish
-                      </Button>
-                    </Alert>
-                  </Collapse>
-                </div>
-              )
-          )
-        : null}
-
-      {loggedIn && !notfullProfile
-        ? voucherData.map(
-            (num, index) =>
-              num.name === "full_account_voucher" && num.value !== 0 && (
-                <div className="courRegPop">
-                  <Collapse in={open}>
-                    <Alert
-                      action={
-                        <IconButton
-                          aria-label="close"
-                          color="inherit"
-                          size="small"
-                          onClick={() => {
-                            setOpen(false);
-                          }}
-                        >
-                          <CloseIcon fontSize="inherit" />
-                        </IconButton>
-                      }
-                      sx={{ mb: 2 }}
-                      className="alert animation"
-                      severity="info"
-                    >
-                      <strong>
-                        <p style={{ fontSize: "18px" }}>
-                          Profil malumotlarini to'ldiring va <br /> {currency(parseInt(num.value) / 100, 'UZS').replace(/,/g, ".").slice(0, -3)}{" "}
-                          so'm vaucherga ega bo'ling
-                        </p>
-                      </strong>
-                      <div
-                        style={{ textAlign: "center", marginTop: "10px" }}
-                      ></div>
-                      <Button
-                        className="alertBtn"
-                        style={{
-                          borderRadius: "15px",
-                          backgroundColor: "rgba(0, 106, 255, 1)",
-                        }}
-                        variant="contained"
-                        onClick={() => navigate("/profile")}
-                      >
-                        Profilni to'ldirish
-                      </Button>
-                    </Alert>
-                  </Collapse>
-                </div>
-              )
-          )
-        : null}
+a
+        <ToastContainer style={{ marginTop: "50px" }} limit={1}/>
     </div>
   );
 }

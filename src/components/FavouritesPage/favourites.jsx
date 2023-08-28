@@ -9,6 +9,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import SidebarSm from "../Sidebar/SidebarSm";
 import "./favourites.css";
 
+
 export default function Favourites() {
   const { navStretch } = useContext(StateContext);
   useEffect(() => {
@@ -20,8 +21,8 @@ export default function Favourites() {
     <div className="favoritesPage">
       <NavbarSm />
       <NavbarDemo />
-      <Sidebar active={3} />
-      <SidebarSm active={3} />
+      {/* <Sidebar active={3} />
+      <SidebarSm active={3} /> */}
       <div className={navStretch ? "courses ml-240" : "courses ml-100"}>
         <FavoriteCourses />
       </div>

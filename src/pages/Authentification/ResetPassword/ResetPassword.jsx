@@ -9,40 +9,46 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import NavbarFalse from "../../../components/NavbarFalse/NavbarFalse";
 import NavbarSm from "../../../components/Navbar/NavbarSm";
-import { Alert } from "@mui/material";
-import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
-import CloseIcon from '@mui/icons-material/Close';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import TextField from "@mui/material/TextField";
 
 export default function ResetPassword() {
-  const { setToken } = useContext(StateContext);
+  const { setToken, registerEmail, setRegisterEmail } = useContext(StateContext);
 
   const [mobile, setMobile] = useState("");
 
   const navigate = useNavigate();
   const [check, setcheck] = useState(true);
-  const [open, setOpen] = useState(false);
 
+  const phoneNumberNotFound = () => toast.error("Telefon raqam topilmadi!");
 
-  const sendddata = async () => {
-    mobile.length >= 10 ? setcheck(true) : setcheck(false);
-    try {
-      await axios
-        .post(`${process.env.REACT_APP_API_KEY}/api/v2/accounts/step-one/`, {
-          mobile: mobile.length >= 10 ? mobile : null,
-          region: '',
-          is_forgot: true
-        })
-        .then((res) => {
-          console.log(res)
-          setToken(res.data.otp_generated);
-        });
-      mobile.length >= 10
-        ? navigate("/resetVerify")
-        : navigate("/resetPassword");
-    } catch (error) {
-       setOpen(true)
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      sendddata(event);
+    }
+  };
+
+  const sendddata = async (e) => {
+    e.preventDefault()
+    if(mobile.length >= 12) {
+      setcheck(true)
+      try {
+        await axios
+          .post(`${process.env.REACT_APP_API_KEY}/api/v2/accounts/step-one/`, {
+            mobile: mobile,
+            region: '',
+            is_forgot: true
+          })
+          .then((res) => {
+            setToken(res.data.otp_generated);
+            navigate("/resetVerify")
+          });
+      } catch (error) {
+        phoneNumberNotFound()
+      }
+    }else {
+      setcheck(false);
     }
   };
   return (
@@ -52,22 +58,59 @@ export default function ResetPassword() {
       <div className="Login Register">
         <div className="container">
           <h1 className="login-title">Parolni tiklash</h1>
-          <form action="">
+          <form onSubmit={(e) => sendddata(e)}>
             <div className="rowGrid">
               <div className="col-24">
+                {!registerEmail ? (
                 <div className="phoneInputBox">
                   <p className="label"></p>
                   <PhoneInput
+                    onKeyDown={handleKeyDown}
+                    inputProps={{
+                     name: 'phone',
+                     required: true,
+                     autoFocus: true
+                   }}
                     country={"uz"}
                     onChange={(phone) => setMobile(phone)}
                   />
                 </div>
+                ): (
+                  <TextField
+                  className="inputs"
+                  sx={{
+                    width: "100%",
+                    marginBottom: '30px',
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderRadius: "15px",
+                      height: "70px",
+                      border: "2px solid #D9D9D9",
+                    },
+                    "& .MuiOutlinedInput-input": {
+                      height: "70px",
+                      padding: "0 0 0 25px",
+                      marginTop: "-2px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      top: "4px",
+                    },
+                    "& .MuiInputLabel-shrink": {
+                      top: "0",
+                      left: "2px",
+                    },
+                  }}
+                  value={mobile}
+                  label="Emailingizni kiriting"
+                  variant="outlined"
+                  type="email"
+                  onChange={(e) => setMobile(e.target.value)}
+                />
+                )}
               </div>
             </div>
             {check ? null : (
               <p className="error-messageee">
-                <ReportIcon style={{ marginRight: "10px" }} /> Telefon raqami
-                noto'g'ri kiritildi
+                <ReportIcon style={{ marginRight: "10px" }} />{!registerEmail ? "Telefon raqami": "Elektron pochta"} noto'g'ri kiritildi
               </p>
             )}
             <Button
@@ -86,38 +129,22 @@ export default function ResetPassword() {
               }}
               variant="contained"
               className="btn"
-              onClick={sendddata}
+              type="submit"
             >
               Tasdiqlash kodini yuborish
             </Button>
+            <ToastContainer />
+
           </form>
+
+          <p className="sign-up">
+              <span onClick={() => setRegisterEmail(!registerEmail)}>
+                {!registerEmail ? "Elektron pochta" : "Telefon raqam"} orqali parolni tiklash
+              </span>
+          </p>
         </div>
       </div>
-
-
-      {open ? (
-        <Alert
-        action={
-         <IconButton
-           aria-label="close"
-           color="inherit"
-           size="small"
-           onClick={() => {
-             setOpen(false);
-           }}
-         >
-           <CloseIcon fontSize="inherit" />
-         </IconButton>
-       }
-       sx={{ mb: 2 }}
-   className="alert animation"
-   severity="error"
- >
-   <strong>
-   <p style={{fontSize: '18px'}}>Raqam topilmadi</p>
-   </strong>
- </Alert>
-      ) : null}
+      
     </>
   );
 }

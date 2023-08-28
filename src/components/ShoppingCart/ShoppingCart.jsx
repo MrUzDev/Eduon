@@ -115,7 +115,7 @@ function ShoppingCart() {
     <>
       <NavbarSm />
       <NavbarDemo />
-      <Sidebar />
+      <Sidebar active={3}/>
       <SidebarSm active={4} />
       <div className={navStretch ? "courses ml-240" : "courses ml-100"}>
         <div className="shoppingCart">

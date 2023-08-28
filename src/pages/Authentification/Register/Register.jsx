@@ -9,15 +9,23 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import NavbarFalse from "../../../components/NavbarFalse/NavbarFalse";
 import NavbarSm from "../../../components/Navbar/NavbarSm";
+import { useForm } from "react-hook-form"
+import TextField from "@mui/material/TextField";
+
 
 export default function Register() {
-  const { phoneNumber, setPhoneNumber, setToken, token } = useContext(StateContext);
-  const [countryCode , setCountryCode] = useState('')
+  const { phoneNumber, setPhoneNumber, setToken, registerEmail, setRegisterEmail} = useContext(StateContext);
   const [check, setcheck] = useState(false);
   const [againRes, setAgainRes] = useState(false)
   const navigate = useNavigate();
 
+  const {control} = useForm()
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      sendddata(event);
+    }
+  };
 
 
   useEffect(() => {
@@ -29,18 +37,20 @@ export default function Register() {
   }, [])
   
     useEffect(() => {
-      if(phoneNumber) {
-        phoneNumber.length >= 12 ? setcheck(false) : setcheck(true)
-      }
+     if(phoneNumber) {
+       phoneNumber.length >= 10 ? setcheck(false) : setcheck(true)
+     }
+      
+      setAgainRes(false)
     }, [phoneNumber])
+
+    useEffect(() => {
+      setPhoneNumber('')
+    }, [registerEmail])
+
   
-  const sendddata = async () => {
-
-    const formData = new FormData();
-    // formData.append("mobile", phoneNumber);
-    // formData.append("region", '');
-    // formData.append('is_forgot', false)
-
+  const sendddata = async (event) => {
+    event.preventDefault();
    try {
     check === false && await axios
         .post(
@@ -75,24 +85,68 @@ export default function Register() {
               <span> kiring</span>
             </Link>
           </p>
-          <form action="">
+          <form onSubmit={(e) => sendddata(e)}>
             <div className="rowGrid">
               <div className="col-24">
+                  {!registerEmail ? (
+
                 <div className="phoneInputBox">
                   <p className="label"></p>
                   <PhoneInput
+                     onKeyDown={handleKeyDown}
+                     inputProps={{
+                      name: 'phone',
+                      required: true,
+                      autoFocus: true
+                    }}
+                    control={control}
+                    rules={{ required: true }}
                     country={"uz"}
                     enableAreaCodes={true}
                     value={phoneNumber}
-                    onChange={(phone , country) => {setPhoneNumber(phone); console.log(country)}}
+                    onChange={(phone , country) => setPhoneNumber(phone)}
                   />
+
                 </div>
+                  ): (
+                    <>
+                    <TextField
+                      className="inputs"
+                      sx={{
+                        width: "100%",
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderRadius: "15px",
+                          height: "70px",
+                          border: "2px solid #D9D9D9",
+                        },
+                        "& .MuiOutlinedInput-input": {
+                          height: "70px",
+                          padding: "0 0 0 25px",
+                          marginTop: "-2px",
+                        },
+                        "& .MuiInputLabel-root": {
+                          top: "4px",
+                        },
+                        "& .MuiInputLabel-shrink": {
+                          top: "0",
+                          left: "2px",
+                        },
+                      }}
+                      value={phoneNumber}
+                      label="Emailingizni kiriting"
+                      variant="outlined"
+                      type="email"
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                    <br />
+                    <br />
+                    </>
+                  )}
               </div>
             </div>
             {check && (
               <p className="error-messageee">
-                <ReportIcon style={{ marginRight: "10px" }} /> Telefon raqami
-                noto'g'ri kiritildi
+                <ReportIcon style={{ marginRight: "10px" }} />{!registerEmail ? "Telefon raqami": "Email"} notog'ri kiritilgan 
               </p>
             )}
              {againRes && (
@@ -116,11 +170,17 @@ export default function Register() {
               }}
               variant="contained"
               className="btn"
-              onClick={sendddata}
+              type="submit"
             >
               Davom etish
             </Button>
           </form>
+
+          <p className="sign-up">
+              <span onClick={() => setRegisterEmail(!registerEmail)}>
+                {!registerEmail ? "Elektron pochta" : "Telefon raqam"} orqali ro'yhatdan o'tish
+              </span>
+          </p>
           {/* <div className="box_line">
             <div className="line"></div>
             <p>yoki</p>

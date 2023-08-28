@@ -524,11 +524,108 @@ export default function LiveItems(props) {
                   Xarid qilish
                 </button>
               )}
-                {isBought || props.price == 0  ? (
+                 {isBought || props.price == 0 ? (
                   null
-                ): (
+                ): props.isAddedToCart || artificialAddedToCart ? (
+                  <div
+                  onClick={(e) => {
+                    props.price
+                      ? DeleteFromCart(e, props.id)
+                      : navigateToWatch(e, props.id);
+                    setArtificialAddedToCart(false);
+                  }}
+                >
+                  {props.price ? (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      // fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#006aff"
+                      className="modalAddCart"
+                    >
+                      <path
+                        d="M2 2H3.74001C4.82001 2 5.67 2.93 5.58 4L4.75 13.96C4.61 15.59 5.89999 16.99 7.53999 16.99H18.19C19.63 16.99 20.89 15.81 21 14.38L21.54 6.88C21.66 5.22 20.4 3.87 18.73 3.87H5.82001"
+                        stroke="#1c1c1c"
+                        strokeWidth="1.5"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M16.25 22C16.9404 22 17.5 21.4404 17.5 20.75C17.5 20.0596 16.9404 19.5 16.25 19.5C15.5596 19.5 15 20.0596 15 20.75C15 21.4404 15.5596 22 16.25 22Z"
+                        stroke="#1c1c1c"
+                        strokeWidth="1.5"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M8.25 22C8.94036 22 9.5 21.4404 9.5 20.75C9.5 20.0596 8.94036 19.5 8.25 19.5C7.55964 19.5 7 20.0596 7 20.75C7 21.4404 7.55964 22 8.25 22Z"
+                        stroke="#1c1c1c"
+                        strokeWidth="1.5"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M9 8H21"
+                        stroke="#1c1c1c"
+                        strokeWidth="1.5"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M22 16.74V4.67C22 3.47 21.02 2.58 19.83 2.68H19.77C17.67 2.86 14.48 3.93 12.7 5.05L12.53 5.16C12.24 5.34 11.76 5.34 11.47 5.16L11.22 5.01C9.44 3.9 6.26 2.84 4.16 2.67C2.97 2.57 2 3.47 2 4.66V16.74C2 17.7 2.78 18.6 3.74 18.72L4.03 18.76C6.2 19.05 9.55 20.15 11.47 21.2L11.51 21.22C11.78 21.37 12.21 21.37 12.47 21.22C14.39 20.16 17.75 19.05 19.93 18.76L20.26 18.72C21.22 18.6 22 17.7 22 16.74Z"
+                        stroke="#006aff"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M12 5.49V20.49"
+                        stroke="#006aff"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M7.75 8.49H5.5"
+                        stroke="#006aff"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M8.5 11.49H5.5"
+                        stroke="#006aff"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                </div>
+                  ) : (
+                    <>
                   <svg
-                  onClick={() => addToCart()}
+                 onClick={(e) => {
+                  props.price
+                    ? addToCart(e, props.id)
+                    : navigateToWatch(e, props.id);
+                  loggedIn && setArtificialAddedToCart(true);
+                }}
                 width="30"
                 height="30"
                 viewBox="0 0 24 24"
@@ -570,8 +667,8 @@ export default function LiveItems(props) {
                   strokeLinejoin="round"
                 />
                 </svg>
-                )} 
-                  
+                    </>
+                )}
             </div>
           </div>
         </div>

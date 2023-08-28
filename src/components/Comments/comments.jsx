@@ -114,7 +114,7 @@ export default function Comments(props) {
         {commentsData.map((comments, index) => (
           <div key={index}>
             <div className="names">
-              <p className="d-sm-block mb-sm-0">
+              <p className="d-sm-block">
                 {new Date(comments.date_created)
                   .toLocaleDateString([], {
                     year: "numeric",

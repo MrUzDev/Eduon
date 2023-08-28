@@ -19,6 +19,7 @@ import PhoneInput from "react-phone-input-2";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
+import { BounceLoader } from "react-spinners";
 
 
 const style = {
@@ -66,6 +67,7 @@ export default function CourseItem(props) {
   const [artificialAddedToCart, setArtificialAddedToCart] = useState(false);
   const playVideo = useRef();
   const [error, setError] = useState(false);
+  const [loader, setLoader] = useState(false);
 
 
   // const playingVideoPlayer = () => {
@@ -158,6 +160,8 @@ export default function CourseItem(props) {
   }, [props.boughtCourses]);
 
   const addToCart = async (e, id) => {
+    setLoader(true)
+    
     const headers = {
       Authorization: loggedIn
         ? `Bearer ${localStorage.getItem("access")}`
@@ -165,7 +169,7 @@ export default function CourseItem(props) {
     };
     !loggedIn && handleOpen();
     try {
-      loggedIn &&
+      loggedIn && id &&
         (await axios
           .post(
             `${process.env.REACT_APP_API_KEY}/api/v1/orders/cart`,
@@ -176,9 +180,12 @@ export default function CourseItem(props) {
             { headers }
           )
           .then((res) => {
-            res.data.message === "This course already exists"
-              ? setAlertError(true)
-              : setAddedToCart(true);
+            setTimeout(() => {
+              setLoader(false)
+              res.data.message === "This course already exists"
+                ? setAlertError(true)
+                : setAddedToCart(true);
+            }, 600)
           })
           .catch((err) => {
             refresh(err.response.status, err.response.status.text);
@@ -259,27 +266,36 @@ export default function CourseItem(props) {
   };
 
   const DeleteFromCart = (e, id) => {
+    id && setLoader(true);
     e.preventDefault();
-    let delId = props.cartData.items.filter((item) => item.course.id == id)[0].id;
-    try {
-      loggedIn &&
-        axios
-          .delete(
-            `${process.env.REACT_APP_API_KEY}/api/v1/orders/cart-remove/${delId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("access")}`,
-              },
-            }
-          )
-          .then((res) => {
-            setAddedToCart(true);
-            setTimeout(() => {
-              setAddedToCart(false);
-            }, 10);
-            setIsRemoved(!isremoved);
-          });
-    } catch (error) { }
+    
+    if(id) {
+      let delId = props.cartData.items.filter((item) => item.course.id === id)[0].id;
+      console.log(delId, delId == '', delId == ' ');
+      console.log(props.cartData.items.filter((item) => console.log(id, item.course.id, item.course.id == id)));
+
+      try {
+        loggedIn && delId !== undefined &&
+          axios
+            .delete(
+              `${process.env.REACT_APP_API_KEY}/api/v1/orders/cart-remove/${delId}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("access")}`,
+                },
+              }
+            )
+            .then((res) => {
+              setAddedToCart(true);
+                delId = 0
+                setAddedToCart(false);
+                setLoader(false)
+              setIsRemoved(!isremoved);
+            });
+      } catch (error) { }
+    }else {
+      console.log('id yoq');
+    }
   };
   const DeleteFromFav = (e, id) => {
     e.preventDefault();
@@ -1094,11 +1110,108 @@ export default function CourseItem(props) {
                   Xarid qilish
                 </button>
               )}
-                {isBought ? (
+                {isBought || props.price == 0 ? (
                   null
-                ): (
+                ): props.isAddedToCart || artificialAddedToCart ? (
+                  <div
+                  onClick={(e) => {
+                    props.price
+                      ? DeleteFromCart(e, props.id)
+                      : navigateToWatch(e, props.id);
+                    setArtificialAddedToCart(false);
+                  }}
+                >
+                  {props.price ? (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      // fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#006aff"
+                      className="modalAddCart"
+                    >
+                      <path
+                        d="M2 2H3.74001C4.82001 2 5.67 2.93 5.58 4L4.75 13.96C4.61 15.59 5.89999 16.99 7.53999 16.99H18.19C19.63 16.99 20.89 15.81 21 14.38L21.54 6.88C21.66 5.22 20.4 3.87 18.73 3.87H5.82001"
+                        stroke="#1c1c1c"
+                        strokeWidth="1.5"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M16.25 22C16.9404 22 17.5 21.4404 17.5 20.75C17.5 20.0596 16.9404 19.5 16.25 19.5C15.5596 19.5 15 20.0596 15 20.75C15 21.4404 15.5596 22 16.25 22Z"
+                        stroke="#1c1c1c"
+                        strokeWidth="1.5"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M8.25 22C8.94036 22 9.5 21.4404 9.5 20.75C9.5 20.0596 8.94036 19.5 8.25 19.5C7.55964 19.5 7 20.0596 7 20.75C7 21.4404 7.55964 22 8.25 22Z"
+                        stroke="#1c1c1c"
+                        strokeWidth="1.5"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M9 8H21"
+                        stroke="#1c1c1c"
+                        strokeWidth="1.5"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M22 16.74V4.67C22 3.47 21.02 2.58 19.83 2.68H19.77C17.67 2.86 14.48 3.93 12.7 5.05L12.53 5.16C12.24 5.34 11.76 5.34 11.47 5.16L11.22 5.01C9.44 3.9 6.26 2.84 4.16 2.67C2.97 2.57 2 3.47 2 4.66V16.74C2 17.7 2.78 18.6 3.74 18.72L4.03 18.76C6.2 19.05 9.55 20.15 11.47 21.2L11.51 21.22C11.78 21.37 12.21 21.37 12.47 21.22C14.39 20.16 17.75 19.05 19.93 18.76L20.26 18.72C21.22 18.6 22 17.7 22 16.74Z"
+                        stroke="#006aff"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M12 5.49V20.49"
+                        stroke="#006aff"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M7.75 8.49H5.5"
+                        stroke="#006aff"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M8.5 11.49H5.5"
+                        stroke="#006aff"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                </div>
+                  ) : (
+                    <>
                   <svg
-                  onClick={() => addToCart()}
+                 onClick={(e) => {
+                  props.price
+                    ? addToCart(e, props.id)
+                    : navigateToWatch(e, props.id);
+                  loggedIn && setArtificialAddedToCart(true);
+                }}
                 width="30"
                 height="30"
                 viewBox="0 0 24 24"
@@ -1140,8 +1253,8 @@ export default function CourseItem(props) {
                   strokeLinejoin="round"
                 />
                 </svg>
+                    </>
                 )}
-                  
             </div>
           </div>
         </div>
@@ -1296,6 +1409,15 @@ export default function CourseItem(props) {
           <br />
         </Alert> */}
       </div>
+
+                     { loader && (
+                        <div className="loader">
+                          <BounceLoader
+                            color="#006AFF"
+                            speedMultiplier={1.2}
+                          />
+                        </div>
+                      )}
 
       {/* <!-- ------------------------------------- --> */}
     </div>

@@ -76,6 +76,7 @@ function Watching() {
   const [waitingSec, setWaitingSec] = useState(false);
   const [loader, setLoader] = useState(false);
   const [playerPause, setPlayerPause] = useState(false);
+  const [courseRate, setCourseRate] = useState(0)
 
   var id = useParams();
   const playVideo = useRef();
@@ -190,11 +191,11 @@ function Watching() {
       videos.addEventListener("timeupdate", function () {
         localStorage.setItem(
           "duration",
-          Math.floor(playVideo.current.currentTime)
+          Math.floor(mainVideo.currentTime)
         );
 
         if (
-          Math.floor(playVideo.current.currentTime) ===
+          Math.floor(mainVideo.currentTime) ===
             Math.floor(mainVideo.duration / 2) &&
           lessonId !== false
         ) {
@@ -295,6 +296,7 @@ function Watching() {
   //***  add and change course rating METHOD OF POST
 
   const setRating = async (e) => {
+    console.log(`${process.env.REACT_APP_API_KEY}/api/v1/courses/rate-course/`);
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("access")}`,
     };
@@ -310,7 +312,7 @@ function Watching() {
         )
         .then((res) => {
           res.data === "You have already rated the course!" &&
-            editRating(e.target.value);
+            editRating(e.target.value, parseInt(resData.id));
         })
         .catch(() => {});
     } catch (error) {}
@@ -319,6 +321,7 @@ function Watching() {
   //***  UPDATE and change course RATING METHOD OF PUT
 
   const editRating = (value, id) => {
+    console.log(id);
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("access")}`,
     };
@@ -326,9 +329,7 @@ function Watching() {
       axios
         .put(
           `${process.env.REACT_APP_API_KEY}/api/v1/courses/edit-rate-course/${id}`,
-          // ${parseInt(
-          //   props.resData.id
-          // )}`
+        
           {
             rating: parseInt(value),
           },
@@ -340,6 +341,24 @@ function Watching() {
         .catch((err) => {});
     } catch (error) {}
   };
+
+
+  useEffect(() => {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("access")}`,
+    };
+    try {
+      axios
+        .get(
+          `${process.env.REACT_APP_API_KEY}/api/v1/courses/get-rate-course/${id.id}`,
+          {
+            headers,
+          }
+        )
+        .then((res) => setCourseRate(res.data.rating));
+    } catch (error) {}
+
+  }, [id])
 
   const referalTg = () => {
     const headers = {
@@ -417,7 +436,7 @@ function Watching() {
       videoTimeline.addEventListener("mousemove", (e) => {
         let timelineWidth = videoTimeline.clientWidth;
         let offsetX = e.offsetX;
-        let percent = Math.floor((offsetX / timelineWidth) * playVideoDuration);
+        let percent = Math.floor((offsetX / timelineWidth) * mainVideo.duration);
         const progressTime = videoTimeline.querySelector("span");
         offsetX =
           offsetX < 20
@@ -430,42 +449,40 @@ function Watching() {
       });
 
       videoTimeline.addEventListener("click", (e) => {
-        if (!isFinite(playVideo.current.currentTime)) {
-          playVideo.current.currentTime =
-            (e.offsetX / timelineWidth) * playVideoDuration;
-          playVideo.current.currentTime =
-            (e.offsetX / timelineWidth) * playVideoDuration;
+        // if (!isFinite(mainVideo.currentTime)) {
           let timelineWidth = videoTimeline.clientWidth;
-        }
+          mainVideo.currentTime = (e.offsetX / timelineWidth) * mainVideo.duration;
+          blurvid.currentTime = (e.offsetX / timelineWidth) * mainVideo.duration;
+        // }
       });
 
-      document.querySelector("video").addEventListener("timeupdate", (e) => {
+      mainVideo.addEventListener("timeupdate", (e) => {
         let { currentTime, duration } = e.target;
-        let percent = (playVideo.current.currentTime / playVideoDuration) * 100;
+        let percent = (mainVideo.currentTime / mainVideo.duration) * 100;
         progressBar.style.width = `${percent}%`;
         currentVidTime.innerText = formatTime(
-          parseInt(playVideo.current.currentTime)
+          parseInt(mainVideo.currentTime)
         );
         setLoader(false);
       });
 
       window.addEventListener("offline", (e) => {
-        // console.log(e);
         setLoader(true);
       });
 
-      document.querySelector("video").addEventListener("loadeddata", () => {
+        mainVideo.addEventListener("loadeddata", () => {
         videoDuration.innerText = formatTime(mainVideo.duration);
         setLoader(false);
       });
 
       const draggableProgressBar = (e) => {
+        console.log(mainVideo.currentTime);
         let timelineWidth = videoTimeline.clientWidth;
         progressBar.style.width = `${e.offsetX}px`;
         mainVideo.currentTime =
-          (e.offsetX / timelineWidth) * playVideoDuration;
+          (e.offsetX / timelineWidth) * mainVideo.duration;
           mainVideo.currentTime =
-          (e.offsetX / timelineWidth) * playVideoDuration;
+          (e.offsetX / timelineWidth) * mainVideo.duration;
         currentVidTime.innerText = formatTime(mainVideo.currentTime);
       };
 
@@ -946,7 +963,9 @@ function Watching() {
                       precision={0.5}
                       onChange={(e) => {
                         setRating(e);
+                        setCourseRate(e.target.value)
                       }}
+                      value={courseRate}
                     />
                     <div className="rightBlock">
                       <button

@@ -14,6 +14,8 @@ import NavbarSm from "../Navbar/NavbarSm";
 import "./moneyOperation.css";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
+import SidebarSm from "../Sidebar/SidebarSm";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -96,8 +98,9 @@ export default function MoneyOperations() {
   return (
     <div className="moneyOperations">
       <NavbarDemo />
-      <NavbarSm />
-      {status ? <SidebarActive /> : <Sidebar />}
+      <NavbarSm/>
+      <SidebarSm active={3}/>
+      {status ? <SidebarActive active={1}/> : <Sidebar active={0}/>}
       <div
         className={
           navStretch ? "courses mt-100 ml-240" : "courses mt-100 ml-100"

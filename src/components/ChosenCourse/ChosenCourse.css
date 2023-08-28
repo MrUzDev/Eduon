@@ -758,6 +758,7 @@ ul {
     opacity: 1;
     bottom: 0;
     transition: all 0.13s ease;
+    z-index: 3;
 }
 
 .watchingCourses .wrapper::before,
@@ -960,7 +961,7 @@ ul {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     transition: opacity 0.13s ease;
     opacity: 0;
-    
+    z-index: 1;
 }
 
 

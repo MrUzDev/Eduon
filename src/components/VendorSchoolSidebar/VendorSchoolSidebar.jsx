@@ -7,16 +7,15 @@ import { StateContext } from '../../context/Context';
 export default function VendorSchoolSidebar(props) {
   const {sidebarOpen, setSidebarOpen, setShowVsChat} = useContext(StateContext)
 
-
-  useEffect(() => {
-      
-  }, [])
-
   const sidebarNavigateLink = (link) => {
     navigate(link)
     setSidebarOpen(true)
     setShowVsChat(false)
   }
+
+  useEffect(() => {
+    setSidebarOpen(true)
+  }, [])
 
   const navigate = useNavigate()
   return (

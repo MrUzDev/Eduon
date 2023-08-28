@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.d430c8ae.chunk.css",
-    "main.js": "/static/js/main.5105c22e.chunk.js",
-    "main.js.map": "/static/js/main.5105c22e.chunk.js.map",
+    "main.css": "/static/css/main.75d32181.chunk.css",
+    "main.js": "/static/js/main.637e3f3f.chunk.js",
+    "main.js.map": "/static/js/main.637e3f3f.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1fee62f6.js",
     "runtime-main.js.map": "/static/js/runtime-main.1fee62f6.js.map",
     "static/css/2.41893c8d.chunk.css": "/static/css/2.41893c8d.chunk.css",
-    "static/js/2.3c0d7437.chunk.js": "/static/js/2.3c0d7437.chunk.js",
-    "static/js/2.3c0d7437.chunk.js.map": "/static/js/2.3c0d7437.chunk.js.map",
+    "static/js/2.e0325296.chunk.js": "/static/js/2.e0325296.chunk.js",
+    "static/js/2.e0325296.chunk.js.map": "/static/js/2.e0325296.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.41893c8d.chunk.css.map": "/static/css/2.41893c8d.chunk.css.map",
-    "static/css/main.d430c8ae.chunk.css.map": "/static/css/main.d430c8ae.chunk.css.map",
-    "static/js/2.3c0d7437.chunk.js.LICENSE.txt": "/static/js/2.3c0d7437.chunk.js.LICENSE.txt",
+    "static/css/main.75d32181.chunk.css.map": "/static/css/main.75d32181.chunk.css.map",
+    "static/js/2.e0325296.chunk.js.LICENSE.txt": "/static/js/2.e0325296.chunk.js.LICENSE.txt",
     "static/media/FintechLogo.8fc10e79.png": "/static/media/FintechLogo.8fc10e79.png",
     "static/media/IshBeruvchi.1a0907aa.png": "/static/media/IshBeruvchi.1a0907aa.png",
     "static/media/Jalinga Logotype.3f57c4bf.png": "/static/media/Jalinga Logotype.3f57c4bf.png",
@@ -64,8 +64,8 @@
   "entrypoints": [
     "static/js/runtime-main.1fee62f6.js",
     "static/css/2.41893c8d.chunk.css",
-    "static/js/2.3c0d7437.chunk.js",
-    "static/css/main.d430c8ae.chunk.css",
-    "static/js/main.5105c22e.chunk.js"
+    "static/js/2.e0325296.chunk.js",
+    "static/css/main.75d32181.chunk.css",
+    "static/js/main.637e3f3f.chunk.js"
   ]
 }

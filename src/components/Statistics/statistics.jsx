@@ -72,7 +72,6 @@ export default function Statistics(props) {
         )
         .then((res) => {
           setLoader(false)
-          console.log(res.data);
           res.data.forEach(item => {item.platform === 'EDUON' && setEduonCourses((data) => [...data, item])});
           res.data.forEach(item => {item.platform === 'SM' && setSmCourses((data) => [...data, item])});
         })

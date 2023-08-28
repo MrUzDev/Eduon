@@ -9,16 +9,28 @@ import axios from "../../../Apis/api";
 import ReportIcon from "@mui/icons-material/Report";
 import NavbarFalse from "../../../components/NavbarFalse/NavbarFalse";
 import NavbarSm from "../../../components/Navbar/NavbarSm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BounceLoader } from "react-spinners";
 
 export default function SmsVerify() {
   const [OTP, setOTP] = useState("");
-  const { navStretch, phoneNumber, token, setToken } = useContext(StateContext);
+  const { navStretch, phoneNumber, token, setToken, registerEmail } = useContext(StateContext);
   const [dataInfo, setDataInfo] = useState("");
   const [check, setCheck] = useState(false);
   const [message, setMessage] = useState();
   const [sec, setSec] = useState(60);
+  const [loader, setLoader] = useState(true);
 
   const navigate = useNavigate();
+
+  const otpError = () => toast.error("Tasdiqlash kodi noto'g'ri kiritildi!");
+  const refreshSmsAlert = () => toast.info("Kod yuborishili mumkin bo'lgan vaqt tugaganidan so'ng qayta urinib ko'ring");
+  const refreshSmsSuccess = () => toast.success("Kod qayta yuborildi!");
+
+  useEffect(() => {
+    phoneNumber ? setLoader(false) : navigate('/register')
+  })
 
   useEffect(() => {
     let myInterval = setInterval(() => {
@@ -34,6 +46,7 @@ export default function SmsVerify() {
 
   const refreshSms = async () => {
     if (sec === 0) {
+      refreshSmsSuccess()
       try {
         const data = await axios.post(
           `${process.env.REACT_APP_API_KEY}/api/v2/accounts/step-one/`,
@@ -46,16 +59,14 @@ export default function SmsVerify() {
         setToken(data.data.otp_generated);
         setSec(60);
       } catch (error) {}
+    }else {
+      refreshSmsAlert()
     }
   };
 
-  useEffect(() => {
-    // let tokenReg = window.location.href.replace('https://eduon.uz/register/', '').replace('http://localhost:3000/register/', '').replace('https://front.eduon-test.uz/register/', '');
-    // localStorage.setItem('referalToken', tokenReg);
-    console.log(localStorage.getItem('referalToken'));
-  }, [])
 
-  const sendddata = async () => {
+  const sendddata = async (e) => {
+    e.preventDefault()
     try {
       const data = await axios.post(
         `${process.env.REACT_APP_API_KEY}/api/v1/accounts/step-two/`,
@@ -70,7 +81,11 @@ export default function SmsVerify() {
       data.data.jwt_token
         ? setMessage(data.data.jwt_token.message)
         : setMessage(data.data.message);
-    } catch (error) {}
+    } catch (error) {
+      if(error.response.status === 404) {
+        otpError()
+      }
+    }
   };
 
   return (
@@ -80,14 +95,14 @@ export default function SmsVerify() {
       <div className="Login Verify">
         <div className="container">
           <h1 className="login-title">Ro'yxatdan o'tish</h1>
-          <form action="">
+          <form action="" onSubmit={(e) => sendddata(e)}>
             <p className="phone-number">
-              {phoneNumber
-                ? `  +${phoneNumber.slice(0, 5)}  ***-**-${phoneNumber.slice(
+              {!registerEmail && phoneNumber && ` +${phoneNumber.slice(0, 5)}  ***-**-${phoneNumber.slice(
                     10,
                     12
                   )} raqamingizga tasdiqlash kodi yuborildi`
-                : null}
+                }
+                {registerEmail && phoneNumber && ` ${phoneNumber.slice(0, 5)}  *****${phoneNumber.slice(10, phoneNumber.length )} elektron pochtasiga tasdiqlash kodi yuborildi`}
             </p>
             <div className="wrapper">
               <OTPInput
@@ -100,6 +115,8 @@ export default function SmsVerify() {
                 type="number"
               />
             </div>
+            <ToastContainer />
+
             {dataInfo ? (
               dataInfo.jwt_token ? (
                 <p className="error-messageee">
@@ -138,6 +155,7 @@ export default function SmsVerify() {
               variant="contained"
               className="btn"
               onClick={sendddata}
+              type="submit"
             >
               Davom etish
             </Button>
@@ -154,6 +172,16 @@ export default function SmsVerify() {
             </Link>
           </p>
         </div>
+
+                  { loader && (
+                        <div className="loader">
+                          <BounceLoader
+                            color="#006AFF"
+                            speedMultiplier={1.2}
+                          />
+                        </div>
+                      )}
+
       </div>
     </>
   );

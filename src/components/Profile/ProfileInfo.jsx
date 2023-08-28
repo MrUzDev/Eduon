@@ -227,7 +227,7 @@ export default function ProfileInfo() {
                       left: "2px",
                     },
                   }}
-                  label="Familiyangiz"
+                  label="Familyangiz"
                   variant="outlined"
                   value={surname}
                   onChange={(e) => setsurname(e.target.value)}

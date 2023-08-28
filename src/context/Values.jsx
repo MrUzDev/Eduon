@@ -33,6 +33,7 @@ export default function Values() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [showVsChat, setShowVsChat] = useState(false)
   const [addMoneyModal, setAddMoneyModal] = useState(false);
+  const [registerEmail, setRegisterEmail] = useState(false)
 
   useEffect(() => {
     const headers = {
@@ -163,7 +164,9 @@ export default function Values() {
     showVsChat,
     setShowVsChat,
     addMoneyModal,
-    setAddMoneyModal
+    setAddMoneyModal,
+    registerEmail,
+    setRegisterEmail
   };
   return values;
 }
