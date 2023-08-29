@@ -70,7 +70,7 @@ function VendorSchool() {
   const [password, setpassword] = useState("");
   const [show, setShow] = useState(false);
 
-  const [IsRegVS, setIsRegVs] = useState(false);
+  const [IsRegVS, setIsRegVs] = useState();
   const [showDistrictModal, setShowDistrickModal] = useState(false);
   const [loader, setLoader] = useState(false)
 
@@ -79,9 +79,9 @@ function VendorSchool() {
   };
 
   useEffect(() => {
-    console.log(loggedIn, 'login');
     setLoader(true)
     if(loggedIn) {
+      console.log(IsRegVS);
       if(IsRegVS === true || IsRegVS === false) {
         setLoader(false)
       }

@@ -20,7 +20,7 @@ export default function NavbarProfile(props) {
   return (
     <div>
       {loggedIn ? (
-        userInfo.avatar ? (
+        userInfo.avatar && userInfo.avatar !== `${process.env.REACT_APP_API_KEY}/media/NULL` && userInfo.avatar !== `${process.env.REACT_APP_API_KEY}/media/` ? (
           <img
             aria-describedby={id}
             onClick={handleClick}

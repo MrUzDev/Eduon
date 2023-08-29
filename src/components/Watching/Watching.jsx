@@ -510,12 +510,53 @@ function Watching() {
       });
 
       window.addEventListener("keydown", (e) => {
-        console.log(mainVideo.currentTime);
+        e.preventDefault()
+
+        // add and take 10s video current time start
         if (e.keyCode === 39) {
-          mainVideo.currentTime += 10;
+          mainVideo.currentTime += 5;
         } else if (e.keyCode === 37) {
-          mainVideo.currentTime -= 10;
+          mainVideo.currentTime -= 5;
         }
+        // add and take 10s video current time end
+  
+        // full screen toggle start
+        else if(e.keyCode === 70) {
+          containerVideo.classList.toggle("fullscreen");
+          if (document.fullscreenElement) {
+            fullScreenBtn.classList.replace("fa-compress", "fa-expand");
+            return document.exitFullscreen();
+          }else {
+            fullScreenBtn.classList.replace("fa-expand", "fa-compress");
+            containerVideo.requestFullscreen();
+          }
+        }
+        // full screen toggle end
+  
+        // video play and pause start
+        else if(e.keyCode === 32) {
+          if(mainVideo.paused) {
+            mainVideo.play()
+          }else {
+            mainVideo.pause()
+          }
+        }
+        // video play and pause end
+        
+        // add and take video volume start
+        else if(e.keyCode === 38) {
+          if(mainVideo.volume < 1) {
+            mainVideo.volume += 0.2;
+            volumeSlider.value = mainVideo.volume;          
+          }
+        }else if(e.keyCode === 40) {
+          if(mainVideo.volume > 0.2) {
+            mainVideo.volume -= 0.2;
+            volumeSlider.value = mainVideo.volume;          
+          }
+        }
+        // add and take video volume end
+
       });
 
       volumeSlider.addEventListener("input", (e) => {

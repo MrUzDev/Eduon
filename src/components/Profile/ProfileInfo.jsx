@@ -149,7 +149,7 @@ export default function ProfileInfo() {
       <div className="container_body rowGrid">
         <div className="left_container col-5 col-lg-5 col-sm-24">
           {`${process.env.REACT_APP_API_KEY}${avatar}` ==
-            `${process.env.REACT_APP_API_KEY}null` &&
+            `${process.env.REACT_APP_API_KEY}/media/NULL` || `${process.env.REACT_APP_API_KEY}/media` &&
           images.preViews == null ? (
             <svg
               class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium avatarka pointer "

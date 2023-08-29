@@ -27,7 +27,7 @@ function NavbarSm() {
         })
         .then((res) => {
           setUserInfo({
-            avatar: res.data.profile_picture,
+            avatar: res.data.profile_picture_url,
             name: res.data.f_name,
             surname: res.data.l_name,
             mobile: res.data.phone_number,
@@ -135,10 +135,10 @@ function NavbarSm() {
             loggedIn ? setOpenProfile(true) : navigate("/login");
           }}
         >
-          {userInfo.avatar ? (
+          {userInfo.avatar && userInfo.avatar !== `${process.env.REACT_APP_API_KEY}/media/NULL` && userInfo.avatar !== `${process.env.REACT_APP_API_KEY}/media/` ? (
             <img
               className="avatar pointer"
-              src={`${process.env.REACT_APP_API_KEY}${userInfo.avatar}`}
+              src={`${userInfo.avatar}`}
               // src={`${process.env.REACT_APP_API_KEY}${userInfo.avatar}`}
               alt="..."
             />
@@ -151,10 +151,10 @@ function NavbarSm() {
         <div className="openProfileMenu">
           <div className="user justify-between pointer">
             <div className="d-flex align-center">
-              {userInfo.avatar ? (
+              {userInfo.avatar && userInfo.avatar !== `${process.env.REACT_APP_API_KEY}/media/NULL` && userInfo.avatar !== `${process.env.REACT_APP_API_KEY}/media/` ? (
                 <img
                   className="avatar pointer"
-                  src={`${process.env.REACT_APP_API_KEY}${userInfo.avatar}`}
+                  src={`${userInfo.avatar}`}
                   alt="..."
                   onClick={() => {
                     setOpenProfile(false);

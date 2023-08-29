@@ -733,12 +733,6 @@
     width: 40px;
     height: 40px;
   }
-}
-
-@media (max-width: 450px){
-  .watchingCourses .courseTitle .courseTitle_right .rightBlock {
-    margin: 10px 0 0 !important;
-  }
 
   .img .pause {
     width: 40px !important;
@@ -751,6 +745,14 @@
     width: 30px !important;
     height: 30px !important;
   }
+}
+
+@media screen and (max-width: 450px){
+  .watchingCourses .courseTitle .courseTitle_right .rightBlock {
+    margin: 10px 0 0 !important;
+  }
+
+  
 }
 
 @media screen and (max-width: 400px){

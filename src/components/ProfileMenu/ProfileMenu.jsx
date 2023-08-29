@@ -45,7 +45,7 @@ function ProfileMenu(props) {
     <div className="profileMenu">
       <div className="openProfileMenu">
         <div onClick={() => navigate("/userAbout")} className="user pointer">
-          {props.img ? (
+          {props.img && props.img !== `${process.env.REACT_APP_API_KEY}/media/NULL` && props.img !== `${process.env.REACT_APP_API_KEY}/media/` ? (
             <img
               className="avatar pointer"
               src={`${props.img}`}

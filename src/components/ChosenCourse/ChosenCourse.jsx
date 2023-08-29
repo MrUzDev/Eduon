@@ -480,18 +480,20 @@ export default function ChosenCourse(props) {
       if (document.fullscreenElement) {
         fullScreenBtn.classList.replace("fa-compress", "fa-expand");
         return document.exitFullscreen();
+      }else {
+        fullScreenBtn.classList.replace("fa-expand", "fa-compress");
+        containerVideo.requestFullscreen();
       }
-      fullScreenBtn.classList.replace("fa-expand", "fa-compress");
-      containerVideo.requestFullscreen();
     });
 
-    // playPauseBtn.addEventListener("click", () => {console.log('click'); mainVideo.paused ? mainVideo.play() : mainVideo.pause(); blurvid.paused ? blurvid.play() : blurvid.pause()});
-    // speedBtn.addEventListener("click", () => {speedOptions.classList.toggle("showw")});
     speedBtn.addEventListener("click", () => {
       setSpeedOptionsAc((speedOptionsAc) => !speedOptionsAc);
     });
 
     window.addEventListener("keydown", (e) => {
+      e.preventDefault()
+
+      // add and take 10s video current time start
       if (e.keyCode === 39) {
         mainVideo.currentTime += 5;
         blurvid.currentTime += 5;
@@ -499,6 +501,41 @@ export default function ChosenCourse(props) {
         mainVideo.currentTime -= 5;
         blurvid.currentTime -= 5;
       }
+      // add and take 10s video current time end
+
+      // full screen toggle start
+      else if(e.keyCode === 70) {
+        containerVideo.classList.toggle("fullscreen");
+        if (document.fullscreenElement) {
+          fullScreenBtn.classList.replace("fa-compress", "fa-expand");
+          return document.exitFullscreen();
+        }else {
+          fullScreenBtn.classList.replace("fa-expand", "fa-compress");
+          containerVideo.requestFullscreen();
+        }
+      }
+      // full screen toggle end
+
+      // video play and pause start
+      else if(e.keyCode === 32) {
+        if(mainVideo.paused) {
+          mainVideo.play()
+        }else {
+          mainVideo.pause()
+        }
+      }
+      // video play and pause end
+      
+      // add and take video volume start
+      else if(e.keyCode === 38) {
+          mainVideo.volume += 0.2;
+          volumeSlider.value = mainVideo.volume;          
+      }else if(e.keyCode === 40) {
+        mainVideo.volume -= 0.2;
+        volumeSlider.value = mainVideo.volume;          
+      }
+      // add and take video volume end
+
     });
 
     skipBackward.addEventListener("click", () => {
@@ -517,17 +554,6 @@ export default function ChosenCourse(props) {
     );
   }, []);
 
-  // useEffect(() => {
-  //   console.log(speedOptionsAc)
-  //     let speedOptions = document.querySelector(".speed-options"),
-  //     mainVideo = document.querySelector("video"),
-  //     blurvid = document.querySelector("video")
-
-  //     if(speedOptionsAc == true) {
-
-  //     }
-
-  // }, [speedOptionsAc])
 
   const currency = (number, currency, lang = undefined) =>
     Intl.NumberFormat(lang, { style: "currency", currency }).format(number);
@@ -681,8 +707,9 @@ export default function ChosenCourse(props) {
                     <div className="spikers">
                       <div className="img">
                         {resData ? (
-                          resData.course_owner.profile_picture === "" ||
-                          resData.course_owner.profile_picture === "NULL" ? (
+                          resData.course_owner.profile_picture === `${process.env.REACT_APP_API_KEY}/media/NULL` ||
+                          resData.course_owner.profile_picture === `${process.env.REACT_APP_API_KEY}/media/` ? (
+                            <>
                             <svg
                               class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium avatarka pointer "
                               focusable="false"
@@ -695,10 +722,11 @@ export default function ChosenCourse(props) {
                             >
                               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path>
                             </svg>
+                           </>
                           ) : (
                             <div className="img">
                               <img
-                                src={`${process.env.REACT_APP_API_KEY}/media/${resData.course_owner.profile_picture}`}
+                                src={`${resData.course_owner.profile_picture}`}
                                 alt="jpg"
                               />
                             </div>
@@ -1148,8 +1176,8 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                     <h1>{resData.name}</h1>
                     <div className="spikers">
                       {resData ? (
-                        resData.course_owner.profile_picture === "" ||
-                        resData.course_owner.profile_picture === "NULL" ? (
+                        resData.course_owner.profile_picture === `${process.env.REACT_APP_API_KEY}/media/NULL` ||
+                        resData.course_owner.profile_picture === `${process.env.REACT_APP_API_KEY}/media/` ? (
                           <svg
                             class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium avatarka pointer "
                             focusable="false"
@@ -1165,7 +1193,7 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                         ) : (
                           <div className="img">
                             <img
-                              src={`${process.env.REACT_APP_API_KEY}/media/${resData.course_owner.profile_picture}`}
+                              src={`${resData.course_owner.profile_picture}`}
                               alt="jpg"
                             />
                           </div>
@@ -1596,8 +1624,8 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                   <div className="spiker_card_one">
                     <div className="d-sm-flex justify-sm-between">
                       {resData ? (
-                        resData.course_owner.profile_picture === "" ||
-                        resData.course_owner.profile_picture === "NULL" ? (
+                        resData.course_owner.profile_picture === `${process.env.REACT_APP_API_KEY}/media/NULL` ||
+                        resData.course_owner.profile_picture === `${process.env.REACT_APP_API_KEY}/media/` ? (
                           <svg
                             class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium avatarka pointer "
                             focusable="false"
@@ -1613,7 +1641,7 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                         ) : (
                           <div className="img">
                             <img
-                              src={`${process.env.REACT_APP_API_KEY}/media/${resData.course_owner.profile_picture}`}
+                              src={`${resData.course_owner.profile_picture}`}
                               alt="jpg"
                             />
                           </div>
