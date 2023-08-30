@@ -254,28 +254,30 @@ export default function NavbarDemo(props) {
       <nav className="navbar">
         <div className="container">
           <div className="rowGrid justify-content-between align-center">
-            <button className="bars" onClick={() => setNavStretch(!navStretch)}>
-              <svg width="24" height="24">
-                <path
-                  d="M3 7H21"
-                  stroke="#1C1C1C"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M3 12H21"
-                  stroke="#1C1C1C"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M3 17H21"
-                  stroke="#1C1C1C"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
+            {loggedIn && (
+                <button className="bars" onClick={() => setNavStretch(!navStretch)}>
+                <svg width="24" height="24">
+                  <path
+                    d="M3 7H21"
+                    stroke="#1C1C1C"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M3 12H21"
+                    stroke="#1C1C1C"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M3 17H21"
+                    stroke="#1C1C1C"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            )}
 
             <div className="col-6 col-lg-10">
               <div className="courseMenu">
@@ -873,9 +875,11 @@ export default function NavbarDemo(props) {
                   className={`${!loggedIn ? "speakerBlockContainer col-auto col-lg-auto pointer relative" : "speakerBlock col-auto col-lg-auto pointer relative"}`}
                 >
                   {/* <SpeakerButton userInfo={userInfo} /> */}
+                  {loggedIn && (
                   <div className='speakerButton'>
                     <p>{!status ? "Spiker" : "Student"}</p>
                   </div>
+                  )}
                   {status && (
                     <div className="sp-popup">
                       Shu yerdan Talaba ko'rinishiga o'ting va o'qiyotgan

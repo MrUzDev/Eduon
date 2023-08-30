@@ -23,7 +23,7 @@ export default function Homepage(props) {
       <NavbarDemo />
       <NavbarSm />
       <SidebarSm active={0} />
-      { <Sidebar active={1} />}
+      {loggedIn && <Sidebar active={1} />}
       <Courses />
     </div>
   );

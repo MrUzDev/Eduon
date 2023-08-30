@@ -1185,7 +1185,7 @@
     .Vendor-School .nav-smalll .vendor-nav-lists ul {
         display: flex;
         flex-direction: column;
-        color: #006AFF !important;
+        color: red !important;
         gap: 2rem 0;
         font-size: 1.3rem;
         padding-bottom: 5rem;   

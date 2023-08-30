@@ -147,7 +147,8 @@ export default function ProfileInfo() {
   return (
     <div className="container">
       <div className="container_body rowGrid">
-        <div className="left_container col-5 col-lg-5 col-sm-24">
+        <div className="left_container text-align-center
+         col-5 col-lg-5 col-sm-24">
           {`${process.env.REACT_APP_API_KEY}${avatar}` ==
             `${process.env.REACT_APP_API_KEY}/media/NULL` || `${process.env.REACT_APP_API_KEY}/media` &&
           images.preViews == null ? (
@@ -206,7 +207,7 @@ export default function ProfileInfo() {
                     marginBottom: "44px",
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderRadius: "15px",
-                      height: "70px",
+                      // height: "70px",
                       border: "2px solid #D9D9D9",
                     },
                     "& .MuiOutlinedInput-input": {
@@ -236,7 +237,7 @@ export default function ProfileInfo() {
                     marginBottom: "44px",
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderRadius: "15px",
-                      height: "70px",
+                      // height: "70px",
                       border: "2px solid #D9D9D9",
                     },
                     "& .MuiOutlinedInput-input": {
@@ -268,7 +269,7 @@ export default function ProfileInfo() {
                    
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderRadius: "15px",
-                      height: "70px",
+                      // height: "70px",
                       border: "2px solid #D9D9D9",
                     },
                     "& .MuiOutlinedInput-input": {
@@ -299,7 +300,7 @@ export default function ProfileInfo() {
   
                       "& .MuiOutlinedInput-notchedOutline": {
                         borderRadius: "15px",
-                        height: "70px",
+                        // height: "70px",
                         border: "2px solid #D9D9D9",
                       },
                       "& .MuiOutlinedInput-input": {
@@ -374,7 +375,7 @@ export default function ProfileInfo() {
                           className="rowGrid col-24"
                           id="dataMobilePickerPar"
                         >
-                          <div className="col-12 txtMob">
+                          <div className="col-12 col-sm-24">
                             <FormControl fullWidth>
                               <InputLabel id="demo-simple-select-helper-label">
                                 Kasbingiz
@@ -391,11 +392,11 @@ export default function ProfileInfo() {
 
                                   "& .MuiOutlinedInput-notchedOutline": {
                                     borderRadius: "15px",
-                                    height: "70px",
+                                    // height: "70px",
                                     border: "2px solid #D9D9D9",
                                   },
                                   "& .MuiOutlinedInput-input": {
-                                    height: "70px",
+                                    // height: "70px",
                                   },
                                 }}
                               >
@@ -420,7 +421,7 @@ export default function ProfileInfo() {
                               </Select>
                             </FormControl>
                           </div>
-                          <div className="col-12" id="dataMobilePicker">
+                          <div className="col-12 col-sm-24" id="dataMobilePicker">
                             <LocalizationProvider dateAdapter={AdapterMoment}>
                               <MobileDatePicker
                                 label="Tugilgan sanangiz"

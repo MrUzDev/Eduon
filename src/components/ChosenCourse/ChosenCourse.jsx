@@ -41,9 +41,7 @@ import VisibilityOffOutlinedIcon from "../../assets/icons/eye-slash.png";
 import PhoneInput from "react-phone-input-2";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import SkipNextSharpIcon from "@mui/icons-material/SkipNextSharp";
 import FullscreenSharpIcon from "@mui/icons-material/FullscreenSharp";
 import SlowMotionVideoSharpIcon from "@mui/icons-material/SlowMotionVideoSharp";
 import PauseSharpIcon from "@mui/icons-material/PauseSharp";
@@ -116,17 +114,23 @@ export default function ChosenCourse(props) {
 
   const handleClose = () => setOpen(false);
 
-  const pauseVideoPlayer = () => {
-    // playVideo.current.pause();
-    // playVideo.current.currentTime = localStorage.getItem("durationChosen");
+  const fullPLay = () => {
+    document.querySelector("video").play();
+    setPlay(false);
+    setPause(true)
+    
+      setTimeout(() => {
+        setPause(false)
+      }, 2500)
   };
 
-  // useEffect(() => {
-  //   let videos = document.querySelector(".coverImg");
-  //   videos.addEventListener("timeupdate", function () {
-  //     localStorage.setItem("duration", Math.floor(playVideo.current.currentTime));
-  //   });
-  // }, [play]);
+  const pauseVideoPlayer = () => {
+    document.querySelector("video").pause();
+    playVideo.current.currentTime = localStorage.getItem("duration");
+    setPlay(true);
+    setPause(false);
+  };
+
 
   useEffect(() => {
     if (!localStorage.getItem("referalToken")) {
@@ -519,9 +523,9 @@ export default function ChosenCourse(props) {
       // video play and pause start
       else if(e.keyCode === 32) {
         if(mainVideo.paused) {
-          mainVideo.play()
+          fullPLay()
         }else {
-          mainVideo.pause()
+          pauseVideoPlayer()
         }
       }
       // video play and pause end
@@ -554,6 +558,7 @@ export default function ChosenCourse(props) {
     );
   }, []);
 
+  
 
   const currency = (number, currency, lang = undefined) =>
     Intl.NumberFormat(lang, { style: "currency", currency }).format(number);
@@ -597,14 +602,13 @@ export default function ChosenCourse(props) {
                             {play ? (
                               <PlayArrowIcon
                                 onClick={() =>
-                                  document.querySelector("video").play()
+                                  fullPLay()
                                 }
                               />
                             ) : (
                               <PauseSharpIcon
                                 onClick={() =>
-                                  // pauseVideoPlayer()
-                                  document.querySelector("video").pause()
+                                  pauseVideoPlayer()
                                 }
                               />
                             )}
@@ -649,6 +653,7 @@ export default function ChosenCourse(props) {
                       src={resData.trailer_file}
                       poster={resData.cover_img}
                       autoPlay={true}
+                      playerRef={playVideo}
                       onPlay={() => {
                         setPlay(false);
                         setPause(true);
@@ -667,9 +672,7 @@ export default function ChosenCourse(props) {
                             color: "#fff",
                           }}
                           onClick={() => {
-                            document.querySelector("video").play();
-                            setPlay(false);
-                            setPause(true);
+                            fullPLay()
                           }}
                           onMouseOver={() => setHover(true)}
                           onMouseLeave={() => setHover(false)}
@@ -684,9 +687,7 @@ export default function ChosenCourse(props) {
                         }}
                         onMouseOver={() => setHover(true)}
                         onClick={() => {
-                          // pauseVideoPlayer()
-                          document.querySelector("video").pause();
-                          setPlay(true);
+                          pauseVideoPlayer()
                         }}
                       >
                         <PauseIcon

@@ -30,6 +30,7 @@ import NavbarSm from "../Navbar/NavbarSm";
 import PauseIcon from "@mui/icons-material/Pause";
 import ReactDOM from "react-dom";
 import { BounceLoader } from "react-spinners";
+import PauseSharpIcon from "@mui/icons-material/PauseSharp";
 
 import {
   FacebookShareButton,
@@ -75,13 +76,10 @@ function Watching() {
 
   const [waitingSec, setWaitingSec] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [playerPause, setPlayerPause] = useState(false);
   const [courseRate, setCourseRate] = useState(0)
 
   var id = useParams();
   const playVideo = useRef();
-
-  const location = useLocation();
 
   useEffect(() => {
     setLoader(true);
@@ -224,35 +222,7 @@ function Watching() {
     }
   }, [play, lessonId, videoUrl]);
 
-  // useEffect(() => {
-  //   const mainVideo = document.querySelector("video")
-
-  //     console.log();
-  //   if(playVideo.current.currentTime > Math.floor(mainVideo.duration / 2) && lessonId) {
-  //     console.log('nima gap bolla');
-  //     console.log(lessonId);
-
-  //     const headers = {
-  //       Authorization: `Bearer ${localStorage.getItem("access")}`,
-  //     };
-  //     // try {
-  //     //   lessonId && axios
-  //     //     .post(
-  //     //       `${process.env.REACT_APP_API_KEY}/api/v2/courses/lesson-view-post/${parseInt(lessonId)}`,
-  //     //       { headers }
-  //     //     )
-  //     //     .then((res) => {
-  //     //       console.log(res.data);
-  //     //     })
-  //     //     .catch(() => {});
-  //     // } catch (error) {}
-
-  //     // setLessonId()'
-  //   }
-  // }, [playVideo.current.currentTime, lessonId])
-
-  // **** copy link course's for shared
-
+ 
   useEffect(() => {
     copied &&
       setTimeout(() => {
@@ -283,15 +253,20 @@ function Watching() {
     document.querySelector("video").play();
     setPlay(false);
     setPause(true)
-    setPlayerPause(true)
     
-    if(window.innerWidth < 1000) {
       setTimeout(() => {
-        setPlayerPause(false)
+        setPause(false)
       }, 2500)
-    }
   };
 
+
+  const playOrPause = () => {
+    if(play) {
+      fullPLay()
+    }else {
+      pauseVideoPlayer()
+    }
+  }
 
   //***  add and change course rating METHOD OF POST
 
@@ -392,14 +367,12 @@ function Watching() {
         videoDuration = document.querySelector(".video-duration"),
         skipBackward = document.querySelector(".skip-backward svg"),
         skipForward = document.querySelector(".skip-forward svg"),
-        speedBtn = document.querySelector(".playback-speed span"),
         speedOptions = document.querySelector(".speed-options"),
         fullScreenBtn = document.querySelector(".fullscreen svg"),
         volumeSlider = document.querySelector(".left input");
       let timer;
 
       mainVideo.onloadedmetadata = function () {
-        // setPlayVideoCurrent(mainVideo.currentTime)
         setPlayVideoVolume(mainVideo.volume);
         setPlayVideoDuration(mainVideo.duration);
       };
@@ -410,7 +383,9 @@ function Watching() {
           containerVideo.classList.remove("show-controls");
         }, 3000);
       };
+
       hideControls();
+
       blurvid.volume = 1;
       containerVideo.addEventListener("mousemove", () => {
         containerVideo.classList.add("show-controls");
@@ -457,7 +432,6 @@ function Watching() {
       });
 
       mainVideo.addEventListener("timeupdate", (e) => {
-        let { currentTime, duration } = e.target;
         let percent = (mainVideo.currentTime / mainVideo.duration) * 100;
         progressBar.style.width = `${percent}%`;
         currentVidTime.innerText = formatTime(
@@ -497,17 +471,6 @@ function Watching() {
         volumeSlider.value = playVideoVolume;
       });
 
-      window.addEventListener("keypress", (e) => {
-        if (e.keyCode === 32) {
-          if (document.querySelector("video").paused) {
-            document.querySelector("video").play();
-            setPlay(false);
-            setPause(true);
-          } else {
-            pauseVideoPlayer();
-          }
-        }
-      });
 
       window.addEventListener("keydown", (e) => {
         e.preventDefault()
@@ -536,9 +499,9 @@ function Watching() {
         // video play and pause start
         else if(e.keyCode === 32) {
           if(mainVideo.paused) {
-            mainVideo.play()
+            fullPLay()
           }else {
-            mainVideo.pause()
+            pauseVideoPlayer()
           }
         }
         // video play and pause end
@@ -603,10 +566,10 @@ function Watching() {
       document.addEventListener("mouseup", () =>
         videoTimeline.removeEventListener("mousemove", draggableProgressBar)
       );
+
+
     }
-  }, [
-    currentVideo,
-  ]);
+  }, [ currentVideo ]);
 
   useEffect(() => {
     if (localStorage.getItem("watchIn") == window.location.href && videoUrl) {
@@ -616,9 +579,7 @@ function Watching() {
     localStorage.setItem("watchIn", window.location.href);
   }, [videoQuality]);
 
-  const playVideoFnc = () => {
-
-  }
+ 
   return (
     <>
       <NavbarSm />
@@ -627,9 +588,6 @@ function Watching() {
       <div className={navStretch ? "courses ml-240" : "courses ml-100"}>
         <div className="watchingCourses">
           <div className="container">
-            <div className="complete d-sm-none">
-              <h1>{resData.name}</h1>
-            </div>
             <div className="rowGrid">
               <div className="col-18 col-lg-14 col-md-24 p-0 col-sm-24">
                 <div className="video video-container">
@@ -662,44 +620,18 @@ function Watching() {
                         </button>
                         <button id="play-pause">
                           {play ? (
-                            <div className="pause">
                               <PlayArrowIcon
-                                style={{
-                                  borderRadius: "50%",
-                                  background: "#006AFF",
-                                  fontSize: "20px",
-                                  width: "400px !important",
-                                  margin: "0 20px 0 0 !important",
-                                }}
                                 onClick={() => {
-                                  document.querySelector("video").play();
-                                  setPlay(false);
-                                  setPause(true);
-                                }}
-                                onMouseOver={() => setHover(true)}
-                                onMouseLeave={() => setHover(false)}
-                              />
-                            </div>
-                          ) : null}
-                          {pause ? (
-                            <div
-                              className="pause"
-                              onMouseLeave={() => setHover(false)}
-                              onMouseOver={() => setHover(true)}
-                              onClick={() => {
-                                pauseVideoPlayer();
-                              }}
-                            >
-                              <PauseIcon
-                                style={{
-                                  borderRadius: "50%",
-                                  background: "#006AFF",
-                                  fontSize: "20px",
-                                  width: "40px",
+                                  fullPLay()
                                 }}
                               />
-                            </div>
-                          ) : null}
+                          ) : (
+                            <PauseIcon
+                            onClick={() => {
+                              pauseVideoPlayer();
+                            }}
+                            />
+                          )}
                         </button>
                         <button className="skip-forward">
                           <RotateRightIcon />
@@ -909,12 +841,12 @@ function Watching() {
                           playerRef={playVideo}
                           onPlay={() => {
                             fullPLay();
-                            setPause(true);
                           }}
-                          onPause={() => {
-                            setPlay(true);
-                            setPause(false);
-                          }}
+                          onClick={() => playOrPause()}
+                          // onPause={() => {
+                          //   setPlay(true);
+                          //   setPause(false);
+                          // }}
                           // onProgress={() => {setLoader(true); console.log('progres')}}
                           onLoadStart={() => {
                             setLoader(true);
@@ -922,7 +854,6 @@ function Watching() {
                           onLoad={() => {
                             setLoader(false);
                           }}
-                          // down
                         />
                       
                       </>
@@ -937,21 +868,16 @@ function Watching() {
                       )
                     )}
 
-                    {play && hover ? (
+                    {play && (
                       <div className="pause">
                         <PlayArrowIcon
                           onClick={() => {
-                            // setPlay(false);
-                            // setPause(true);
                             fullPLay()
                           }}
-                          onMouseOver={() => setHover(true)}
-                          onMouseLeave={() => setHover(false)}
                         />
-                        {/* <p>salom</p> */}
                       </div>
-                    ) : null}
-                    {playerPause && hover ? (
+                    )}
+                    {pause && (
                       <div
                         className="pause"
                         onMouseLeave={() => setHover(false)}
@@ -969,7 +895,8 @@ function Watching() {
                           }}
                         />
                       </div>
-                    ) : null}
+
+                    )}
                   </div>
                   {/* <button
                     onClick={() => {

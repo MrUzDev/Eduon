@@ -26,14 +26,8 @@ import { useNavigate } from "react-router-dom";
 
 function Action() {
   const {
-    // isremoved,
-    // setIsRemoved,
     loggedIn,
-    // addedToCart,
-    // setAddedToCart,
-    // addedToFav,
     setAddedToFav,
-    // setNavStretch,
   } = useContext(StateContext);
 
   const [close, setClose] = useState(true);

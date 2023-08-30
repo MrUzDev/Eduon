@@ -6,9 +6,7 @@
 .css-9wz69r-MuiModal-root-MuiPopover-root .MuiPaper-root{
   margin-top: 12px !important;
 }
-.profile_container .css-19kzrtu {
-  padding: 24px 24px 24px 0px !important;
-}
+
 .profile_container {
   padding-top: 0px;
   font-weight: 500;
@@ -55,6 +53,10 @@
 
 .profile_links a:first-child {
   color: #006aff;
+}
+
+.he70 {
+  height: 70px !important;
 }
 
 .profile_links a {
@@ -208,14 +210,6 @@
     height: 51px !important;
   }
 
-  #dataMobilePickerPar #dataMobilePicker{
-    padding:0px  15px;
-  }
-
-  #dataMobilePickerPar .txtMob {
-    padding-right: 15px !important;
-  }
-
   .container_body button {
     width: 100% !important;
     font-size: 16px;
@@ -329,9 +323,6 @@
   .right_container .genderBtn {
     height: 55px !important;
     font-size: 16px;
-  }
-  .right_container #fioForm .MuiFormControl-root {
-    margin-bottom: 20px !important;
   }
 
   .right_container .comments .aboutMe {

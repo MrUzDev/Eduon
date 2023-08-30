@@ -101,19 +101,11 @@ export default function Fio() {
     errorCheck();
     console.log(phoneNumber);
     if (
-      // surNameError === false &&
-      // nameError === false &&
-      // passwordError === false &&
-      // password1Error === false &&
-      // genderError === false &&
-      // checkError === false
       surname &&
       name &&
       password &&
       check &&
       password === confirmPassword &&
-      // gender
-      // email
       password.length >= 6
     ) {
      await axios 

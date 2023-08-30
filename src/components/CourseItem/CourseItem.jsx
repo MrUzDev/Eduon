@@ -123,6 +123,13 @@ export default function CourseItem(props) {
       setpopupShow(false);
     }, 100);
   };
+
+  const popupShowTime = () => {
+    setTimeout(() => {
+      setpopupShow(true)
+    }, 100)
+  }
+
   useEffect(() => {
     alertError
       ? setTimeout(() => {
@@ -319,9 +326,6 @@ export default function CourseItem(props) {
           });
     } catch (error) { }
   };
-  useEffect(() => {
-    setNavStretch(false);
-  }, [popupShow]);
 
   
   const currency = (number, currency, lang = undefined) => 
@@ -335,13 +339,10 @@ export default function CourseItem(props) {
           className="course-item pointer"
           // HOVER UCHUN
           onMouseOver={() => {
-            setpopupShow(true);
-            // setHoverPlay(true);
+            popupShowTime()
           }}
           onMouseLeave={() => {
             leave();
-            // setHoverPlay(false);
-            // props.trailer_url && playVideo.current.load();
           }}
         >
           <div className="item-header">

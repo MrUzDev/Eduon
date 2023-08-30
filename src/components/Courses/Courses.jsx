@@ -256,7 +256,7 @@ export default function Courses() {
 
   return (
     <div className="pt-0">
-      <div className={navStretch ? "ml-240" : "ml-100"}>
+      <div className={navStretch ? "ml-240" : loggedIn && "ml-100"}>
         <div>
           <div>
             <div className="navBotMenu ">
@@ -278,7 +278,7 @@ export default function Courses() {
         </div>
       </div>
 
-      <div className={navStretch ? "courses ml-240" : "courses ml-100"}>
+      <div className={navStretch ? "courses ml-240" : loggedIn && "courses ml-100"}>
         <Action />
         <div className="container">
           {(courseData.length !== 0 || webinarCard.length !== 0) ? (
@@ -366,8 +366,6 @@ export default function Courses() {
           )}
         </div>
       </div>
-
-a
         <ToastContainer style={{ marginTop: "50px" }} limit={1}/>
     </div>
   );

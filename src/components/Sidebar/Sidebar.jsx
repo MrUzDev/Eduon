@@ -33,7 +33,7 @@ const style = {
 };
 
 export default function   Sidebar(props) {
-  const { navStretch, addedToFav, balance, loggedIn , isremoved, vaucherBlanceData} =
+  const { navStretch, setNavStretch, balance, loggedIn , isremoved, vaucherBlanceData} =
     useContext(StateContext);
   const [favCourses, setfavCourses] = useState();
   const navigate = useNavigate();
@@ -118,6 +118,14 @@ export default function   Sidebar(props) {
           });
     } catch (error) {}
   }, [isremoved]);
+
+  useEffect(() => {
+    if(navStretch === true) {
+      setTimeout(() => {
+        navStretch && setNavStretch(false)
+      }, 20000)
+    }
+  }, [navStretch])
 
   const currency = (number, currency, lang = undefined) => 
   Intl.NumberFormat(lang, {style: 'currency', currency}).format(number)

@@ -184,6 +184,11 @@ export default function LiveItems(props) {
     }, 100);
   };
   
+  const popupShowTime = () => {
+    setTimeout(() => {
+      setpopupShow(true)
+    }, 100)
+  }
   
   const sendddata = async (e) => {
     e.preventDefault();
@@ -221,7 +226,7 @@ export default function LiveItems(props) {
   className="course-item pointer"
   // HOVER UCHUN
   onMouseOver={() => {
-    setpopupShow(true);
+    popupShowTime()
   }}
   onMouseLeave={() => {
     leave();
@@ -491,16 +496,14 @@ export default function LiveItems(props) {
 </div>
 
 <div className={
-            popupSelfShow || popupShow ? "cards_popup" : "visibilityNone"
+            `${popupSelfShow || popupShow ? "cards_popup" : "visibilityNone"} `
           }
           onMouseOver={() => setpopupSelfShow(true)}
           onMouseLeave={() => setpopupSelfShow(false)}
         >
           <div className={popupSelfShow || popupShow ? "popup" : "scale0"}>
             <h1 onClick={() => navigate(`/chosenStream/${props.id}`)}>
-              {props.name && props.name.length > 25
-                ? props.name.slice(0, 25) + "..."
-                : props.name}
+              { props.name }
             </h1>
             <div className="btn_popup">
               {props.priceLine ? <button>Chegirmadagi vebinar</button> : null}

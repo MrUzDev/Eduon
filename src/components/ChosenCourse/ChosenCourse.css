@@ -729,11 +729,14 @@ footer ul li a {
 #courseAbout .video-container.fullscreen {
     max-width: 100%;
     width: 100%;
-    height: 100%;
     border-radius: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#courseAbout .video-container.fullscreen {
+    height: 100%;
 }
 
 .watchingCourses .wrapper,

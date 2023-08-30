@@ -187,17 +187,6 @@ function OverallHeader() {
   }, [chartAmout])
 
 
-  useEffect(() => {
-    // console.log(chartData);
-  }, [chartData])
-
-
-  useEffect(() => {
-    console.log(startDate);
-    console.log(endDate);
-  }, [startDate])
-
-
   const currency = (number, currency, lang = undefined) => 
   Intl.NumberFormat(lang, {style: 'currency', currency}).format(number)
   

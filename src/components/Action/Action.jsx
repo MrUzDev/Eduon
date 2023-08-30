@@ -33,21 +33,12 @@ import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
 
 function Action() {
   const {
-    // isremoved,
-    // setIsRemoved,
     loggedIn,
-    // addedToCart,
-    // setAddedToCart,
-    // addedToFav,
     setAddedToFav,
-    // setNavStretch,
   } = useContext(StateContext);
 
-  const [close, setClose] = useState(true);
   const [loginError, setLoginError] = useState(false);
   const [open, setOpen] = useState(false);
-  const [alertErrorFav, setAlertErrorFav] = useState(false);
-  const [isBought, setisBought] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [days, setDay] = useState();

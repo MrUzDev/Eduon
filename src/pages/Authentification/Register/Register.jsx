@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../Login/Login.css";
 import Button from "@mui/material/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { StateContext } from "../../../context/Context";
 import axios from "../../../Apis/api";
 import ReportIcon from "@mui/icons-material/Report";
@@ -19,6 +19,7 @@ export default function Register() {
   const [check, setcheck] = useState(false);
   const [againRes, setAgainRes] = useState(false)
   const navigate = useNavigate();
+  const location = useLocation()
 
   const {control} = useForm()
 
@@ -33,10 +34,10 @@ export default function Register() {
 
   useEffect(() => {
 
-    if(!localStorage.getItem('referalToken')) {
-      const tokenReg = window.location.href.replace('https://eduon.uz/register/', '').replace('http://localhost:3000/register/', '').replace('https://front.eduon-test.uz/register/', '');
-      localStorage.setItem('referalToken', tokenReg);
-    }
+      if(location.pathname !== '/register') {
+        localStorage.setItem('referalToken', location.pathname.replace('/register/', ''));
+        console.log(location.pathname.replace('/register/', ''));
+      }
   }, [])
   
     useEffect(() => {
@@ -68,7 +69,7 @@ export default function Register() {
           setToken(res.data.otp_generated);
           res.data.success
             ? navigate("/verify")
-            : navigate("/register"); console.log(res.data.status); setAgainRes(true)
+            : navigate("/register"); setAgainRes(true)
           localStorage.setItem("mobile", phoneNumber);
         })
         .catch((err) => {});
