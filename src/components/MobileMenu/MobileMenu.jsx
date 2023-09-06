@@ -196,7 +196,7 @@ export default function MobileMenu() {
                         Kirish
                       </button>
                     )}
-                      <button className="btn" onClick={() => {navigate('/sotuvchilarMaktabi'); setMobileMenuOpen(false)}}>Sotuvchilar maktabi</button>
+                      {/* <button className="btn" onClick={() => {navigate('/sotuvchilarMaktabi'); setMobileMenuOpen(false)}}>Sotuvchilar maktabi</button> */}
                       </div>
                     <svg
                       width="24"

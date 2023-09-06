@@ -199,7 +199,7 @@ export default function ChosenCourse(props) {
           setSpeakerId(res.data.course_owner.id);
         })
         .catch((err) => {
-          refresh(err.response.status, err.response.status.text);
+          err.response.status && refresh(err.response.status, err.response.status.text);
         });
     } catch (error) {}
   }, [id]);
@@ -219,7 +219,7 @@ export default function ChosenCourse(props) {
             setisBought(res.data.some((item) => item.course.id === resData.id));
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           });
     } catch (error) {}
   }, [resData]);
@@ -246,7 +246,7 @@ export default function ChosenCourse(props) {
             navigate("/cart");
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           }));
 
       setIsRemoved(!isremoved);
@@ -265,7 +265,7 @@ export default function ChosenCourse(props) {
         },
         headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
       }).catch((err) => {
-        refresh(err.response.status, err.response.status.text);
+        err.response.status && refresh(err.response.status, err.response.status.text);
       });
       data.data.message === "This course is already in the list!"
         ? setAlertErrorFav(true)

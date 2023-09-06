@@ -189,6 +189,7 @@
   margin-bottom: 34px;
 }
 
+.modalForRegister .wrapper,
 .Verify .wrapper {
   width: 100%;
   height: 70px;
@@ -201,6 +202,7 @@
   align-items: center;
 }
 
+.modalForRegister .wrapper input,
 .Verify .wrapper input {
   height: 100%;
   width: 100%;

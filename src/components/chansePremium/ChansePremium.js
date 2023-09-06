@@ -31,7 +31,7 @@ function ChansePremium(props) {
             setresponseData(res.data);
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           });
     } catch (error) {}
     setStatus(JSON.parse(localStorage.getItem("status")));

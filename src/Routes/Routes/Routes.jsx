@@ -72,7 +72,7 @@ export default function RoutesComp() {
           })
           .then((res) => setUser(res.data))
           .catch((err) =>
-            refresh(err.response.status, err.response.status.text)
+          err.response.status && refresh(err.response.status, err.response.status.text)
           );
     } catch (error) { }
   }, []);

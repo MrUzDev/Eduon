@@ -792,11 +792,11 @@ export default function NavbarDemo(props) {
             <div className="col-10 col-lg-14">
               <div className="rowGrid justify-end align-center">
 
-                  <div className="see-btn">
+                  {/* <div className="see-btn">
                     {!status && (
                         <p onClick={() => navigate('/sotuvchilarMaktabi')}>Sotuvchilar maktabi</p>
                       )}
-                  </div>
+                  </div> */}
 
                 {status && (
                   <button

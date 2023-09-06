@@ -103,7 +103,7 @@ export default function ChosenCourse(props) {
           setVebinarDesk(res.data.short_descr);
         })
         .catch((err) => {
-          refresh(err.response.status, err.response.status.text);
+          err.response.status && refresh(err.response.status, err.response.status.text);
         });
     } catch (error) {}
   }, [id]);
@@ -124,7 +124,7 @@ export default function ChosenCourse(props) {
             setisBought(res.data.some((item) => item.webinar.id == vebinarId));
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           });
     } catch (error) {}
   }, [vebinarId]);
@@ -151,7 +151,7 @@ export default function ChosenCourse(props) {
             navigate("/cart");
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           }));
 
       setIsRemoved(!isremoved);

@@ -68,7 +68,7 @@ function Action() {
             navigate("/cart");
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status &&  refresh(err.response.status, err.response.status.text);
           }));
 
       // setIsRemoved(!isremoved);

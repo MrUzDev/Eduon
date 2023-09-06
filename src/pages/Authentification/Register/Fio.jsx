@@ -120,8 +120,6 @@ export default function Fio() {
           referral : referal && referal
         })
         .then((res) => {
-          // navigate("/login");
-          console.log(res.data);
           password !== confirmPassword
             ? setpassword1Error(true)
             : setpassword1Error();

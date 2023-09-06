@@ -18,8 +18,9 @@ import VisibilityOffOutlinedIcon from "../../assets/icons/eye-slash.png";
 import PhoneInput from "react-phone-input-2";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
-import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from "react-html-parser";
 import { BounceLoader } from "react-spinners";
+import OTPInput from "otp-input-react";
 
 
 const style = {
@@ -46,6 +47,8 @@ export default function CourseItem(props) {
     addedToFav,
     setAddedToFav,
     setNavStretch,
+    setToken,
+    token
   } = useContext(StateContext);
 
   const [loginError, setLoginError] = useState(false);
@@ -57,7 +60,7 @@ export default function CourseItem(props) {
 
   const [number, setnumber] = useState("");
   const [password, setpassword] = useState("");
-   const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
   const [alertError, setAlertError] = useState(false);
   const [alertErrorFav, setAlertErrorFav] = useState(false);
@@ -68,28 +71,15 @@ export default function CourseItem(props) {
   const playVideo = useRef();
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState(false);
-
-
-  // const playingVideoPlayer = () => {
-  //   props.trailer_url && playVideo.current.play();
-  // };
-  // const pauseVideoPlayer = () => {
-  //   props.trailer_url && playVideo.current.pause();
-  // };
-
-  // useEffect(() => {
-  //   hoverPlay ? playingVideoPlayer() : pauseVideoPlayer();
-  // }, [hoverPlay]);
-  // useEffect(() => {
-  //   console.log(props.trailer_url);
-  // }, [props.trailer_url]);
+  const [registerModal, setRegisterModal] = useState(false);
+  const [check, setcheck] = useState(false);
+  const [registerSendSms, setRegisterSendSms] = useState(false)
+  const [OTP, setOTP] = useState("");
 
   const singleCourse = (e, id) => {
     e.preventDefault();
     navigate(`/chosenCourse/${id}`);
   };
-
- 
 
   const sendddata = async (e) => {
     e.preventDefault();
@@ -113,6 +103,63 @@ export default function CourseItem(props) {
     // saveSystems()
   };
 
+  const register = async (event) => {
+    event.preventDefault();
+
+    try {
+      check === false &&
+        (await axios
+          .post(`${process.env.REACT_APP_API_KEY}/api/v2/accounts/step-one/`, {
+            mobile: number,
+            region: "",
+            is_forgot: false,
+          })
+          .then((res) => {console.log(res.data); setRegisterSendSms(true); setToken(res.data.otp_generated)}));
+    } catch (error) {}
+  };
+
+  const smsVerify = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.
+      post(`${process.env.REACT_APP_API_KEY}/api/v1/accounts/step-two/`,
+      {
+        otp: OTP,
+        otp_token: token,
+      }).then((res) => console.log(res.data))
+    } catch (error) {
+      
+    }
+  }
+
+  const enterFio = async (e) => {
+    e.preventDefault()
+
+    try {
+      await axios
+      .post(`${process.env.REACT_APP_API_KEY}/api/v2/accounts/register`,
+      {
+        phone_number: number,
+        password: password,
+        password2: confirmPassword,
+        f_name: name,
+        l_name: surname,
+        sex: null,
+        email: email,
+        referral : referal && referal
+      })
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(() => {
+    if (number) {
+      number.length >= 12 ? setcheck(false) : setcheck(true);
+    }
+  }, [number]);
+
   const navigateToSpeaker = (e, id) => {
     e.preventDefault();
     navigate(`/speakerAbout/${id}`);
@@ -126,38 +173,38 @@ export default function CourseItem(props) {
 
   const popupShowTime = () => {
     setTimeout(() => {
-      setpopupShow(true)
-    }, 100)
-  }
+      setpopupShow(true);
+    }, 100);
+  };
 
   useEffect(() => {
     alertError
       ? setTimeout(() => {
-        setAlertError(false);
-      }, 3000)
+          setAlertError(false);
+        }, 3000)
       : setAlertError(false);
     alertErrorFav
       ? setTimeout(() => {
-        setAlertErrorFav(false);
-      }, 3000)
+          setAlertErrorFav(false);
+        }, 3000)
       : setAlertErrorFav(false);
     addedToCart
       ? setTimeout(() => {
-        setAddedToCart(false);
-      }, 3000)
+          setAddedToCart(false);
+        }, 3000)
       : setAddedToCart(false);
     addedToFav
       ? setTimeout(() => {
-        setAddedToFav(false);
-      }, 3000)
+          setAddedToFav(false);
+        }, 3000)
       : setAddedToFav(false);
   }, [alertError, alertErrorFav, addedToCart, addedToFav]);
 
   useEffect(() => {
     loginError
       ? setTimeout(() => {
-        setLoginError(false);
-      }, 4000)
+          setLoginError(false);
+        }, 4000)
       : setLoginError(false);
   }, [loginError]);
   useEffect(() => {
@@ -167,8 +214,8 @@ export default function CourseItem(props) {
   }, [props.boughtCourses]);
 
   const addToCart = async (e, id) => {
-    setLoader(true)
-    
+    loggedIn && setLoader(true);
+
     const headers = {
       Authorization: loggedIn
         ? `Bearer ${localStorage.getItem("access")}`
@@ -176,7 +223,8 @@ export default function CourseItem(props) {
     };
     !loggedIn && handleOpen();
     try {
-      loggedIn && id &&
+      loggedIn &&
+        id &&
         (await axios
           .post(
             `${process.env.REACT_APP_API_KEY}/api/v1/orders/cart`,
@@ -188,21 +236,20 @@ export default function CourseItem(props) {
           )
           .then((res) => {
             setTimeout(() => {
-              setLoader(false)
+              setLoader(false);
               res.data.message === "This course already exists"
                 ? setAlertError(true)
                 : setAddedToCart(true);
-            }, 600)
+            }, 600);
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status &&
+              refresh(err.response.status, err.response.status.text);
           }));
 
       setIsRemoved(!isremoved);
-   
-    } catch (error) { }
+    } catch (error) {}
   };
-
 
   const addToCart2 = async (e, id) => {
     const headers = {
@@ -228,13 +275,13 @@ export default function CourseItem(props) {
               : setAddedToCart(true);
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status &&
+              refresh(err.response.status, err.response.status.text);
           }));
 
       setIsRemoved(!isremoved);
-      loggedIn && navigate('/buy')
-    } catch (error) { }
-
+      loggedIn && navigate("/buy");
+    } catch (error) {}
   };
 
   const addToFav = async (e, id) => {
@@ -261,10 +308,10 @@ export default function CourseItem(props) {
               setAlertErrorFav(true);
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status &&
+              refresh(err.response.status, err.response.status.text);
           }));
-    } catch (error) { }
-
+    } catch (error) {}
   };
 
   const navigateToWatch = (e, id) => {
@@ -275,14 +322,21 @@ export default function CourseItem(props) {
   const DeleteFromCart = (e, id) => {
     id && setLoader(true);
     e.preventDefault();
-    
-    if(id) {
-      let delId = props.cartData.items.filter((item) => item.course.id === id)[0].id;
-      console.log(delId, delId == '', delId == ' ');
-      console.log(props.cartData.items.filter((item) => console.log(id, item.course.id, item.course.id == id)));
+
+    if (id) {
+      let delId = props.cartData.items.filter(
+        (item) => item.course.id === id
+      )[0].id;
+      console.log(delId, delId == "", delId == " ");
+      console.log(
+        props.cartData.items.filter((item) =>
+          console.log(id, item.course.id, item.course.id == id)
+        )
+      );
 
       try {
-        loggedIn && delId !== undefined &&
+        loggedIn &&
+          delId !== undefined &&
           axios
             .delete(
               `${process.env.REACT_APP_API_KEY}/api/v1/orders/cart-remove/${delId}`,
@@ -294,14 +348,14 @@ export default function CourseItem(props) {
             )
             .then((res) => {
               setAddedToCart(true);
-                delId = 0
-                setAddedToCart(false);
-                setLoader(false)
+              delId = 0;
+              setAddedToCart(false);
+              setLoader(false);
               setIsRemoved(!isremoved);
             });
-      } catch (error) { }
-    }else {
-      console.log('id yoq');
+      } catch (error) {}
+    } else {
+      console.log("id yoq");
     }
   };
   const DeleteFromFav = (e, id) => {
@@ -324,13 +378,11 @@ export default function CourseItem(props) {
               setAddedToCart(false);
             }, 10);
           });
-    } catch (error) { }
+    } catch (error) {}
   };
 
-  
-  const currency = (number, currency, lang = undefined) => 
-  Intl.NumberFormat(lang, {style: 'currency', currency}).format(number)
-
+  const currency = (number, currency, lang = undefined) =>
+    Intl.NumberFormat(lang, { style: "currency", currency }).format(number);
 
   return (
     <div className="wrapper">
@@ -339,7 +391,7 @@ export default function CourseItem(props) {
           className="course-item pointer"
           // HOVER UCHUN
           onMouseOver={() => {
-            popupShowTime()
+            popupShowTime();
           }}
           onMouseLeave={() => {
             leave();
@@ -354,8 +406,8 @@ export default function CourseItem(props) {
                     ? props.coverImg
                     : CourseImage
                   : props.coverImg
-                    ? `${process.env.REACT_APP_API_KEY}${props.coverImg}`
-                    : CourseImage
+                  ? `${process.env.REACT_APP_API_KEY}${props.coverImg}`
+                  : CourseImage
               }
               alt="....."
               onClick={(e) => singleCourse(e, props.id)}
@@ -533,7 +585,7 @@ export default function CourseItem(props) {
               </svg>
             )} */}
 
-{isBought ? (
+            {isBought ? (
               <div
                 onClick={() => navigate(`/watch/${props.id}`)}
                 className="course-start"
@@ -815,21 +867,37 @@ export default function CourseItem(props) {
                   <div className="price mr-20">
                     {props.priceLine ? (
                       <>
-                        <span className="t-gray line-through"> UZS&nbsp;	
-                        {currency(props.price, 'UZS').replace(/,/g, '.').replace("UZS", "")
-                        .replace("soʻm", "").slice(0, -3)} 
+                        <span className="t-gray line-through">
+                          {" "}
+                          UZS&nbsp;
+                          {currency(props.price, "UZS")
+                            .replace(/,/g, ".")
+                            .replace("UZS", "")
+                            .replace("soʻm", "")
+                            .slice(0, -3)}
                         </span>
-                        <p style={{ color: "#f00", fontWeight: '700' }}> UZS&nbsp;	
-                        {currency(((props.price) - parseInt(props.priceLine)), 'UZS').replace(/,/g, '.').replace("UZS", "")
-                        .replace("soʻm", "").slice(0, -3)}
-
+                        <p style={{ color: "#f00", fontWeight: "700" }}>
+                          {" "}
+                          UZS&nbsp;
+                          {currency(
+                            props.price - parseInt(props.priceLine),
+                            "UZS"
+                          )
+                            .replace(/,/g, ".")
+                            .replace("UZS", "")
+                            .replace("soʻm", "")
+                            .slice(0, -3)}
                           <span className="gray ml-5"></span>
                         </p>
                       </>
                     ) : (
-                      <p>UZS&nbsp;	
-                        {currency(props.price, 'UZS').replace(/,/g, '.').replace("UZS", "")
-                        .replace("soʻm", "").slice(0, -3)}
+                      <p>
+                        UZS&nbsp;
+                        {currency(props.price, "UZS")
+                          .replace(/,/g, ".")
+                          .replace("UZS", "")
+                          .replace("soʻm", "")
+                          .slice(0, -3)}
                         <span className="gray ml-5"></span>
                       </p>
                     )}
@@ -847,14 +915,17 @@ export default function CourseItem(props) {
                 </div>
               )}
             </div>
-          {props.price === 0 || isBought ? (
-            null
-                        
-                      ) : (
-                       <div className="course-start">
-                         <button onClick={(e) => {addToCart2(e, props.id);}}>Xarid qilish</button>
-                       </div>
-                      )}
+            {props.price === 0 || isBought ? null : (
+              <div className="course-start">
+                <button
+                  onClick={(e) => {
+                    addToCart2(e, props.id);
+                  }}
+                >
+                  Xarid qilish
+                </button>
+              </div>
+            )}
 
             {/* {isBought ? (
               <div
@@ -1068,8 +1139,6 @@ export default function CourseItem(props) {
                 )}
               </div>
             )} */}
-
-            
           </div>
         </div>
         <div
@@ -1081,14 +1150,14 @@ export default function CourseItem(props) {
         >
           <div className={popupSelfShow || popupShow ? "popup" : "scale0"}>
             <h1 onClick={() => navigate(`/chosenCourse/${props.id}`)}>
-              {props.title.length > 25
-                ? props.title
-                : props.title}
+              {props.title.length > 25 ? props.title : props.title}
             </h1>
             <div className="btn_popup">
-              {props.priceLine ? <button className="mr-10">Chegirmadagi kurs</button> : null}
+              {props.priceLine ? (
+                <button className="mr-10">Chegirmadagi kurs</button>
+              ) : null}
               <p>
-                 Yangilangan:{" "}
+                Yangilangan:{" "}
                 <span>{moment().locale("uz-latn").format("MMMM YYYY")}</span>
               </p>
             </div>
@@ -1098,8 +1167,8 @@ export default function CourseItem(props) {
               {/* {console.log((props.about))} */}
               {/* {console.log(props.about)} */}
               {props.about && ReactHtmlParser(props.about)[0].length >= 250
-                ? (ReactHtmlParser(props.about)[0]).slice(0, 250) + "..."
-                : (ReactHtmlParser(props.about)[0])}
+                ? ReactHtmlParser(props.about)[0].slice(0, 250) + "..."
+                : ReactHtmlParser(props.about)[0]}
             </p>
             <div className="add_cart">
               {props.price === 0 || isBought ? (
@@ -1107,14 +1176,18 @@ export default function CourseItem(props) {
                   Kursni davom ettirish
                 </button>
               ) : (
-                <button style={{width: '100%', marginRight: '20px'}} onClick={(e) => {addToCart2(e, props.id)}}>
+                <button
+                  style={{ width: "100%", marginRight: "20px" }}
+                  onClick={(e) => {
+                    addToCart2(e, props.id);
+                  }}
+                >
                   Xarid qilish
                 </button>
               )}
-                {isBought || props.price == 0 ? (
-                  null
-                ): props.isAddedToCart || artificialAddedToCart ? (
-                  <div
+              {isBought || props.price == 0 ? null : props.isAddedToCart ||
+                artificialAddedToCart ? (
+                <div
                   onClick={(e) => {
                     props.price
                       ? DeleteFromCart(e, props.id)
@@ -1204,73 +1277,73 @@ export default function CourseItem(props) {
                     </svg>
                   )}
                 </div>
-                  ) : (
-                    <>
+              ) : (
+                <>
                   <svg
-                 onClick={(e) => {
-                  props.price
-                    ? addToCart(e, props.id)
-                    : navigateToWatch(e, props.id);
-                  loggedIn && setArtificialAddedToCart(true);
-                }}
-                width="30"
-                height="30"
-                viewBox="0 0 24 24"
-                // fill="none"
-                className="modalAddCart"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="#fff"
-                >
-                <path
-                  d="M2 2H3.74001C4.82001 2 5.67 2.93 5.58 4L4.75 13.96C4.61 15.59 5.89999 16.99 7.53999 16.99H18.19C19.63 16.99 20.89 15.81 21 14.38L21.54 6.88C21.66 5.22 20.4 3.87 18.73 3.87H5.82001"
-                  stroke="#1c1c1c"
-                  strokeWidth="1.5"
-                  strokeMiterlimit="10"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M16.25 22C16.9404 22 17.5 21.4404 17.5 20.75C17.5 20.0596 16.9404 19.5 16.25 19.5C15.5596 19.5 15 20.0596 15 20.75C15 21.4404 15.5596 22 16.25 22Z"
-                  stroke="#1c1c1c"
-                  strokeWidth="1.5"
-                  strokeMiterlimit="10"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M8.25 22C8.94036 22 9.5 21.4404 9.5 20.75C9.5 20.0596 8.94036 19.5 8.25 19.5C7.55964 19.5 7 20.0596 7 20.75C7 21.4404 7.55964 22 8.25 22Z"
-                  stroke="#1c1c1c"
-                  strokeWidth="1.5"
-                  strokeMiterlimit="10"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M9 8H21"
-                  stroke="#1c1c1c"
-                  strokeWidth="1.5"
-                  strokeMiterlimit="10"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                </svg>
-                    </>
-                )}
+                    onClick={(e) => {
+                      props.price
+                        ? addToCart(e, props.id)
+                        : navigateToWatch(e, props.id);
+                      loggedIn && setArtificialAddedToCart(true);
+                    }}
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    // fill="none"
+                    className="modalAddCart"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#fff"
+                  >
+                    <path
+                      d="M2 2H3.74001C4.82001 2 5.67 2.93 5.58 4L4.75 13.96C4.61 15.59 5.89999 16.99 7.53999 16.99H18.19C19.63 16.99 20.89 15.81 21 14.38L21.54 6.88C21.66 5.22 20.4 3.87 18.73 3.87H5.82001"
+                      stroke="#1c1c1c"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M16.25 22C16.9404 22 17.5 21.4404 17.5 20.75C17.5 20.0596 16.9404 19.5 16.25 19.5C15.5596 19.5 15 20.0596 15 20.75C15 21.4404 15.5596 22 16.25 22Z"
+                      stroke="#1c1c1c"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M8.25 22C8.94036 22 9.5 21.4404 9.5 20.75C9.5 20.0596 8.94036 19.5 8.25 19.5C7.55964 19.5 7 20.0596 7 20.75C7 21.4404 7.55964 22 8.25 22Z"
+                      stroke="#1c1c1c"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M9 8H21"
+                      stroke="#1c1c1c"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </>
+              )}
             </div>
           </div>
         </div>
-          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <div className="modalForLogin">
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <div className="modalForLogin">
             <Fade in={open}>
               <Box sx={style} className="container">
                 <div className="modalLogin">
@@ -1342,16 +1415,21 @@ export default function CourseItem(props) {
                         raqami yoki parol xato kiritilgan{" "}
                       </p>
                     ) : null}
-                    <p className="sign-up">
-                      Akkauntingiz yo'qmi? Unda{" "}
-                      <Link to="/register">
+                    <p className="sign-up flex">
+                      Akkauntingiz yo'qmi? Unda &nbsp;
+                      <p style={{color: '#006aff'}}
+                        onClick={() => {
+                          setOpen(false);
+                          setRegisterModal(true);
+                        }}
+                      >
                         <span> Ro'yxatdan o'ting</span>
-                      </Link>
+                      </p>
                     </p>
                     <Button
                       onClick={(e) => {
                         sendddata(e);
-                       }}
+                      }}
                       sx={{
                         width: "100%",
                         height: "70px",
@@ -1374,53 +1452,112 @@ export default function CourseItem(props) {
                 </div>
               </Box>
             </Fade>
-        </div>
-          </Modal>
-        {/* <Alert
-          className={alertError ? "alert animation" : "alert"}
-          severity="error"
+          </div>
+        </Modal>
+
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={registerModal}
+          onClose={() => setRegisterModal(false)}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
         >
-          <strong>Bu kurs savatchaga qo'shilgan!</strong>
-        </Alert>
-        <Alert
-          className={addedToCart ? "alert animation" : "alert"}
-          severity="success"
-        >
-          <strong>Kurs savatchaga qo'shildi!</strong>
-        </Alert>
-        <Alert
-          className={addedToFav ? "alert animation" : "alert"}
-          severity="success"
-        >
-          <strong>Kurs sevimlilarga qo'shildi!</strong>
-        </Alert>
-        <Alert
-          className={alertErrorFav ? "alert animation" : "alert"}
-          severity="error"
-        >
-          <strong>Bu kurs sevimlilarga qo'shilgan!</strong>
-        </Alert>
-        <Alert
-          className={loginError ? "alert animation" : "alert"}
-          severity="error"
-        >
-          <strong>
-            Iltimos ushbu amaliyotni bajarish uchun tizimga kiring!
-          </strong>
-          <br />
-        </Alert> */}
+          
+          <div className="modalForLogin modalForRegister">
+            <Fade in={registerModal}>
+              <Box sx={style} className="container">
+                <div className="modalLogin">
+                  <h2 style={{ textAlign: "center", margin: "20px" }}>
+                    Ro'yhatdan o'tish
+                  </h2>
+                  <form onSubmit={(e) => !registerSendSms ? register(e) : smsVerify(e)}>
+
+                    {!registerSendSms ? (
+                    <div className="phoneInputBox">
+                      <PhoneInput
+                        country={"uz"}
+                        value={
+                          localStorage.getItem("storageMobile")
+                            ? localStorage.getItem("storageMobile")
+                            : number
+                        }
+                        onChange={(phone) => setnumber(phone)}
+                        id="phone"
+                      />
+                    </div>
+
+                    ) : (
+                      <div className="wrapper">
+                        <OTPInput
+                        value={OTP}
+                        onChange={setOTP}
+                        autoFocus
+                        OTPLength={5}
+                        otpType="number"
+                        disabled={false}
+                        type="number"
+                      />
+                      </div>
+                    )}
+
+                    {check && (
+                      <p className="error-messageee">
+                        <ReportIcon style={{ marginRight: "10px" }} />
+                        Telefon raqami notog'ri kiritilgan
+                      </p>
+                    )}
+                   
+                    <p className="sign-up flex">
+                      Akkountingiz bormi? Unda Akkauntingizga &nbsp;
+                      <p
+                        onClick={() => {
+                          setRegisterModal(false);
+                          setOpen(true);
+                        }}
+                      >
+                        <span style={{color: '#006aff'}}> kiring </span>
+                      </p>
+                    </p>
+
+                    <Button
+                      sx={{
+                        width: "100%",
+                        height: "70px",
+                        borderRadius: "15px",
+                        backgroundColor: "#80B5FF;",
+                        fontFamily: "sans-serif",
+                        fontStyle: "normal",
+                        fontWeight: "600",
+                        fontSize: "24px",
+                        lineHeight: "29px",
+                        textTransform: "none",
+                        marginBottom: "44px",
+                      }}
+                      variant="contained"
+                      className="btn"
+                      type="submit"
+                    >
+                      Davom etish
+                    </Button>
+                  </form>
+
+                  <form onSubmit={(e) => enterFio(e)}></form>
+                </div>
+              </Box>
+            </Fade>
+          </div>
+        </Modal>
       </div>
 
-                     { loader && (
-                        <div className="loader">
-                          <BounceLoader
-                            color="#006AFF"
-                            speedMultiplier={1.2}
-                          />
-                        </div>
-                      )}
-
-      {/* <!-- ------------------------------------- --> */}
+      {loader && (
+        <div className="loader">
+          <BounceLoader color="#006AFF" speedMultiplier={1.2} />
+        </div>
+      )}
     </div>
   );
 }

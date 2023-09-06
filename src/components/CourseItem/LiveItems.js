@@ -93,7 +93,7 @@ export default function LiveItems(props) {
               : setAddedToCart(true);
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           }));
 
       setIsRemoved(!isremoved);
@@ -147,7 +147,7 @@ export default function LiveItems(props) {
               : setAddedToCart(true);
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           }));
 
       setIsRemoved(!isremoved);
@@ -173,7 +173,7 @@ export default function LiveItems(props) {
             setisBought(res.data.some((item) => item.webinar.id == props.id));
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           });
     } catch (error) {}
   }, []);

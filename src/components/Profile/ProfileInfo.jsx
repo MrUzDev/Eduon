@@ -56,9 +56,7 @@ export default function ProfileInfo() {
     };
     try {
       const formData = new FormData();
-      console.log("adwdawdadw2");
       images.img && formData.append("profile_picture", images.img);
-      console.log("adwdawdadw3");
       name && formData.append("f_name", name);
       surname && formData.append("l_name", surname);
       email && formData.append("email", email);
@@ -80,7 +78,6 @@ export default function ProfileInfo() {
       formData.append("courses_licenses", courseLicense);
       formData.append("current_country", district);
       formData.append("current_address", currentAddress);
-      console.log("adwdawdadw4");
       // birthday && formData.append(
       // "date_birth",
       // moment(birthday._d).format("YYYY-MM-DDThh:mm")
@@ -139,7 +136,6 @@ export default function ProfileInfo() {
             setCurrentAddress(res.data.current_address);
             setDistrict(res.data.current_country);
             setIsGmail(res.data.is_gmail)
-            // console.log(res.data.languages);
           });
     } catch (error) {}
   }, []);
@@ -291,7 +287,6 @@ export default function ProfileInfo() {
                   variant="outlined"
                   value={mobile}
                 />
-                {console.log(isGmail)}
                 {!isGmail && (
                   <TextField
                     className="inputs mt-30"

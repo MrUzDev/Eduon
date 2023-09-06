@@ -112,7 +112,7 @@ function Watching() {
           setResData(res.data);
         })
         .catch((err) => {
-          refresh(err.response.status, err.response.status.text);
+          err.response.status && refresh(err.response.status, err.response.status.text);
         });
     } catch (error) {}
   }, [id]);

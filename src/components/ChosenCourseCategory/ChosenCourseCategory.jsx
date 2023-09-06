@@ -34,7 +34,7 @@ export default function ChosenCourseCategory() {
           setSubcategoryName(res.data.name);
         })
         .catch((err) => {
-          refresh(err.response.status, err.response.status.text);
+          err.response.status && refresh(err.response.status, err.response.status.text);
         });
     } catch (error) { }
   }, [id]);
@@ -65,7 +65,7 @@ export default function ChosenCourseCategory() {
           setCategories(res.data);
         })
         .catch((err) => {
-          refresh(err.response.status, err.response.status.text);
+          err.response.status && refresh(err.response.status, err.response.status.text);
         });
     } catch (error) { }
     document.body.scrollTop = 0;

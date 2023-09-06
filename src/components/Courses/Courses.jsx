@@ -73,7 +73,7 @@ export default function Courses() {
             setCartItems(res.data.items.map((item) => item.course.id));
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           });
     } catch (error) {}
   }, [addedToCart, isremoved]);
@@ -106,7 +106,7 @@ export default function Courses() {
           setCourseData(res.data);
         })
         .catch((err) => {
-          refresh(err.response.status, err.response.status.text);
+          err.response.status && refresh(err.response.status, err.response.status.text);
         });
     } catch (error) {}
     try {
@@ -170,7 +170,7 @@ export default function Courses() {
             setStCartItem(res.data.items.map((item) => item.webinar.id));
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           });
     } catch (error) {}
   }, [addedToCart, isremoved]);
@@ -181,7 +181,7 @@ export default function Courses() {
         .get(`${process.env.REACT_APP_API_KEY}/api/v2/stream/webinar-list/`, {})
         .then((res) => setWebinarCart(res.data))
         .catch((err) => {
-          refresh(err.response.status, err.response.status.text);
+          err.response.status && refresh(err.response.status, err.response.status.text);
         });
     } catch (error) {}
   }, []);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { gapi } from "gapi-script";
 
 export const refresh = (code, statusText) => {
   try {
@@ -17,6 +18,11 @@ export const refresh = (code, statusText) => {
           console.log(err);
           localStorage.removeItem("access");
           localStorage.removeItem("refresh");
+
+          var auth2 = gapi.auth2.getAuthInstance();
+          auth2.signOut().then(function() {
+            window.location.reload();
+          });
         });
     }
   } catch (error) {}

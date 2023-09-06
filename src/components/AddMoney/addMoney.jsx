@@ -106,7 +106,7 @@ export default function AddMoney(props) {
             // console.log(res);
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
             // console.log(err);
           });
         setAmount("");
@@ -147,7 +147,7 @@ export default function AddMoney(props) {
         })
         .catch((err) => {
           // console.log(err);
-          refresh(err.response.status, err.response.status.text);
+          err.response.status && refresh(err.response.status, err.response.status.text);
         });
 
       setAmount("");
@@ -281,7 +281,7 @@ export default function AddMoney(props) {
           res.data && res.data.length !== 0 && setISpeaker(true);
         })
         .catch((err) => {
-          refresh(err.response.status, err.response.status.text);
+          err.response.status && refresh(err.response.status, err.response.status.text);
         });
     } catch (error) {}
   }, []);

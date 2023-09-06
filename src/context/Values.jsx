@@ -50,7 +50,7 @@ export default function Values() {
           })
           .catch((err) => {
             console.log(err);
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           });
     } catch (error) {}
   }, [balanceToggle]);
@@ -71,7 +71,7 @@ export default function Values() {
             setBoughtCourses(res.data);
           })
           .catch((err) => {
-            refresh(err.response.status, err.response.status.text);
+            err.response.status && refresh(err.response.status, err.response.status.text);
           });
     } catch (error) {}
   }, []);
