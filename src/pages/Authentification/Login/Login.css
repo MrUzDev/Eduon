@@ -31,12 +31,14 @@
   min-width: 20px !important;
 }
 
+.modalForRegister .passwordFio,
 .Login .container-setNewPass .passwordFio {
   width: 100% !important;
   position: relative;
 }
 
-.Login .container-setNewPass 
+.modalForRegister .passwordFio,
+.Login .container-setNewPass,
 .Login .container .passwordFio {
   width: 50%;
   position: relative;
@@ -55,7 +57,8 @@
   /* width: 19.57px;
   height: 16.55px; */
   position: absolute;
-  top: 21px;
+  top: 50%;
+  transform: translateY(-50%);
   right: 25px;
   color: gray;
   cursor: pointer;
@@ -63,11 +66,13 @@
   /* background-color: white; */
 }
 
+.modalForRegister .passwordFio .eye,
 .Login .container .passwordFio .eye {
   /* width: 19.57px;
   height: 16.55px; */
   position: absolute;
-  top: 21px;
+  top: 50%;
+  transform: translateY(-50%);
   right: 25px;
   background-color: white;
   color: gray;
@@ -395,6 +400,7 @@
     font-size: 16px !important;
   }
 
+  .modalForRegister .passwordFio .eye,
   .Login .container .password .eye,
   .Login .container .passwordFio .eye {
     top: 20px;
@@ -440,6 +446,7 @@
   .fio .mb-0 {
     margin-bottom: 0 !important;
   }
+  .modalForRegister .passwordFio,
   .Login .container .passwordFio {
     margin-bottom: 0;
   }
@@ -467,6 +474,7 @@
     font-size: 12px;
     text-align:left ;
   }
+  .modalForRegister .passwordFio,
   .Login .container-setNewPass .passwordFio{
     margin-bottom: 20px !important;
   }

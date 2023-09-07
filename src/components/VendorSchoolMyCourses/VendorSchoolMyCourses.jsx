@@ -19,6 +19,7 @@ import Modal from "react-modal";
 import axios from "../../Apis/api";
 import ReactHtmlParser from 'react-html-parser';
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 
 function TabPanel(props) {
@@ -80,6 +81,15 @@ export default function VendorSchoolMyCourses() {
     } catch (error) {}
   }, []);
 
+  // useEffect(() => {
+  //   try {
+  //     axios.get(
+  //       `${process.env.REACT_APP_API_KEY}/api/v2/courses/module/${props.id.id}`
+  //     )
+  //   } catch (error) {
+  //   }
+  // } , [])
+
   const customStyles = {
     content: {
       top: "50%",
@@ -107,10 +117,6 @@ export default function VendorSchoolMyCourses() {
       width: "400px",
     },
   };
-
-  useEffect(() => {
-    console.log(smData);
-  }, [smData])
 
   return (
     <div>
@@ -151,6 +157,7 @@ export default function VendorSchoolMyCourses() {
             <div className="rowGrid">
               {smData.map((item) => 
               <div className="col-24 mb-24">
+                {console.log(item)}
                 <div className="vs-my-courses-box flex">
                   <div>
                     <img className="pointer" onClick={() => navigate(`/watch/${item.id}`)} src={`${process.env.REACT_APP_API_KEY}${item.cover_img}`} alt="" />
@@ -165,7 +172,7 @@ export default function VendorSchoolMyCourses() {
                         </p>
                         <h5>{item.name}</h5>
                         <p className="vs-tutorial-time">
-                          Qolgan dars soatlari <span>4 : 53 : 21</span>
+                          Kursni uzunligi <span> {moment.unix(item.course_duration && item.course_duration).utc().format('H [hours,] m [minutes and] s [seconds]')} </span>
                         </p>
                       </div>
                       <div className="flex vs-course-prog">

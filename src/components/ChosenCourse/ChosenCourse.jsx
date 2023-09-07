@@ -58,6 +58,7 @@ import {
   WhatsappIcon,
   TwitterIcon,
 } from "react-share";
+import RegisterAndLoginModal from "../RegisterAndLoginModal/RegisterAndLoginModal";
 
 const style = {
   position: "absolute",
@@ -80,6 +81,7 @@ export default function ChosenCourse(props) {
     loggedIn,
     addedToCart,
     setAddedToCart,
+    setLoginModal
   } = useContext(StateContext);
   var id = useParams();
   var token = useParams();
@@ -94,7 +96,7 @@ export default function ChosenCourse(props) {
   const [sameCourses, setSameCourses] = useState([]);
   const [open, setOpen] = useState(false);
   const [isBought, setisBought] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => setLoginModal(true);
   const [copied, setCopied] = useState(false);
   const [share, setShare] = useState(false);
   const [referalToken, setReferalToken] = useState("");
@@ -1776,124 +1778,9 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
             </div>
           </div>
         </section>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <div className="modalForLogin">
-            <Fade in={open}>
-              <Box sx={style} className="container">
-                <div className="modalLogin">
-                  <h2 style={{ textAlign: "center", margin: "20px" }}>
-                    Profilga kirish
-                  </h2>
-                  <form onSubmit={sendddata}>
-                    <div className="phoneInputBox">
-                      <PhoneInput
-                        country={"uz"}
-                        // value={storageLogDetails?storageLogDetails: number}
-                        value={
-                          localStorage.getItem("storageMobile")
-                            ? localStorage.getItem("storageMobile")
-                            : number
-                        }
-                        onChange={(phone) => setnumber(phone)}
-                        id="phone"
-                      />
-                    </div>
-                    <div className="password">
-                      <TextField
-                        className="inputs"
-                        sx={{
-                          width: "100%",
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderRadius: "15px",
-                            height: "70px",
-                            border: "2px solid #D9D9D9",
-                          },
-                          "& .MuiOutlinedInput-input": {
-                            height: "70px",
-                            padding: "0 0 0 25px",
-                            marginTop: "-2px",
-                          },
-                          "& .MuiInputLabel-root": {
-                            top: "4px",
-                          },
-                          "& .MuiInputLabel-shrink": {
-                            top: "0",
-                            left: "2px",
-                          },
-                        }}
-                        value={password}
-                        type={!show ? "password" : "text"}
-                        label="Parolingizni kiriting"
-                        variant="outlined"
-                        onChange={(e) => setpassword(e.target.value)}
-                      />
-                      {!show ? (
-                        <img
-                          src={VisibilityOutlinedIcon}
-                          onClick={() => setShow(!show)}
-                          className="eye"
-                          alt="..."
-                        />
-                      ) : (
-                        <img
-                          src={VisibilityOffOutlinedIcon}
-                          onClick={() => setShow(!show)}
-                          className="eye eyeSlash"
-                          alt="..."
-                        />
-                      )}
-                    </div>
-                    {error ? (
-                      <p className="error-messageee">
-                        <ReportIcon style={{ marginRight: "10px" }} /> Telefon
-                        raqami yoki parol xato kiritilgan{" "}
-                      </p>
-                    ) : null}
-                    <p className="sign-up">
-                      Akkauntingiz yo'qmi? Unda{" "}
-                      <Link to="/register">
-                        <span> Ro'yxatdan o'ting</span>
-                      </Link>
-                    </p>
-                    <Button
-                      onClick={(e) => {
-                        sendddata(e);
-                        saveSystems();
-                      }}
-                      sx={{
-                        width: "100%",
-                        height: "70px",
-                        borderRadius: "15px",
-                        backgroundColor: "#80B5FF;",
-                        fontFamily: "sans-serif",
-                        fontStyle: "normal",
-                        fontWeight: "600",
-                        fontSize: "24px",
-                        lineHeight: "29px",
-                        textTransform: "none",
-                        marginBottom: "44px",
-                      }}
-                      variant="contained"
-                      className="btn"
-                    >
-                      Tizimga kirish
-                    </Button>
-                  </form>
-                </div>
-              </Box>
-            </Fade>
-          </div>
-        </Modal>
+     
+        <RegisterAndLoginModal/>
+
         <Alert
           className={alertError ? "alert animation" : "alert"}
           severity="error"

@@ -30,6 +30,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { EditorState } from "draft-js";
 import ReactHtmlParser from "react-html-parser";
 import { BounceLoader } from "react-spinners";
+import RegisterAndLoginModal from "../RegisterAndLoginModal/RegisterAndLoginModal";
 
 const style = {
   position: "absolute",
@@ -45,7 +46,7 @@ const style = {
 };
 
 export default function ChosenCourse(props) {
-  const { navStretch, isremoved, setIsRemoved, loggedIn } =
+  const { navStretch, isremoved, setIsRemoved, loggedIn, setLoginModal } =
     useContext(StateContext);
   var id = useParams();
   const [alertError, setAlertError] = useState(false);
@@ -57,7 +58,7 @@ export default function ChosenCourse(props) {
   const [sameCourses, setSameCourses] = useState([]);
   const [open, setOpen] = useState(false);
   const [isBought, setisBought] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => setLoginModal(true);
   const [vebinarDesk, setVebinarDesk] = useState(EditorState.createEmpty());
   const handleClose = () => setOpen(false);
   const [loaderr, setLoaderr] = useState(false);
@@ -853,45 +854,9 @@ export default function ChosenCourse(props) {
             </div>
           </div>
         </section>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={open}>
-            <Box sx={style} className="container">
-              <div className="rowGrid">
-                <p style={{ color: "#1c1c1c" }} className="col-24">
-                  Akkauntingiz yo'qmi? Unda
-                </p>
-                <div className="col-24">
-                  <Button
-                    sx={{
-                      width: "100%",
-                      marginTop: "20px",
-                      backgroundColor: "#80B5FF",
-                      borderRadius: "15px",
-                      height: "59px",
-                      color: "white",
-                      fontSize: "20px",
-                      fontWeight: "500",
-                    }}
-                    className="btn"
-                    onClick={() => navigate("/register")}
-                  >
-                    Ro'yxatdan o'ting
-                  </Button>
-                </div>
-              </div>
-            </Box>
-          </Fade>
-        </Modal>
+        
+          <RegisterAndLoginModal/>
+
         <Alert
           className={alertError ? "alert animation" : "alert"}
           severity="error"

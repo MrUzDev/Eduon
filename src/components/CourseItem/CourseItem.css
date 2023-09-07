@@ -208,6 +208,10 @@
     display: flex;
 }
 
+.mb10 {
+    margin-bottom: 10px;
+}
+
 .course-item .item-footer .course-start {
     /* width: 60px; */
     /* height: 44px; */
@@ -666,11 +670,19 @@
     }
 
     .modalForLogin .modalLogin {
-        max-width: 80%;
+        max-width: 95%;
     }
 }
 
 @media (max-width: 576px) {
+
+    .modalForLogin .sign-up {
+        display: block;
+    }
+
+    .modalForLogin .css-pgfwo1 {
+        width: 95% !important;
+    }
     .course-item {
         /* margin-bottom: 0 !important; */
         padding: inherit 0 0 0 !important;

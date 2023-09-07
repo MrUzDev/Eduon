@@ -16,6 +16,7 @@ import LiveItems from "../CourseItem/LiveItems";
 // import alanBtn from '@alan-ai/alan-sdk-web';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RegisterAndLoginModal from "../RegisterAndLoginModal/RegisterAndLoginModal";
 
 export default function Courses() {
   const {
@@ -255,6 +256,8 @@ export default function Courses() {
 
 
   return (
+    <>
+
     <div className="pt-0">
       <div className={navStretch ? "ml-240" : loggedIn && "ml-100"}>
         <div>
@@ -268,7 +271,7 @@ export default function Courses() {
                       activeCategory === item.name ? "activeCategory" : ""
                     }
                     onClick={() => navigateToCourses(item.id, item.name)}
-                  >
+                    >
                     {item.name}
                   </li>
                 ))}
@@ -278,7 +281,9 @@ export default function Courses() {
         </div>
       </div>
 
+                    
       <div className={navStretch ? "courses ml-240" : loggedIn && "courses ml-100"}>
+        <RegisterAndLoginModal/>
         <Action />
         <div className="container">
           {(courseData.length !== 0 || webinarCard.length !== 0) ? (
@@ -368,5 +373,6 @@ export default function Courses() {
       </div>
         <ToastContainer style={{ marginTop: "50px" }} limit={1}/>
     </div>
+    </>
   );
 }
