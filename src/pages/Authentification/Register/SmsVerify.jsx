@@ -25,7 +25,7 @@ export default function SmsVerify() {
   const navigate = useNavigate();
 
   const otpError = () => toast.error("Tasdiqlash kodi noto'g'ri kiritildi!");
-  const refreshSmsAlert = () => toast.info("Kod yuborilishi mumkin bo'lgan vaqt tugaganidan so'ng qayta urinib ko'ring");
+  const refreshSmsAlert = () => t.info("Kod yuborilishi mumkin bo'lgan vaqt tugaganidan so'ng qayta urinib ko'ring");
   const refreshSmsSuccess = () => toast.success("Kod qayta yuborildi!");
 
   useEffect(() => {

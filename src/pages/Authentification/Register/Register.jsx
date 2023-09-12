@@ -83,7 +83,7 @@ export default function Register() {
       axios.post(`${process.env.REACT_APP_API_KEY}/api/v2/accounts/google-auth`,
       {
         email: res.profileObj.email,
-        token: res.tokenId
+         ken: res.tokenId
       }).then((resData) => {
         console.log(resData.data.jwt_token);
         localStorage.setItem("access", resData.data.jwt_token.access);
