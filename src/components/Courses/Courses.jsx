@@ -16,7 +16,6 @@ import LiveItems from "../CourseItem/LiveItems";
 // import alanBtn from '@alan-ai/alan-sdk-web';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RegisterAndLoginModal from "../RegisterAndLoginModal/RegisterAndLoginModal";
 
 export default function Courses() {
   const {
@@ -117,7 +116,7 @@ export default function Courses() {
           setCategories(res.data);
         });
     } catch (error) {}
-  }, []);
+  }, []); 
 
   for (let i = 0; i < webinarCard.length; i++) {
     if (window.innerWidth > 1300) {
@@ -195,8 +194,6 @@ export default function Courses() {
     }else {
       nowRegisterAlert = () => toast.info(`Profil malumotlarini to'ldiring va ${currency(parseInt(value) / 100, 'UZS').replace(/,/g, ".").slice(0, -3)} so'm vaucherga ega bo'ling`);
       nowRegisterAlert()
-    toastNotf()
-
     }
   }
 
@@ -283,7 +280,6 @@ export default function Courses() {
 
                     
       <div className={navStretch ? "courses ml-240" : loggedIn && "courses ml-100"}>
-        <RegisterAndLoginModal/>
         <Action />
         <div className="container">
           {(courseData.length !== 0 || webinarCard.length !== 0) ? (

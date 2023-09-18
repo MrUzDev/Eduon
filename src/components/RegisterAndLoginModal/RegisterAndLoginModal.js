@@ -15,6 +15,7 @@ import TextField from "@mui/material/TextField";
 import OTPInput from "otp-input-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GoogleLogin } from 'react-google-login'
 
 const style = {
   position: "absolute",
@@ -29,20 +30,21 @@ const style = {
   p: 5,
 };
 
-export default function RegisterAndLoginModal () {
 
+export default function RegisterAndLoginModal () {
+  
   const [loginError, setLoginError] = useState(false);
   const [open, setOpen] = useState(false);
   const [isBought, setisBought] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setLoginModal(false);
   const navigate = useNavigate();
-
+  
   const [number, setnumber] = useState("");
   const [password, setpassword] = useState("");
   const [show, setShow] = useState(false);
-
- 
+  
+  
   const [error, setError] = useState(false);
   const [check, setcheck] = useState(false);
   const [registerSendSms, setRegisterSendSms] = useState(false)
@@ -60,21 +62,28 @@ export default function RegisterAndLoginModal () {
   const [paswordLen, setPaswordLen] = useState(false)
   const [password1Error, setpassword1Error] = useState();
   const [passwordError, setPasswordError] = useState();
-
+  
   const [surNameError, setSurNameError] = useState();
   const [nameError, setNameError] = useState();
-
+  
   const { setToken, token,  loginModal,
     setLoginModal,
     registerModal,
     setRegisterModal } = useContext(StateContext);
-
-
+    
+  const clientIdGoogle =  "218671596318-3guu90dq107i1d8n2r288pidrpvaekuj.apps.googleusercontent.com"
+    
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      !registerSendSms ? register(event) : smsVerify(event)
-    }
+      if (event.key === 'Enter') {
+        register(event)
+      }
   };
+
+  const handleKeyDownLogin = e => {
+    if (e.key === 'Enter') {
+      sendddata(e)
+    }
+  }
 
   const otpError = () => toast.error("Tasdiqlash kodi noto'g'ri kiritildi!");
 
@@ -92,13 +101,10 @@ export default function RegisterAndLoginModal () {
       localStorage.setItem("access", data.data.access);
       localStorage.setItem("refresh", data.data.refresh);
 
-      // data.data.access ? navigate("/") : navigate("/login");
       window.location.reload();
     } catch (error) {
       setError(true);
-      // handleOpen();
     }
-    // saveSystems()
   };
 
   const register = async (event) => {
@@ -140,7 +146,6 @@ export default function RegisterAndLoginModal () {
       }
     }
   }
-  
 
   const enterFio = async (e) => {
     e.preventDefault()
@@ -190,7 +195,6 @@ export default function RegisterAndLoginModal () {
       window.location.reload();
     } catch (error) {
       setError(true);
-      // handleOpen();
     }
   }
 
@@ -205,6 +209,24 @@ export default function RegisterAndLoginModal () {
       ? setpassword1Error(true)
       : setpassword1Error(false);
   };
+
+  const onSuccessLogin = (res) => {
+
+    try {
+      axios.post(`${process.env.REACT_APP_API_KEY}/api/v2/accounts/google-auth`,
+      {
+        email: res.profileObj.email,
+        token: res.tokenId
+      }).then((resData) => {
+        console.log(resData.data.jwt_token);
+        localStorage.setItem("access", resData.data.jwt_token.access);
+        localStorage.setItem("refresh", resData.data.jwt_token.refresh);
+        navigate("/");
+        window.location.reload();
+      })
+    } catch (error) {console.log(error)}
+  }
+
 
     return (
     <div className="registerAndLoginModal">
@@ -230,8 +252,13 @@ export default function RegisterAndLoginModal () {
                   <form onSubmit={sendddata}>
                     <div className="phoneInputBox">
                       <PhoneInput
+                      onKeyDown={handleKeyDownLogin}
+                      inputProps={{
+                       name: 'phone',
+                       required: true,
+                       autoFocus: true
+                     }}
                         country={"uz"}
-                        // value={storageLogDetails?storageLogDetails: number}
                         value={
                           localStorage.getItem("storageMobile")
                             ? localStorage.getItem("storageMobile")
@@ -304,10 +331,19 @@ export default function RegisterAndLoginModal () {
                         <span> Ro'yxatdan o'ting</span>
                       </p>
                     </p>
+
+                    <GoogleLogin
+                      clientId={clientIdGoogle}
+                      buttonText="Google orqali tizimga kiring"
+                      onSuccess={onSuccessLogin}
+                      onFailure={(e) => console.log(e)}
+                      cookiePolicy="single_host_origin"
+                      isSignedIn={true}
+                      className="googleLogin"
+                    />
+
                     <Button
-                      onClick={(e) => {
-                        sendddata(e);
-                      }}
+                      type="submit"
                       sx={{
                         width: "100%",
                         height: "70px",
@@ -388,7 +424,7 @@ export default function RegisterAndLoginModal () {
                         </p>
                       )}
 
-                    {dataInfo ? (
+                     {dataInfo ? (
                       dataInfo.jwt_token ? (
                         <p className="error-messageee">
                           <ReportIcon style={{ marginRight: "10px" }} />
@@ -415,6 +451,16 @@ export default function RegisterAndLoginModal () {
                           <span style={{color: '#006aff'}}> kiring </span>
                         </p>
                       </p>
+
+                      <GoogleLogin
+                      clientId={clientIdGoogle}
+                      buttonText="Google orqali tizimga kiring"
+                      onSuccess={onSuccessLogin}
+                      onFailure={(e) => console.log(e)}
+                      cookiePolicy="single_host_origin"
+                      isSignedIn={true}
+                      className="googleLogin"
+                    />
 
                       <Button
                         sx={{
@@ -669,7 +715,6 @@ export default function RegisterAndLoginModal () {
                         </div>
                      </div>
                           
-                     
 
                   <Button
                       sx={{

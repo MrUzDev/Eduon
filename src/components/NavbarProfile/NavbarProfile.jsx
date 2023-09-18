@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { StateContext } from "../../context/Context";
 import Popover from "@mui/material/Popover";
 
 export default function NavbarProfile(props) {
@@ -12,6 +12,10 @@ export default function NavbarProfile(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const { setLoginModal,
+  } = useContext(StateContext);
+
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
@@ -36,9 +40,9 @@ export default function NavbarProfile(props) {
           />
         )
       ) : (
-        <Link to="/login">
+        <p onClick={() => setLoginModal(true)}>
           <button className="bgBlue pointer">Kirish</button>
-        </Link>
+        </p>
       )}
       <Popover
         id={id}

@@ -81,15 +81,7 @@ export default function VendorSchoolMyCourses() {
     } catch (error) {}
   }, []);
 
-  // useEffect(() => {
-  //   try {
-  //     axios.get(
-  //       `${process.env.REACT_APP_API_KEY}/api/v2/courses/module/${props.id.id}`
-  //     )
-  //   } catch (error) {
-  //   }
-  // } , [])
-
+  
   const customStyles = {
     content: {
       top: "50%",

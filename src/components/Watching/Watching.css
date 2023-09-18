@@ -144,7 +144,6 @@
 
 #play-pause {
   position: relative;
-  margin-right: 10px;
 }
 
 #play-pause svg {
@@ -152,14 +151,14 @@
   z-index: 11;
 }
 
-#play-pause .MuiSvgIcon-root {
+/* #play-pause .MuiSvgIcon-root {
   font-size: 20px;
   top: 0 !important;
   width: 40px !important;
   height: 100% !important;
   left: 0 !important;
   margin-right: 10px;
-}
+} */
 
 .watchingCourses .video .img {
   z-index: 2;
@@ -426,10 +425,10 @@
   height: 30px;
 }
 
-.video .videoSetting .resolution {
+.video .resolution {
   position: absolute;
-  top: 0px;
-  right: 52px;
+  bottom: 60px;
+  right: 42px;
   background-color: rgba(0, 0, 0, 0.5);
   width: 200px;
   text-align: left;
@@ -440,24 +439,25 @@
   border-radius: 5px;
 }
 
-.video .videoSetting .resolution .title {
+.video .resolution .title {
   letter-spacing: 1px;
   white-space: nowrap;
 }
 
-.video .videoSetting .resolution li {
+.video .resolution li {
   padding: 10px 15px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
-.video .videoSetting .resolution li svg {
+.video .resolution li svg {
   width: 20px;
   height: 20px;
   margin-right: 10px;
 }
 
-.video .videoSetting .resolution li:hover {
+.video .resolution li:hover {
   background: rgba(0, 0, 0, 0.3);
 }
 
@@ -501,6 +501,10 @@
   position: relative;
   margin-left: 30px;
   width: auto !important;
+}
+
+.watchingCourses .options {
+  position: relative;
 }
 
 .watchingCourses .courseTitle .courseTitle_right .rightBlock .socialIcons {
@@ -564,10 +568,10 @@
 }
 
 @media (max-width: 576px) {
-
+/* 
   #play-pause .MuiSvgIcon-root {
     width: 30px !important;
-  }
+  } */
 
   .watchingCourses .video .img svg {
     position: absolute;
@@ -715,6 +719,10 @@
   #full-screen-icon {
     right: 10px !important;
     bottom: 27% !important;
+  }
+
+  .video .resolution li {
+      padding: 3px 10px;
   }
 }
 

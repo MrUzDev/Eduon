@@ -107,7 +107,7 @@ export default function RoutesComp() {
       <Route path="/sotuvchilarMaktabi" element={<VendorSchool/>}/>
       <Route element={<ProtectedRoutes />}>
       <Route path="/Quiz" element={<Quiz/>}/>
-        <Route path="/stream/:id" element={<Stream />} />
+        <Route path="/stream/:id" element={<Stream />}  c/>
         <Route path="/profile" element={<Profile />} />
         <Route path="/registerVendorSchool" element={<RegiterVendorSchool/>}/>
         <Route path="/speaker" element={<Speaker user={user} />} />

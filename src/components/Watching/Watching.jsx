@@ -16,7 +16,7 @@ import TabUnstyled from "@mui/base/TabUnstyled";
 import CourseAbout from "../CourseAbout/CourseAbout";
 import Comments from "../Comments/comments";
 import axios from "../../Apis/api";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CourseRating from "../CourseRating/courseRating";
 import Sidebar from "../Sidebar/Sidebar";
 import Footer from "../Footers/Footer";
@@ -30,7 +30,10 @@ import NavbarSm from "../Navbar/NavbarSm";
 import PauseIcon from "@mui/icons-material/Pause";
 import ReactDOM from "react-dom";
 import { BounceLoader } from "react-spinners";
-import PauseSharpIcon from "@mui/icons-material/PauseSharp";
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   FacebookShareButton,
@@ -68,18 +71,23 @@ function Watching() {
   const [referalToken, setReferalToken] = useState("");
   const [userPhone, setUserPhone] = useState();
   const [playVideoDuration, setPlayVideoDuration] = useState();
-  const [playVideoCurrent, setPlayVideoCurrent] = useState();
   const [playVideoVolume, setPlayVideoVolume] = useState();
   const [speedOptionsAc, setSpeedOptionsAc] = useState(false);
   const [videoQuality, setVideoQuality] = useState("");
   const [lessonId, setLessonId] = useState(false);
+  const [nowVideoLessonId, setNowVideoLessonId] = useState();
 
   const [waitingSec, setWaitingSec] = useState(false);
   const [loader, setLoader] = useState(false);
   const [courseRate, setCourseRate] = useState(0)
+  const [videoOptionsHover, setVideoOptionsHover] = useState(false)
 
   var id = useParams();
   const playVideo = useRef();
+
+  const prewNotVideo = () => toast.error("Bundan oldingi video mavjud emas!");
+  const nextNotVideo = () => toast.error("Bundan keyingi video mavjud emas!");
+  const nextVideoSuccess = () => toast.success("Bundan keyingi videoga olindi!");
 
   useEffect(() => {
     setLoader(true);
@@ -89,9 +97,6 @@ function Watching() {
     }, 1000);
   }, []);
 
-  // const changeWaitingSec = () => {
-  //   setWaitingSec(true)
-  // }
 
   const pauseVideoPlayer = () => {
     playVideo.current.pause();
@@ -130,6 +135,7 @@ function Watching() {
         )
         .then((res) => {
           setDatas(res.data);
+          console.log(res.data);
           setLessonId(res.data[0] && res.data[0].lessons[0].id);
           const url = {
             resolution_240p: res.data[0].lessons[0].resolution_240p,
@@ -152,6 +158,7 @@ function Watching() {
           } else {
             setCurrentVideo("");
           }
+
         })
         .catch((err) => refresh(err.response.status, err.response.status.text));
     } catch (error) {}
@@ -198,7 +205,6 @@ function Watching() {
           lessonId !== false
         ) {
           console.log("succes eduon api");
-          // console.log(lessonId);
 
           try {
             lessonId &&
@@ -218,9 +224,14 @@ function Watching() {
                 .catch(() => {});
           } catch (error) {}
         }
+        else if(mainVideo.currentTime === mainVideo.duration) {
+          console.log('kirdi');
+          nextOrPrewVideo("next")
+          
+        }
       });
     }
-  }, [play, lessonId, videoUrl]);
+  }, [lessonId]);
 
  
   useEffect(() => {
@@ -250,13 +261,17 @@ function Watching() {
   };
 
   const fullPLay = () => {
+    const containerVideo = document.querySelector(".video-container")
     document.querySelector("video").play();
     setPlay(false);
     setPause(true)
     
+    if(!VideoSetting) {
       setTimeout(() => {
         setPause(false)
+        containerVideo.classList.remove("show-controls");
       }, 2500)
+    }
   };
 
 
@@ -296,7 +311,6 @@ function Watching() {
   //***  UPDATE and change course RATING METHOD OF PUT
 
   const editRating = (value, id) => {
-    console.log(id);
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("access")}`,
     };
@@ -323,7 +337,7 @@ function Watching() {
       Authorization: `Bearer ${localStorage.getItem("access")}`,
     };
     try {
-      axios
+    id && axios
         .get(
           `${process.env.REACT_APP_API_KEY}/api/v1/courses/get-rate-course/${id.id}`,
           {
@@ -370,28 +384,13 @@ function Watching() {
         speedOptions = document.querySelector(".speed-options"),
         fullScreenBtn = document.querySelector(".fullscreen svg"),
         volumeSlider = document.querySelector(".left input");
-      let timer;
 
       mainVideo.onloadedmetadata = function () {
         setPlayVideoVolume(mainVideo.volume);
         setPlayVideoDuration(mainVideo.duration);
       };
 
-      const hideControls = () => {
-        if (document.querySelector("video")) return;
-        timer = setTimeout(() => {
-          containerVideo.classList.remove("show-controls");
-        }, 3000);
-      };
-
-      hideControls();
-
       blurvid.volume = 1;
-      containerVideo.addEventListener("mousemove", () => {
-        containerVideo.classList.add("show-controls");
-        clearTimeout(timer);
-        hideControls();
-      });
 
       const formatTime = (time) => {
         let seconds = Math.floor(time % 60),
@@ -567,9 +566,32 @@ function Watching() {
         videoTimeline.removeEventListener("mousemove", draggableProgressBar)
       );
 
-
     }
   }, [ currentVideo ]);
+
+  const hideControls = () => {
+    const containerVideo = document.querySelector(".video-container")
+
+    if (document.querySelector('.video')) {
+         containerVideo.classList.remove("show-controls");
+    }
+  };
+
+  var time;
+
+ 
+  const containerListerCheck = () => {
+    const containerVideo = document.querySelector(".video-container")
+
+    containerVideo.classList.add("show-controls");
+    clearTimeout(time)
+
+      time = setTimeout(() => {
+         hideControls();
+      }, 5000)
+  }
+
+
 
   useEffect(() => {
     if (localStorage.getItem("watchIn") == window.location.href && videoUrl) {
@@ -579,7 +601,57 @@ function Watching() {
     localStorage.setItem("watchIn", window.location.href);
   }, [videoQuality]);
 
- 
+
+  const nextOrPrewVideo = (prewOrNext) => {
+    setLoader(true)
+    setLessonId(lessonId + 1)
+    setLessonIndex(prewOrNext == "next" ? lessonIndex + 1 : prewOrNext == 'prew' && lessonIndex - 1)
+
+    try {
+      axios.get(`${process.env.REACT_APP_API_KEY}/api/v1/courses/get-course-videos/${id.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        }}
+        )
+      .then((res) => {
+
+        try {
+          const url = {
+            resolution_240p: res.data["id" + String(prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1)].resolution_240p,
+            resolution_360p: res.data["id" + String(prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1)].resolution_360p,
+            resolution_480p: res.data["id" + String(prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1)].resolution_480p,
+            resolution_720p: res.data["id" + String(prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1)].resolution_720p,
+            resolution_1080p: res.data["id" + String(prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1)].resolution_1080p,
+          };
+          
+          
+          setVideoUrl(url);
+            if (url.resolution_240p) {
+              setCurrentVideo(url.resolution_240p);
+            } else if (url.resolution_360p) {
+              setCurrentVideo(url.resolution_360p);
+            } else if (url.resolution_480p) {
+              setCurrentVideo(url.resolution_480p);
+            } else if (url.resolution_720p) {
+              setCurrentVideo(url.resolution_720p);
+            } else if (url.resolution_1080p) {
+              setCurrentVideo(url.resolution_1080p);
+            } else {
+              setCurrentVideo("");
+            }
+
+            setLoader(false)
+
+        } catch (error) {
+          prewOrNext == "next" ? nextNotVideo() : prewOrNext && prewNotVideo()
+        }
+      
+      })
+    } catch (error) {}
+  }
+
+
   return (
     <>
       <NavbarSm />
@@ -590,12 +662,13 @@ function Watching() {
           <div className="container">
             <div className="rowGrid">
               <div className="col-18 col-lg-14 col-md-24 p-0 col-sm-24">
-                <div className="video video-container">
+                <div className="video video-container" onMouseMove={() => !videoOptionsHover && containerListerCheck()}>
                   {/* secrutiy */}
                   <h6 id="watermark" className="watermark">
                     {userPhone}
                   </h6>
-                  <div className="wrapper">
+                  <div className="wrapper" onMouseLeave={() => setVideoOptionsHover(false)}
+                        onMouseOver={() => {setVideoOptionsHover(true); clearTimeout(time)}}>
                     <div className="video-timeline">
                       <div className="progress-area">
                         <span>00:00</span>
@@ -615,6 +688,10 @@ function Watching() {
                         </div>
                       </li>
                       <li className="options center">
+                      <button>
+                            <SkipPreviousIcon onClick={() => nextOrPrewVideo('prew')}/>
+                        </button>
+
                         <button className="skip-backward">
                           <RotateLeftIcon />
                         </button>
@@ -636,20 +713,154 @@ function Watching() {
                         <button className="skip-forward">
                           <RotateRightIcon />
                         </button>
+                        
+                        <button>
+                            <SkipNextIcon onClick={() => nextOrPrewVideo('next')}/>
+                        </button>
                       </li>
+
+
                       <li class="options right">
+                            
+                         <button>
+                          <VideoSettingsIcon
+                          style={{color: '#fff'}}
+                            onClick={() => {setVideoSetting(!VideoSetting); clearTimeout(time)}}
+                          />
+                          </button>   
+
+                        {VideoSetting && videoUrl ? (
+                        <ul className="resolution">
+                          <li className="title">Video tasvirning sifati</li>
+                          <Divider color="white" />
+                          {videoUrl.resolution_144p ? (
+                            <li
+                              onClick={() => {
+                                setCurrentVideo(videoUrl.resolution_144p);
+                                setVideoQuality(true);
+                                playVideo.current.currentTime =
+                                  localStorage.getItem("duration");
+                              }}
+                            >
+                              {currentVideo?.includes("144p") ? (
+                                <div className="iconsQuality">
+                                  <CheckIcon />
+                                </div>
+                              ) : (
+                                <div className="iconsQuality"></div>
+                              )}
+                              144p
+                            </li>
+                          ) : null}
+                          {videoUrl.resolution_240p ? (
+                            <li
+                              onClick={() => {
+                                setCurrentVideo(videoUrl.resolution_240p);
+                                setVideoQuality(videoUrl.resolution_240p);
+                                playVideo.current.currentTime =
+                                  localStorage.getItem("duration");
+                              }}
+                            >
+                              {currentVideo?.includes("240p") ? (
+                                <div className="iconsQuality">
+                                  <CheckIcon />
+                                </div>
+                              ) : (
+                                <div className="iconsQuality"></div>
+                              )}
+                              240p
+                            </li>
+                          ) : null}
+                          {videoUrl.resolution_360p ? (
+                            <li
+                              onClick={() => {
+                                setCurrentVideo(videoUrl.resolution_360p);
+                                setVideoQuality(videoUrl.resolution_360p);
+                                playVideo.current.currentTime =
+                                  localStorage.getItem("duration");
+                              }}
+                            >
+                              {currentVideo?.includes("360p") ? (
+                                <div className="iconsQuality">
+                                  <CheckIcon />
+                                </div>
+                              ) : (
+                                <div className="iconsQuality"></div>
+                              )}
+                              360p
+                            </li>
+                          ) : null}
+                          {videoUrl.resolution_480p ? (
+                            <li
+                              onClick={() => {
+                                setCurrentVideo(videoUrl.resolution_480p);
+                                setVideoQuality(videoUrl.resolution_480p);
+                                playVideo.current.currentTime =
+                                  localStorage.getItem("duration");
+                              }}
+                            >
+                              {currentVideo?.includes("480p") ? (
+                                <div className="iconsQuality">
+                                  <CheckIcon />
+                                </div>
+                              ) : (
+                                <div className="iconsQuality"></div>
+                              )}
+                              480p
+                            </li>
+                          ) : null}
+                          {videoUrl.resolution_720p ? (
+                            <li
+                              onClick={() => {
+                                setCurrentVideo(videoUrl.resolution_720p);
+                                setVideoQuality(videoUrl.resolution_720p);
+                                playVideo.current.currentTime =
+                                  localStorage.getItem("duration");
+                              }}
+                            >
+                              {currentVideo?.includes("720p") ? (
+                                <div className="iconsQuality">
+                                  <CheckIcon />
+                                </div>
+                              ) : (
+                                <div className="iconsQuality"></div>
+                              )}
+                              720p
+                            </li>
+                          ) : null}
+                          {videoUrl.resolution_1080p ? (
+                            <li
+                              onClick={() => {
+                                setCurrentVideo(videoUrl.resolution_1080p);
+                                setVideoQuality(videoUrl.resolution_1080p);
+                                playVideo.current.currentTime =
+                                  localStorage.getItem("duration");
+                              }}
+                            >
+                              {currentVideo?.includes("1080p") ? (
+                                <div className="iconsQuality">
+                                  <CheckIcon />
+                                </div>
+                              ) : (
+                                <div className="iconsQuality"></div>
+                              )}
+                              1080p
+                            </li>
+                          ) : null}
+                        </ul>
+                        ) : null}
+
                         <div class="playback-content">
                           <button class="playback-speed">
                             <span class="material-symbols-rounded">
                               <SlowMotionVideoSharpIcon
                                 onClick={() =>
-                                  setSpeedOptionsAc(
-                                    (speedOptionsAc) => !speedOptionsAc
-                                  )
+                                  setSpeedOptionsAc(!speedOptionsAc)
                                 }
                               />
                             </span>
                           </button>
+
                           <ul
                             className={
                               speedOptionsAc
@@ -666,144 +877,14 @@ function Watching() {
                             <li data-speed="0.5">0.5x</li>
                           </ul>
                         </div>
+                        
                         <button className="fullscreen">
                           <FullscreenSharpIcon />
                         </button>
                       </li>
                     </ul>
                   </div>
-                  <div
-                    className="videoSetting"
-                    onMouseOver={() => setHover(true)}
-                    onMouseLeave={() => {
-                      setHover(false);
-                      setVideoSetting(false);
-                    }}
-                  >
-                    <VideoSettingsIcon
-                      onClick={() => setVideoSetting(!VideoSetting)}
-                    />
-                    {VideoSetting && hover && videoUrl ? (
-                      <ul className="resolution">
-                        <li className="title">Video tasvirning sifati</li>
-                        <Divider color="white" />
-                        {videoUrl.resolution_144p ? (
-                          <li
-                            onClick={() => {
-                              setCurrentVideo(videoUrl.resolution_144p);
-                              setVideoQuality(true);
-                              playVideo.current.currentTime =
-                                localStorage.getItem("duration");
-                            }}
-                          >
-                            {currentVideo?.includes("144p") ? (
-                              <div className="iconsQuality">
-                                <CheckIcon />
-                              </div>
-                            ) : (
-                              <div className="iconsQuality"></div>
-                            )}
-                            144p
-                          </li>
-                        ) : null}
-                        {videoUrl.resolution_240p ? (
-                          <li
-                            onClick={() => {
-                              setCurrentVideo(videoUrl.resolution_240p);
-                              setVideoQuality(videoUrl.resolution_240p);
-                              playVideo.current.currentTime =
-                                localStorage.getItem("duration");
-                            }}
-                          >
-                            {currentVideo?.includes("240p") ? (
-                              <div className="iconsQuality">
-                                <CheckIcon />
-                              </div>
-                            ) : (
-                              <div className="iconsQuality"></div>
-                            )}
-                            240p
-                          </li>
-                        ) : null}
-                        {videoUrl.resolution_360p ? (
-                          <li
-                            onClick={() => {
-                              setCurrentVideo(videoUrl.resolution_360p);
-                              setVideoQuality(videoUrl.resolution_360p);
-                              playVideo.current.currentTime =
-                                localStorage.getItem("duration");
-                            }}
-                          >
-                            {currentVideo?.includes("360p") ? (
-                              <div className="iconsQuality">
-                                <CheckIcon />
-                              </div>
-                            ) : (
-                              <div className="iconsQuality"></div>
-                            )}
-                            360p
-                          </li>
-                        ) : null}
-                        {videoUrl.resolution_480p ? (
-                          <li
-                            onClick={() => {
-                              setCurrentVideo(videoUrl.resolution_480p);
-                              setVideoQuality(videoUrl.resolution_480p);
-                              playVideo.current.currentTime =
-                                localStorage.getItem("duration");
-                            }}
-                          >
-                            {currentVideo?.includes("480p") ? (
-                              <div className="iconsQuality">
-                                <CheckIcon />
-                              </div>
-                            ) : (
-                              <div className="iconsQuality"></div>
-                            )}
-                            480p
-                          </li>
-                        ) : null}
-                        {videoUrl.resolution_720p ? (
-                          <li
-                            onClick={() => {
-                              setCurrentVideo(videoUrl.resolution_720p);
-                              setVideoQuality(videoUrl.resolution_720p);
-                              playVideo.current.currentTime =
-                                localStorage.getItem("duration");
-                            }}
-                          >
-                            {currentVideo?.includes("720p") ? (
-                              <div className="iconsQuality">
-                                <CheckIcon />
-                              </div>
-                            ) : (
-                              <div className="iconsQuality"></div>
-                            )}
-                            720p
-                          </li>
-                        ) : null}
-                        {videoUrl.resolution_1080p ? (
-                          <li
-                            onClick={() => {
-                              setCurrentVideo(videoUrl.resolution_1080p);
-                              setVideoQuality(videoUrl.resolution_1080p);
-                              playVideo.current.currentTime =
-                                localStorage.getItem("duration");
-                            }}
-                          >
-                            {currentVideo?.includes("1080p") ? (
-                              <div className="iconsQuality">
-                                <CheckIcon />
-                              </div>
-                            ) : (
-                              <div className="iconsQuality"></div>
-                            )}
-                            1080p
-                          </li>
-                        ) : null}
-                      </ul>
-                    ) : null}
-                  </div>
+              
 
                   {loader && (
                     <div className="loader">
@@ -1174,6 +1255,7 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                                             }
                                             onClick={() => {
                                               setLessonId(items.id);
+                                              
                                               const url = {
                                                 resolution_240p:
                                                   items.resolution_240p,
@@ -1397,12 +1479,12 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                                 <p>{item.name}</p>
                               </div>
                             </div>
-                            {/* <AccordionItem /> */}
+                        
                           </div>
                         </AccordionSummary>
+                     
                         {item.lessons.map((items, indexL) => (
                           <AccordionDetails key={indexL}>
-                            {/* {console.log(items.id)} */}
                             <div
                               sx={{
                                 paddingLeft: "30px",
@@ -1416,6 +1498,7 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                               }
                               onClick={() => {
                                 setLessonId(items.id);
+                                console.log(items.id);
                                 const url = {
                                   resolution_240p: items.resolution_240p,
                                   resolution_360p: items.resolution_360p,
@@ -1518,6 +1601,9 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
           </div>
         </div>
       </div>
+
+      <ToastContainer style={{ marginTop: "50px" }} limit={1}/>
+
       <Footer />
     </>
   );

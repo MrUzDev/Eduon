@@ -30,7 +30,7 @@ const style = {
 };
 
 export default function MobileMenu() {
-  const { loggedIn, balance, mobileMenuOpen, setMobileMenuOpen, setStreamStart } =
+  const { loggedIn, balance, mobileMenuOpen, setMobileMenuOpen, setStreamStart, setLoginModal } =
     useContext(StateContext);
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
@@ -188,7 +188,8 @@ export default function MobileMenu() {
                     {!loggedIn && (
                       <button
                         onClick={() => {
-                          navigate("/login");
+                          // navigate("/login");
+                          setLoginModal(true)
                           setMobileMenuOpen(false);
                         }}
                         className="btn mobileMenuLoginBtn  mr-10"

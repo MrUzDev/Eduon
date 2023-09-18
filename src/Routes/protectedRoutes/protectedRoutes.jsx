@@ -4,7 +4,8 @@ import { StateContext } from "../../context/Context";
 
 const ProtectedRoutes = () => {
   const loggedIn = localStorage.getItem("access")
-  // const { loggedIn } = useContext(StateContext);
-  return loggedIn ? <Outlet /> : <Navigate to="/login" />;
+  const { setLoginModal, registerModal } = useContext(StateContext);
+
+  return loggedIn ? <Outlet /> : !registerModal && setLoginModal(true);
 };
 export default ProtectedRoutes;

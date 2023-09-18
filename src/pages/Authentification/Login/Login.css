@@ -334,6 +334,11 @@
   border-radius: 15px !important;
 }
 
+.modalForLogin .googleLogin {
+  margin: 20px 0;
+}
+
+.modalForLogin .googleLogin,
 .Login .googleLogin,
 .Register .googleLogin {
   width: 100%;
@@ -347,12 +352,14 @@
   align-items: center !important;
 }
 
+.modalForLogin .googleLogin div,
 .Login .googleLogin div,
 .Register .googleLogin div {
   display: flex;
   border-radius: 15px !important;
 }
 
+.modalForLogin .googleLogin span,
 .Login .googleLogin span,
 .Register .googleLogin span {
   font-weight: 700 !important;

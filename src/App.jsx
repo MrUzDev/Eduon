@@ -6,6 +6,7 @@ import SidebarSm from "./components/Sidebar/SidebarSm";
 import MobileMenu from "./components/MobileMenu/MobileMenu";
 import Values from "./context/Values";
 import RoutesComp from "./Routes/Routes/Routes";
+import RegisterAndLoginModal from "./components/RegisterAndLoginModal/RegisterAndLoginModal";
 
 function App() {
   const values = Values();
@@ -19,8 +20,11 @@ function App() {
           {/* Routes ------ */}
           <RoutesComp /> 
           {/* Routes/ ------ */}
+
+          <RegisterAndLoginModal/>
         </BrowserRouter>
       </StateContext.Provider>
+
     </div>
   );
 }

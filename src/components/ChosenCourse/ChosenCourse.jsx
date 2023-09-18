@@ -114,8 +114,6 @@ export default function ChosenCourse(props) {
 
   const playVideo = useRef();
 
-  const handleClose = () => setOpen(false);
-
   const fullPLay = () => {
     document.querySelector("video").play();
     setPlay(false);
@@ -139,38 +137,6 @@ export default function ChosenCourse(props) {
       localStorage.setItem("referalToken", token && token.token);
     }
   }, []);
-
-  const saveSystems = () => {
-    setChek(localStorage.setItem("check", check));
-    setChek(localStorage.getItem("check"));
-
-    if (JSON.parse(check) && number && password) {
-      localStorage.setItem("num", number);
-      localStorage.setItem("pass", password);
-    }
-  };
-
-  const sendddata = async (e) => {
-    e.preventDefault();
-    try {
-      const data = await axios.post(
-        `${process.env.REACT_APP_API_KEY}/api/v1/accounts/login/`,
-        {
-          phone_number: number,
-          password: password,
-        }
-      );
-      localStorage.setItem("access", data.data.access);
-      localStorage.setItem("refresh", data.data.refresh);
-
-      // data.data.access ? navigate("/") : navigate("/login");
-      window.location.reload();
-    } catch (error) {
-      setError(true);
-      // handleOpen();
-    }
-    // saveSystems()
-  };
 
   useEffect(() => {
     alertError
@@ -252,26 +218,6 @@ export default function ChosenCourse(props) {
           }));
 
       setIsRemoved(!isremoved);
-    } catch (error) {}
-  };
-
-  const addToFav = async (e, id) => {
-    e.preventDefault();
-    !loggedIn && handleOpen();
-    try {
-      const data = await axios({
-        method: "post",
-        url: `${process.env.REACT_APP_API_KEY}/api/v1/courses/fav-courses/`,
-        data: {
-          course: id,
-        },
-        headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
-      }).catch((err) => {
-        err.response.status && refresh(err.response.status, err.response.status.text);
-      });
-      data.data.message === "This course is already in the list!"
-        ? setAlertErrorFav(true)
-        : setAlertErrorFav(false);
     } catch (error) {}
   };
 
@@ -360,11 +306,6 @@ export default function ChosenCourse(props) {
       } catch (error) {}
     }
   }, [spakerId]);
-
-  // useEffect(() => {
-  //   setAllSomeCourses([...sameCourses, ...speakerCourses])
-  //   console.log(allSomeCourses)
-  // }, [sameCourses, speakerCourses])
 
   useEffect(() => {
     const containerVideo = document.querySelector(".video-container"),
