@@ -1,5 +1,6 @@
     .actionBody {
         position: relative;
+        margin-bottom: 30px;
     }
     
     .actionBody .actionCard img {
@@ -121,7 +122,7 @@
         margin-top: 16px;
         font-size: 14px;
         margin-left: 1rem;
-        margin-bottom: 16px;
+        /* margin-bottom: 16px; */
     }
 
     .actionBody .vendor-btn:hover {

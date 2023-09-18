@@ -6,17 +6,6 @@ import "moment/locale/uz-latn";
 import moment from "moment";
 import axios from "../../Apis/api";
 import { StateContext } from "../../context/Context";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Backdrop from "@mui/material/Backdrop";
-import Button from "@mui/material/Button";
-import ReportIcon from "@mui/icons-material/Report";
-import VisibilityOutlinedIcon from "../../assets/icons/eye.png";
-import VisibilityOffOutlinedIcon from "../../assets/icons/eye-slash.png";
-import PhoneInput from "react-phone-input-2";
-import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
 import { refresh } from "../../Apis/RefreshToken/RefreshToken";
 import ReactHtmlParser from 'react-html-parser';
 

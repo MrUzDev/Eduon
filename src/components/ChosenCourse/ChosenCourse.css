@@ -1399,9 +1399,9 @@ footer ul li a {
         height: 55px !important;
     }
 
-    .css-sjsm6t-MuiFormControl-root-MuiTextField-root .MuiInputLabel-root {
+    /* .css-sjsm6t-MuiFormControl-root-MuiTextField-root .MuiInputLabel-root {
         top: 0 !important;
-    }
+    } */
 
     .react-tel-input .form-control {
         padding-left: 60px;
