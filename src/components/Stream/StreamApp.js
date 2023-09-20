@@ -66,26 +66,29 @@ export default function ViewStream(props) {
 
 
   useEffect(() => {
-    try {
-      loggedIn && axios
-        .get(
-          `${process.env.REACT_APP_API_KEY}/api/v2/stream/check-user-stream/${id.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("access")}`,
-            },
-          }
-        )
-        .then((res) => {
-          console.log(res.data);
-          setOrSpeaker(res.data.user);
-          res.data.user == "unenrolled" && setUnenrolled(true);
-        })
-        .catch((err) => {
-          refresh(err.response.status, err.response.status.text);
-        });
-    } catch (error) {}
-  }, []);
+    if(props.streamAbout) {
+      try {
+        loggedIn && axios
+          .get(
+            `${process.env.REACT_APP_API_KEY}/api/v2/stream/check-user-stream/${id.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("access")}`,
+              },
+            }
+          )
+          .then((res) => {
+            setOrSpeaker(res.data.user);
+            if(props.streamAbout.price && props.streamAbout.price !== 0) {
+              res.data.user == "unenrolled" && setUnenrolled(true);
+            }else setUnenrolled(false)
+          })
+          .catch((err) => {
+            refresh(err.response.status, err.response.status.text);
+          });
+      } catch (error) {}
+    }
+  }, [props.streamAbout]);
 
 
   const streamStatus = (status) => {
@@ -640,7 +643,7 @@ useEffect(() => {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
+          timeout: 3000,
         }}
       >
         <div className="modalForLogin">

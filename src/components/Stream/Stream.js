@@ -15,8 +15,8 @@ import StreamAbout from "./StreamAbout";
 
 
 export default function Stream() {
-    const { navStretch, loggedIn } = useContext(StateContext);
-    const [streamData, setStreamData] = useState([]);
+  const { navStretch, loggedIn } = useContext(StateContext);
+  const [streamData, setStreamData] = useState([]);
   const [isBought, setisBought] = useState(false);
   const [streamType, setStreamType] = useState([])
   const [streamSpeaker, setStreamSpeaker] = useState();
@@ -27,7 +27,6 @@ export default function Stream() {
 
     var id = useParams();
     const navigate = useNavigate()
-
 
 
     useEffect(() => {
@@ -45,12 +44,8 @@ export default function Stream() {
             .then((res) => {
               setStreamData(res.data)
             })
-            .catch((err) => {
-              // navigate('/')
-            }));
-    
-      } catch (error) {
-       }
+            .catch((err) => {}));
+      } catch (error) {}
     }, [])
     
 
