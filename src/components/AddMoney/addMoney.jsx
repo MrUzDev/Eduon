@@ -28,7 +28,7 @@ export default function AddMoney(props) {
   const { balance, setbalanceToggle, balanceToggle, loggedIn } =
     useContext(StateContext);
 
-  const [amout, setAmount] = useState("");
+  const [amout, setAmount] = useState();
   const [cardNum, setCardNum] = useState("");
   const [expire, setExpire] = useState("");
   const [error, setError] = useState(false);
@@ -431,6 +431,17 @@ export default function AddMoney(props) {
   const currency = (number, currency, lang = undefined) =>
     Intl.NumberFormat(lang, { style: "currency", currency }).format(number);
 
+
+    useEffect(() => {
+      const inp = document.querySelector('.addmoneyInp')
+      inp.addEventListener("keydown", (evalue) => {
+        console.log(evalue.keyCode)
+        if(evalue.keyCode == 69) {
+          evalue.preventDefault()
+        }
+      })
+    })
+
   return (
     <div className="paymentOne" id="paymentOne">
       <div className="container">
@@ -631,9 +642,6 @@ export default function AddMoney(props) {
                     </div>
                   </div>
                 </div>
-                
-
-
               ))}
             </div>
           </div>
@@ -656,7 +664,7 @@ export default function AddMoney(props) {
               <form className="account" autoComplete="off">
                 <div className="password">
                   <TextField
-                    className="inputs invisibleBg"
+                    className="inputs invisibleBg addmoneyInp"
                     id="TransparentInput"
                     sx={{
                       width: "100%",
@@ -685,13 +693,13 @@ export default function AddMoney(props) {
                       setAmount(e.target.value);
                     }}
                   />
+
                   <p id="inputNum">
-                    {amout &&
-                      currency(amout, "UZS")
+                        {currency(amout, "UZS")
                         .replace("UZS", "")
-                        .replace("soʻm", "").replace(/,/g, ".").slice(0, -3)
-                        }
+                        .replace("soʻm", "").replace(/,/g, ".").slice(0, -3)}
                   </p>
+
                   <h1 className="eye">UZS</h1>
                 </div>
                 <div className="password">
