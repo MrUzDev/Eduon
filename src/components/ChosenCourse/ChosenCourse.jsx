@@ -438,7 +438,7 @@ export default function ChosenCourse(props) {
     });
 
     window.addEventListener("keydown", (e) => {
-      e.preventDefault()
+      // e.preventDefault()
 
       // add and take 10s video current time start
       if (e.keyCode === 39) {
@@ -451,7 +451,7 @@ export default function ChosenCourse(props) {
       // add and take 10s video current time end
 
       // full screen toggle start
-      else if(e.keyCode === 70) {
+      else if(e.keyCode === 70 && containerVideo) {
         containerVideo.classList.toggle("fullscreen");
         if (document.fullscreenElement) {
           fullScreenBtn.classList.replace("fa-compress", "fa-expand");

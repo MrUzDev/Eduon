@@ -28,7 +28,6 @@
     "date-fns": "^2.29.3",
     "date-fns-jalali": "^2.29.3-0",
     "daterangepicker": "^3.1.0",
-    "socket.io-client": "^4.7.1",
     "dayjs": "^1.11.7",
     "detect.js": "^2.2.3",
     "draft-js": "^0.11.7",
@@ -74,6 +73,7 @@
     "record-screen": "^3.19.0",
     "rsuite": "^5.23.3",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.7.1",
     "styled-components": "^5.3.10",
     "swiper": "^8.4.7",
     "web-vitals": "^1.1.2"

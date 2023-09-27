@@ -937,13 +937,11 @@ footer ul li a {
     font-family: "Open sans";
 }
 
-.watchingCourses .playback-content,
 #courseAbout .playback-content {
     display: flex;
     position: relative;
 }
 
-.watchingCourses .playback-content .speed-options,
 #courseAbout .playback-content .speed-options {
     position: absolute;
     list-style: none;
@@ -951,18 +949,17 @@ footer ul li a {
     bottom: 40px;
     width: 95px;
     overflow: hidden;
-/*    opacity: 0;*/
+   opacity: 0;
     border-radius: 4px;
 /*    pointer-events: none;*/
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.13s ease;
-    opacity: 0;
+    /* transition: opacity 0.13s ease; */
+    /* opacity: 0; */
     z-index: 1;
 }
 
 
-.watchingCourses .speed-options li,
 #courseAbout .speed-options li {
     cursor: pointer;
     color: #000;

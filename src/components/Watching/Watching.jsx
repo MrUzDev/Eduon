@@ -81,6 +81,7 @@ function Watching() {
   const [loader, setLoader] = useState(false);
   const [courseRate, setCourseRate] = useState(0)
   const [videoOptionsHover, setVideoOptionsHover] = useState(false)
+  const [courseNameFullSc, setCourseNameFullSc] = useState(false)
 
   var id = useParams();
   const playVideo = useRef();
@@ -135,7 +136,6 @@ function Watching() {
         )
         .then((res) => {
           setDatas(res.data);
-          console.log(res.data);
           setLessonId(res.data[0] && res.data[0].lessons[0].id);
           const url = {
             resolution_240p: res.data[0].lessons[0].resolution_240p,
@@ -182,8 +182,8 @@ function Watching() {
   }, []);
 
   useEffect(() => {
-    lessonIndex && setActiveModuleIndex(parseInt(lessonIndex.slice(0, 1)));
-    lessonIndex && setActiveLessonIndex(parseInt(lessonIndex.slice(1)));
+    // lessonIndex && setActiveModuleIndex(parseInt(lessonIndex.slice(0, 1)));
+    // lessonIndex && setActiveLessonIndex(parseInt(lessonIndex.slice(1)));
   }, [lessonIndex]);
 
   // save video duration in localeStorage
@@ -225,9 +225,7 @@ function Watching() {
           } catch (error) {}
         }
         else if(mainVideo.currentTime === mainVideo.duration) {
-          console.log('kirdi');
           nextOrPrewVideo("next")
-          
         }
       });
     }
@@ -256,6 +254,7 @@ function Watching() {
     setInterval(watermarkMap, 20000);
   }, []);
 
+
   const fullHover = () => {
     setHover(true);
   };
@@ -269,7 +268,7 @@ function Watching() {
     if(!VideoSetting) {
       setTimeout(() => {
         setPause(false)
-        containerVideo.classList.remove("show-controls");
+        // containerVideo.classList.remove("show-controls");
       }, 2500)
     }
   };
@@ -286,7 +285,6 @@ function Watching() {
   //***  add and change course rating METHOD OF POST
 
   const setRating = async (e) => {
-    console.log(`${process.env.REACT_APP_API_KEY}/api/v1/courses/rate-course/`);
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("access")}`,
     };
@@ -390,6 +388,8 @@ function Watching() {
         setPlayVideoDuration(mainVideo.duration);
       };
 
+      localStorage.setItem('speed', `speed-${1}x`)
+
       blurvid.volume = 1;
 
       const formatTime = (time) => {
@@ -449,7 +449,6 @@ function Watching() {
       });
 
       const draggableProgressBar = (e) => {
-        console.log(mainVideo.currentTime);
         let timelineWidth = videoTimeline.clientWidth;
         progressBar.style.width = `${e.offsetX}px`;
         mainVideo.currentTime =
@@ -470,9 +469,9 @@ function Watching() {
         volumeSlider.value = playVideoVolume;
       });
 
-
       window.addEventListener("keydown", (e) => {
-        e.preventDefault()
+        // e.preventDefault()
+
 
         // add and take 10s video current time start
         if (e.keyCode === 39) {
@@ -487,10 +486,12 @@ function Watching() {
           containerVideo.classList.toggle("fullscreen");
           if (document.fullscreenElement) {
             fullScreenBtn.classList.replace("fa-compress", "fa-expand");
+            setCourseNameFullSc(false)
             return document.exitFullscreen();
           }else {
             fullScreenBtn.classList.replace("fa-expand", "fa-compress");
             containerVideo.requestFullscreen();
+            setCourseNameFullSc(true)
           }
         }
         // full screen toggle end
@@ -532,23 +533,16 @@ function Watching() {
         volumeBtn.classList.replace("fa-volume-xmark", "fa-volume-high");
       });
 
-      speedOptions.querySelectorAll("li").forEach((option) => {
-        option.addEventListener("click", () => {
-          mainVideo.playbackRate = option.dataset.speed;
-          blurvid.playbackRate = option.dataset.speed;
-          speedOptions.querySelector(".active").classList.remove("active");
-          option.classList.add("active");
-        });
-      });
-
       fullScreenBtn.addEventListener("click", () => {
         containerVideo.classList.toggle("fullscreen");
         if (document.fullscreenElement) {
           fullScreenBtn.classList.replace("fa-compress", "fa-expand");
+          setCourseNameFullSc(false)
           return document.exitFullscreen();
         }
         fullScreenBtn.classList.replace("fa-expand", "fa-compress");
         containerVideo.requestFullscreen();
+        setCourseNameFullSc(true)
       });
 
       skipBackward.addEventListener("click", () => {
@@ -565,32 +559,36 @@ function Watching() {
       document.addEventListener("mouseup", () =>
         videoTimeline.removeEventListener("mousemove", draggableProgressBar)
       );
-
     }
   }, [ currentVideo ]);
 
-  const hideControls = () => {
-    const containerVideo = document.querySelector(".video-container")
-
-    if (document.querySelector('.video')) {
-         containerVideo.classList.remove("show-controls");
-    }
-  };
-
   var time;
-
- 
+  
   const containerListerCheck = () => {
     const containerVideo = document.querySelector(".video-container")
-
+    
     containerVideo.classList.add("show-controls");
+    
     clearTimeout(time)
 
+    if(!videoOptionsHover) {
       time = setTimeout(() => {
-         hideControls();
-      }, 5000)
+        containerVideo.classList.remove("show-controls");
+        setVideoSetting(false)
+        setSpeedOptionsAc(false)
+       }, 5000)
+
+      return () => {
+        clearInterval(time);
+      };
+    }
   }
 
+useEffect(() => {
+  return () => {
+    clearInterval(time);
+  };
+}, [time])
 
 
   useEffect(() => {
@@ -604,8 +602,7 @@ function Watching() {
 
   const nextOrPrewVideo = (prewOrNext) => {
     setLoader(true)
-    setLessonId(lessonId + 1)
-    setLessonIndex(prewOrNext == "next" ? lessonIndex + 1 : prewOrNext == 'prew' && lessonIndex - 1)
+    let changeLessonId = prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1
 
     try {
       axios.get(`${process.env.REACT_APP_API_KEY}/api/v1/courses/get-course-videos/${id.id}`,
@@ -615,42 +612,59 @@ function Watching() {
         }}
         )
       .then((res) => {
+        let values = Object.values(res.data);
 
-        try {
-          const url = {
-            resolution_240p: res.data["id" + String(prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1)].resolution_240p,
-            resolution_360p: res.data["id" + String(prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1)].resolution_360p,
-            resolution_480p: res.data["id" + String(prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1)].resolution_480p,
-            resolution_720p: res.data["id" + String(prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1)].resolution_720p,
-            resolution_1080p: res.data["id" + String(prewOrNext == "next" ? lessonId + 1 : prewOrNext == 'prew' && lessonId - 1)].resolution_1080p,
-          };
-          
-          
-          setVideoUrl(url);
-            if (url.resolution_240p) {
-              setCurrentVideo(url.resolution_240p);
-            } else if (url.resolution_360p) {
-              setCurrentVideo(url.resolution_360p);
-            } else if (url.resolution_480p) {
-              setCurrentVideo(url.resolution_480p);
-            } else if (url.resolution_720p) {
-              setCurrentVideo(url.resolution_720p);
-            } else if (url.resolution_1080p) {
-              setCurrentVideo(url.resolution_1080p);
-            } else {
-              setCurrentVideo("");
-            }
+        let checkId =  values.some((item) => item.id == changeLessonId)
 
-            setLoader(false)
-
-        } catch (error) {
-          prewOrNext == "next" ? nextNotVideo() : prewOrNext && prewNotVideo()
-        }
-      
+        checkId ? lessonIdCheckSuccess(res.data, changeLessonId, prewOrNext) : setLoader(false);
       })
     } catch (error) {}
   }
 
+
+  const lessonIdCheckSuccess = (data, changeLessonId, prewOrNext) => {
+
+    setLessonId(changeLessonId)
+    setLessonIndex(prewOrNext == "next" ? lessonIndex + 1 : prewOrNext == 'prew' && lessonIndex - 1)
+
+    const url = {
+      resolution_240p: data["id" + String(changeLessonId)].resolution_240p,
+      resolution_360p: data["id" + String(changeLessonId)].resolution_360p,
+      resolution_480p: data["id" + String(changeLessonId)].resolution_480p,
+      resolution_720p: data["id" + String(changeLessonId)].resolution_720p,
+      resolution_1080p: data["id" + String(changeLessonId)].resolution_1080p,
+    };
+
+    
+    setVideoUrl(url);
+      if (url.resolution_240p) {
+        setCurrentVideo(url.resolution_240p);
+      } else if (url.resolution_360p) {
+        setCurrentVideo(url.resolution_360p);
+      } else if (url.resolution_480p) {
+        setCurrentVideo(url.resolution_480p);
+      } else if (url.resolution_720p) {
+        setCurrentVideo(url.resolution_720p);
+      } else if (url.resolution_1080p) {
+        setCurrentVideo(url.resolution_1080p);
+      } else {
+        setCurrentVideo("");
+      }
+
+      setLoader(false)
+  }
+
+
+  const videoSpeedChange = (speed, option) => {
+    const mainVideo = document.querySelector("video")
+    
+    mainVideo.playbackRate = speed
+    document.querySelector(".active").classList.remove("active");
+  
+    option.target.classList.add("active");  
+
+    localStorage.setItem('speed', `speed-${speed}x`)
+  } 
 
   return (
     <>
@@ -662,13 +676,14 @@ function Watching() {
           <div className="container">
             <div className="rowGrid">
               <div className="col-18 col-lg-14 col-md-24 p-0 col-sm-24">
-                <div className="video video-container" onMouseMove={() => !videoOptionsHover && containerListerCheck()}>
+                <div className="video video-container" onMouseMove={() => containerListerCheck()}>
+                  {courseNameFullSc && <div className="full-screen-course-name"><h4>{resData.name}</h4></div>}
                   {/* secrutiy */}
                   <h6 id="watermark" className="watermark">
                     {userPhone}
                   </h6>
                   <div className="wrapper" onMouseLeave={() => setVideoOptionsHover(false)}
-                        onMouseOver={() => {setVideoOptionsHover(true); clearTimeout(time)}}>
+                        onMouseOver={() => {setVideoOptionsHover(true)}}>
                     <div className="video-timeline">
                       <div className="progress-area">
                         <span>00:00</span>
@@ -725,7 +740,7 @@ function Watching() {
                          <button>
                           <VideoSettingsIcon
                           style={{color: '#fff'}}
-                            onClick={() => {setVideoSetting(!VideoSetting); clearTimeout(time)}}
+                            onClick={() => {setVideoSetting(!VideoSetting); setSpeedOptionsAc(false)}}
                           />
                           </button>   
 
@@ -855,27 +870,24 @@ function Watching() {
                             <span class="material-symbols-rounded">
                               <SlowMotionVideoSharpIcon
                                 onClick={() =>
-                                  setSpeedOptionsAc(!speedOptionsAc)
+                                  {setSpeedOptionsAc(!speedOptionsAc); setVideoSetting(false)}
                                 }
                               />
                             </span>
                           </button>
-
+                              
+                          {speedOptionsAc && (
                           <ul
-                            className={
-                              speedOptionsAc
-                                ? "speed-options show"
-                                : "speed-options"
-                            }
-                          >
-                            <li data-speed="2">2x</li>
-                            <li data-speed="1.5">1.5x</li>
-                            <li data-speed="1" class="active">
+                            className={"speed-options"}>
+                            <li data-speed="2" className={localStorage.getItem('speed') === 'speed-2x' && 'active'} onClick={(e) => videoSpeedChange(2, e)}>2x</li>
+                            <li data-speed="1.5" className={localStorage.getItem('speed') === 'speed-1.5x' && 'active'} onClick={(e) => videoSpeedChange(1.5, e)}>1.5x</li>
+                            <li data-speed="1" className={localStorage.getItem('speed') === 'speed-1x' && 'active'} onClick={(e) => videoSpeedChange(1, e)}>
                               Normal
                             </li>
-                            <li data-speed="0.75">0.75x</li>
-                            <li data-speed="0.5">0.5x</li>
+                            <li data-speed="0.75" className={localStorage.getItem('speed') === 'speed-0.75x' && 'active'} onClick={(e) => videoSpeedChange(0.75, e)}>0.75x</li>
+                            <li data-speed="0.5" className={localStorage.getItem('speed') === 'speed-0.5x' && 'active'} onClick={(e) => videoSpeedChange(0.5, e)}>0.5x</li>
                           </ul>
+                           )}
                         </div>
                         
                         <button className="fullscreen">
@@ -900,9 +912,7 @@ function Watching() {
                       </div>
                     )}
                     {videoUrl ? (
-                      <>
                         <ReactHlsPlayer
-                          // accountId='1234678'
                           config={{
                             file: {
                               forceHLS: true,
@@ -924,11 +934,6 @@ function Watching() {
                             fullPLay();
                           }}
                           onClick={() => playOrPause()}
-                          // onPause={() => {
-                          //   setPlay(true);
-                          //   setPause(false);
-                          // }}
-                          // onProgress={() => {setLoader(true); console.log('progres')}}
                           onLoadStart={() => {
                             setLoader(true);
                           }}
@@ -937,7 +942,6 @@ function Watching() {
                           }}
                         />
                       
-                      </>
                     ) : (
                       loader && (
                         <div className="loader">
@@ -1498,7 +1502,6 @@ m-22163 -16750 c2 -8608 6 -11054 15 -11128 44 -338 100 -595 188 -857 151
                               }
                               onClick={() => {
                                 setLessonId(items.id);
-                                console.log(items.id);
                                 const url = {
                                   resolution_240p: items.resolution_240p,
                                   resolution_360p: items.resolution_360p,

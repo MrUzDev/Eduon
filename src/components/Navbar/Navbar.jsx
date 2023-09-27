@@ -166,9 +166,11 @@ export default function NavbarDemo(props) {
     color: "#1c1c1c",
     cursor: "pointer",
   };
-  // const searchFunc = (e, value) => {
-  //   e.preventDefault();
-  // setSearchValue(e.target.value);
+  const searchFunc = (e, value) => {
+    let trimText = e.target.value.trim();
+    setSearchValue(trimText);
+  
+  }
   useEffect(() => {
     const func = () => {
       try {
@@ -430,7 +432,7 @@ export default function NavbarDemo(props) {
                     </label>
                     <input
                       onChange={(e) => {
-                        setSearchValue(e.target.value);
+                        searchFunc(e)
                       }}
                       // onInput={(e) => {
                       //   searchValue.length <=2 && searchFunc(e,searchValue);
@@ -440,6 +442,7 @@ export default function NavbarDemo(props) {
                       placeholder="Qidirish..."
                       value={searchValue}
                       autoComplete="off"
+                      pattern="[^\s]+"
                     />
                   </div>
 

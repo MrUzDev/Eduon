@@ -681,6 +681,18 @@
   z-index: 11;
 }
 
+.video .full-screen-course-name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  display: block;
+  z-index: 11;
+  color: #fff;
+  display: none;
+}
+
 .video .text-active {
   display: block !important;
 }
